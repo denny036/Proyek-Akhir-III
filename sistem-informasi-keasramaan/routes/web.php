@@ -24,7 +24,7 @@ Route::get('/', function () {
 
 
 Route::prefix('mahasiswa')->name('mahasiswa.')->group(function(){
-    Route::middleware(['guest'])->group(function(){
+    Route::middleware(['guest:web', 'PreventBackButtonHistory'])->group(function(){
         Route::view('/login', 'auth.mahasiswa.login')->name('login');
         Route::view('/register', 'auth.mahasiswa.register')->name('register');
         Route::post('/create', [UserController::class, 'create'])->name('create');
@@ -32,7 +32,9 @@ Route::prefix('mahasiswa')->name('mahasiswa.')->group(function(){
 
     });
 
-    Route::middleware(['auth'])->group(function(){
+    Route::middleware(['auth:web', 'PreventBackButtonHistory'])->group(function(){
         Route::view('/home', 'mahasiswa.home')->name('home');
+
+        Route::post('/logout', [UserController::class, 'logout'])->name('logout');
     });
 });

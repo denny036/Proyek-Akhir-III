@@ -67,10 +67,16 @@ class UserController extends Controller
       ]);
 
       $credentials = $request->only('nim','password');
-      if (Auth::attempt($credentials)) {
+      if (Auth::guard('web')->attempt($credentials)) {
           return redirect()->route('mahasiswa.home');
       }else{
           return redirect()->route('mahasiswa.login')->with('fail', 'Incorrect username or password.');
       }
+    }
+
+    public function logout() 
+    {
+      Auth::guard('web')->logout();
+      return redirect('/');
     }
 }
