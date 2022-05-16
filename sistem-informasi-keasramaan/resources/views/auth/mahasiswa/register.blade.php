@@ -63,7 +63,7 @@
                             <span class="text-sm text-login">Password</span>
                             <input type="password" id="password" name="password" autocomplete="current-password"
                                 class="block w-full px-3 py-2 mt-1 text-slate-900 bg-gray-200 rounded-md focus:outline-none focus:shadow-outline placeholder:text-slate-800"
-                                placeholder="Masukkan password"  />
+                                placeholder="Masukkan kata sandi"  />
                             <span class="text-red-800 text-sm">
                                 @error('password')
                                 {{ $message }} 
@@ -74,7 +74,7 @@
                             <span class="text-sm text-login">Confirm Password</span>
                             <input type="password" id="confirm_password" name="confirm_password" autocomplete="confirm_password"
                                 class="block w-full px-3 py-2 mt-1 text-slate-900 bg-gray-200 rounded-md focus:outline-none focus:shadow-outline placeholder:text-slate-800"
-                                placeholder="Masukkan confirm password" />
+                                placeholder="Masukkan konfirmasi kata sandi" />
                                 <span class="text-red-800  text-sm">
                                     @error('confirm_password')
                                         {{ $message }} 

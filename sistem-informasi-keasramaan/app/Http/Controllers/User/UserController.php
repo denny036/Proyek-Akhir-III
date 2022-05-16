@@ -16,7 +16,13 @@ class UserController extends Controller
         $request->validate(
             [
                 'nama' => 'required|min:3|max:23',
-                'nim' => 'required|unique:users,nim|min:8|max:8',
+                'nim' => [
+                    'required',
+                    'unique:users,nim',
+                    'min:8',
+                    'max:8',
+                    'regex:/^((11)+(3|4)|(13)+3|(12|14|21|31)+S)(17|18|19|20|21|22)[0-9]{3}$/',
+                ],
                 'password' => 'required|string|min:6|max:16|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
                 'confirm_password' => 'required|string|min:6|max:16|same:password|',
                 'angkatan' => 'required',
@@ -26,6 +32,7 @@ class UserController extends Controller
                 'nama.required' => 'Kolom nama tidak boleh kosong.',
                 'nama.min' => 'Kolom nama minimal 3 karakter.',
                 'nama.max' =>  'Kolom nama maksimal 23 karakter.',
+                'nim.regex' => 'Kolom NIM harus sesuai dengan format akademik.',
                 'nim.required' =>  'Kolom NIM tidak boleh kosong.',
                 'nim.unique' => 'Kolom NIM sudah terdaftar.',
                 'nim.min' => 'Kolom NIM sesuai dengan format akademik.',
@@ -66,8 +73,10 @@ class UserController extends Controller
           'password.required' => 'Password tidak boleh kosong.'
       ]);
 
+      $rememberMe = $request->remember ? true : false;
       $credentials = $request->only('nim','password');
-      if (Auth::guard('web')->attempt($credentials)) {
+
+      if (Auth::guard('web')->attempt($credentials, $rememberMe)) {
           return redirect()->route('mahasiswa.home');
       }else{
           return redirect()->route('mahasiswa.login')->with('fail', 'Incorrect username or password.');
