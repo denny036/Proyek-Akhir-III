@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Masuk</title>
+        <title>Portal Mahasiswa</title>
         
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     </head>

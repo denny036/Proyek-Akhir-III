@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\Koordinator\KoordinatorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,7 +35,19 @@ Route::prefix('mahasiswa')->name('mahasiswa.')->group(function(){
 
     Route::middleware(['auth:web', 'PreventBackButtonHistory'])->group(function(){
         Route::view('/home', 'mahasiswa.home')->name('home');
-
         Route::post('/logout', [UserController::class, 'logout'])->name('logout');
+    });
+});
+
+Route::prefix('koordinator')->name('koordinator.')->group(function() {
+
+    Route::middleware(['guest:koordinator', 'PreventBackButtonHistory'])->group(function(){
+        Route::view('/login', 'auth.koordinator.login')->name('login');
+        Route::post('/check', [KoordinatorController::class, 'check'])->name('check');
+    });
+
+    Route::middleware(['auth:koordinator', 'PreventBackButtonHistory'])->group(function () {
+        Route::view('/home', 'koordinator.home')->name('home');
+        Route::post('/logout', [KoordinatorController::class, 'logout'])->name('logout');
     });
 });

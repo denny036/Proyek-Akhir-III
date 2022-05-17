@@ -17,6 +17,10 @@ return [
         'guard' => 'web',
         'passwords' => 'users',
     ],
+    'koordinator'=>[
+        'driver'=>'eloquent',
+        'model'=>App\Models\Koordinator::class,
+     ],
 
     /*
     |--------------------------------------------------------------------------
@@ -40,6 +44,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'koordinator'=>[
+            'driver'=>'session',
+            'provider'=>'koordinators',
+         ],
     ],
 
     /*
@@ -69,6 +77,10 @@ return [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
+        'koordinators'=>[
+            'driver'=>'eloquent',
+            'model'=>App\Models\Koordinator::class,
+         ],
     ],
 
     /*
@@ -92,6 +104,10 @@ return [
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
+        ],
+        'koordinators'=>[
+            'driver'=>'eloquent',
+            'model'=>App\Models\Koordinator::class,
         ],
     ],
 

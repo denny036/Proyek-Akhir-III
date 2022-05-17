@@ -32,7 +32,7 @@
             
             <div class="flex flex-wrap items-center justify-center py-4 pt-0">
                 <div class="w-full p-4 md:w-1/2 lg:w-1/4 sm:w-1/2 plan-card">
-                    <a href="#">
+                    <a href="{{ route('koordinator.login') }}">
                     <label class="flex flex-col rounded-lg shadow-lg group relative cursor-pointer hover:shadow-2xl">
                         <div class="w-full px-4 py-6 rounded-t-lg card-section-1 bg-cardWelcome">
                             <h3 class="mx-auto text-base font-semibold text-center underline">
