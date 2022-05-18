@@ -56,7 +56,7 @@
                             <div>
                                 <label class="inline-flex items-center">
                                     <input type="checkbox" name="remember"
-                                        class="text-indigo-600 border form-checkbox focus:outline-none focus:shadow-outline" />
+                                        class="text-login border form-checkbox focus:outline-none focus:shadow-outline" />
                                     <span class="mx-2 text-sm text-slate-900">Ingat saya</span>
                                 </label>
                             </div>

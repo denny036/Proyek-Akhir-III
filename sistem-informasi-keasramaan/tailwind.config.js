@@ -15,11 +15,14 @@ module.exports = {
         petugas: "#7FB5FF",
         iconStudents: "#112B3C",
         cardWelcome: "#EDF6FB",
+        templateNav: "#222D32",
       },
       fontFamily: {
         'poppins': ['Poppins', 'sans-serif'] 
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms'),
+  ],
 }

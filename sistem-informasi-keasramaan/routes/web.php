@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Koordinator\AsramaController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Koordinator\KoordinatorController;
 use Illuminate\Support\Facades\Route;
@@ -48,6 +49,12 @@ Route::prefix('koordinator')->name('koordinator.')->group(function() {
 
     Route::middleware(['auth:koordinator', 'PreventBackButtonHistory'])->group(function () {
         Route::view('/home', 'koordinator.home')->name('home');
+
+        Route::get('/data-asrama', [AsramaController::class, 'showDataAsrama'])->name('show.asrama');
+        Route::view('/tambah-data-asrama', 'koordinator.asrama.create')->name('create.asrama');
+        Route::post('/simpan-data-asrama', [AsramaController::class, 'storeDataAsrama'])->name('store.asrama');
+
+
         Route::post('/logout', [KoordinatorController::class, 'logout'])->name('logout');
     });
 });
