@@ -17,10 +17,14 @@ return [
         'guard' => 'web',
         'passwords' => 'users',
     ],
-    'koordinator'=>[
-        'driver'=>'eloquent',
-        'model'=>App\Models\Koordinator::class,
-     ],
+    'koordinator' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\Koordinator::class,
+    ],
+    'petugas' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\Petugas::class,
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -44,10 +48,14 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-        'koordinator'=>[
-            'driver'=>'session',
-            'provider'=>'koordinators',
-         ],
+        'koordinator' => [
+            'driver' => 'session',
+            'provider' => 'koordinators',
+        ],
+        'petugas' => [
+            'driver' => 'session',
+            'provider' => 'petugas',
+        ],
     ],
 
     /*
@@ -77,10 +85,14 @@ return [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
-        'koordinators'=>[
-            'driver'=>'eloquent',
-            'model'=>App\Models\Koordinator::class,
-         ],
+        'koordinators' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Koordinator::class,
+        ],
+        'petugas' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Petugas::class,
+        ],
     ],
 
     /*
@@ -105,9 +117,13 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
-        'koordinators'=>[
-            'driver'=>'eloquent',
-            'model'=>App\Models\Koordinator::class,
+        'koordinators' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Koordinator::class,
+        ],
+        'petugas' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Petugas::class,
         ],
     ],
 

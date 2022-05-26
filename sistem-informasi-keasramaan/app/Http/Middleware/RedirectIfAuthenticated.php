@@ -22,10 +22,13 @@ class RedirectIfAuthenticated
         $guards = empty($guards) ? [null] : $guards;
 
         foreach ($guards as $guard) {
-            if (Auth::guard($guard)->check()) {
 
+            if (Auth::guard($guard)->check()) {
                 if ($guard === 'koordinator') {
                     return redirect()->route('koordinator.home');
+                }
+                if ($guard === 'petugas') {
+                    return redirect()->route('petugas.home');
                 }
 
 

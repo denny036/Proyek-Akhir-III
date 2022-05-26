@@ -19,6 +19,9 @@ class Authenticate extends Middleware
             if($request->routeIs('koordinator.*')){
                 return route('koordinator.login');
             }
+            if($request->routeIs('petugas.*')){
+                return route('petugas.login');
+            }
 
             return route('welcome');
         }
