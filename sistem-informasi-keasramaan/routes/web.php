@@ -4,6 +4,7 @@ use App\Http\Controllers\Koordinator\AsramaController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Koordinator\KoordinatorController;
 use App\Http\Controllers\Petugas\PetugasController;
+use App\Http\Controllers\User\CheckInController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,7 +33,27 @@ Route::prefix('mahasiswa')->name('mahasiswa.')->group(function(){
     });
 
     Route::middleware(['auth:web', 'PreventBackButtonHistory'])->group(function(){
-        Route::view('/home', 'mahasiswa.home')->name('home');
+        Route::get('/home', [UserController::class, 'showHomeMahasiswa'])->name('home');
+
+        Route::get('/profile', [UserController::class, 'getDataAsrama'])->name('profile');
+        Route::post('/simpan-asrama-mahasiswa', [UserController::class, 'storeAsramaMahasiswa'])->name('store.profile');
+
+        Route::get('/check-in', [CheckInController::class, 'showDataCheckIn'])->name('show.check-in');
+        Route::get('/request-check-in', [CheckInController::class, 'showFormCheckIn'])->name('create.check-in');
+        Route::post('/simpan-check-in', [CheckInController::class, 'storeCheckIn'])->name('store.check-in');
+
+        // Route::get('/check-out', [CheckOutController:class, 'showDataCheckOut'])->name('show.check-out');
+        // Route::view('/request-check-out', 'mahasiswa.check-out.create')->name('create.check-out');
+        // Route::post('/simpan-check-out', [CheckOutController::class, 'storeCheckOut'])->name('store.check-out');
+        
+        // Route::get('/izin-sakit', [IzinSakitController::class, 'showDataIzinSakit'])->name('show.izin-sakit');
+        // Route::view('/request-izin-sakit', 'mahasiswa.izin-sakit.create')->name('create.izin-sakit');
+        // Route::post('/simpan-izin-sakit', [IzinSakitController::class,'storeIzinSakit')->name('store.izin-sakit');
+
+        // Route::get('/izin-bermalam', [IzinBermalamController::class, 'showDataIzinBermalam'])->name('show.izin-bermalam');
+        // Route::view('/request-izin-bermalam', 'mahasiswa.izin-bermalam.create')->name('create.izin-bermaalam');
+        // Route::post('/simpan-izin-bermalam', [IzinBermalamController::class, 'storeIzinBermalam')->name('store.izin-bermalam');
+        
         Route::post('/logout', [UserController::class, 'logout'])->name('logout');
     });
 });
@@ -46,6 +67,7 @@ Route::prefix('petugas')->name('petugas.')->group(function(){
 
     Route::middleware(['auth:petugas', 'PreventBackButtonHistory'])->group(function(){
         Route::view('/home', 'petugas.home')->name('home');
+
         Route::post('/logout', [PetugasController::class, 'logout'])->name('logout');
     });
 });

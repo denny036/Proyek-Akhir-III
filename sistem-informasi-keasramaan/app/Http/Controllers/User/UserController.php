@@ -3,10 +3,15 @@
 namespace App\Http\Controllers\User;
 
 use App\Models\User;
+use App\Models\Asrama;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Models\RecordMahasiswaAsrama;
+
+use function PHPUnit\Framework\isEmpty;
 
 class UserController extends Controller
 {
@@ -21,7 +26,7 @@ class UserController extends Controller
                     'unique:users,nim',
                     'min:8',
                     'max:8',
-                    'regex:/^((11)+(3|4)|(13)+3|(12|14|21|31)+S)(17|18|19|20|21|22)[0-9]{3}$/',
+                    'regex:/^((11)+(3|4)|(13)+3|(11|12|14|21|31)+S)(17|18|19|20|21|22)[0-9]{3}$/',
                 ],
                 'password' => 'required|string|min:6|max:16|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
                 'confirm_password' => 'required|string|min:6|max:16|same:password|',
@@ -45,7 +50,8 @@ class UserController extends Controller
                 'confirm_password.same' => 'Konfirmasi sandi Anda harus sama dengan kolom Password',
                 'angkatan.required' => 'Kolom angkatan tidak boleh kosong.',
                 'prodi.required' =>  'Kolom program studi tidak boleh kosong.',
-            ]);
+            ]
+        );
 
         $user = new User();
         $user->nama = $request->nama;
@@ -55,37 +61,101 @@ class UserController extends Controller
         $user->prodi = $request->prodi;
         $save = $user->save();
 
-        if($save) {
-            return redirect()->back()->with('success','Anda berhasil melakukan registrasi.');
-        }else{
+        if ($save) {
+            return redirect()->back()->with('success', 'Anda berhasil melakukan registrasi.');
+        } else {
             return redirect()->back()->with('fail', 'Registrasi gagal, silakan periksa format yang diminta.');
         }
     }
 
-    public function check(Request $request) 
+    public function check(Request $request)
     {
-      $request->validate([
-          'nim' => 'required|exists:users,nim',
-          'password' => 'required'
-      ],[
-          'nim.required' => 'NIM tidak boleh kosong.',
-          'nim.exists' => 'NIM Anda tidak ditemukan.',
-          'password.required' => 'Password tidak boleh kosong.'
-      ]);
+        $request->validate([
+            'nim' => 'required|exists:users,nim',
+            'password' => 'required'
+        ], [
+            'nim.required' => 'NIM tidak boleh kosong.',
+            'nim.exists' => 'NIM Anda tidak ditemukan.',
+            'password.required' => 'Password tidak boleh kosong.'
+        ]);
+        
+        $rememberMe = $request->remember ? true : false;
+        $credentials = $request->only('nim', 'password');
 
-      $rememberMe = $request->remember ? true : false;
-      $credentials = $request->only('nim','password');
-
-      if (Auth::guard('web')->attempt($credentials, $rememberMe)) {
-          return redirect()->route('mahasiswa.home');
-      }else{
-          return redirect()->route('mahasiswa.login')->with('fail', 'Incorrect username or password.');
-      }
+        if (Auth::guard('web')->attempt($credentials, $rememberMe)) {
+            return redirect()->route('mahasiswa.home');
+        } else {
+            return redirect()->route('mahasiswa.login')->with('fail', 'Incorrect username or password.')->withInput();
+        }
     }
 
-    public function logout() 
+    public function showHomeMahasiswa(Asrama $asrama) 
     {
-      Auth::guard('web')->logout();
-      return redirect('/');
+        $dataAsrama = Asrama::all();
+        $user_id = Auth::guard('web')->user()->id;
+
+        $checkAsrama = DB::table('record_mahasiswa_asrama')->where('users_id', '=', $user_id)->get();
+        $isNullAsrama = $checkAsrama->isEmpty();
+
+        $getDataMahasiswa = DB::table('record_mahasiswa_asrama')
+                                ->join('users', 'record_mahasiswa_asrama.users_id', '=', 'users.id')
+                                ->join('asrama', 'record_mahasiswa_asrama.asrama_id', '=', 'asrama.id')
+                                ->where('record_mahasiswa_asrama.users_id', '=', $user_id)
+                                ->first();
+
+        // $totalMahasiswaAsrama = DB::table('record_mahasiswa_asrama')
+        //                             ->join('asrama', 'record_mahasiswa_asrama.asrama_id', '=', 'asrama.id')
+        //                             ->where('record_mahasiswa_asrama.users_id', '=', $user_id)
+        //                             ->groupBy('asrama_id')
+        //                             ->count();
+
+        // dd($totalMahasiswaAsrama);
+
+        return view('mahasiswa.home', compact('dataAsrama', 'isNullAsrama', 'getDataMahasiswa'));
+    }
+
+    public function getDataAsrama(Asrama $asrama)
+    {
+        $asrama = Asrama::all();
+        $user_id = Auth::guard('web')->user()->id;
+
+        $checkAsrama = DB::table('record_mahasiswa_asrama')->where('users_id', '=', $user_id)->get();
+        $nullAsrama = $checkAsrama->isEmpty();
+
+        $dataMahasiswa = DB::table('record_mahasiswa_asrama')
+                         ->join('users', 'record_mahasiswa_asrama.users_id', '=', 'users.id')
+                         ->join('asrama', 'record_mahasiswa_asrama.asrama_id', '=', 'asrama.id')
+                         ->where('record_mahasiswa_asrama.users_id', '=', $user_id)
+                         ->get();
+       
+        return view('mahasiswa.profile', compact('asrama', 'nullAsrama', 'dataMahasiswa'));
+    }
+
+    public function storeAsramaMahasiswa(Request $request)
+    {
+        $request->validate(
+            [
+                'asrama' => 'required'
+            ],
+            [
+                'asrama.required' => 'Kolom Asrama tidak boleh kosong.',
+            ]
+        );
+
+        $user_id = Auth::guard('web')->user()->id;
+        $asrama_id = $request->asrama;
+
+        RecordMahasiswaAsrama::create([
+            'users_id' => $user_id,
+            'asrama_id' => $asrama_id,
+        ]);
+
+        return redirect()->route('mahasiswa.profile')->with('success', 'Berhasil memperbarui data Asrama.');
+    }
+
+    public function logout()
+    {
+        Auth::guard('web')->logout();
+        return redirect('/');
     }
 }

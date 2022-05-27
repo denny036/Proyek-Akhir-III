@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->year('angkatan');
             $table->string('prodi', 45);
-            $table->string('asrama')->nullable();
+            // $table->string('asrama')->nullable();
             $table->rememberToken();
             $table->timestamps();
             // $table->timestamp('email_verified_at')->nullable();

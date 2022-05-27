@@ -13,7 +13,7 @@
 @endsection
 
 @section('statistics')
-<div class="bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
+<div class="bg-gray-100 py-6 flex flex-col justify-start sm:py-12">
     <div
       class="relative px-4 py-10 bg-white w-1/3 mx-8 md:mx-0 shadow rounded-2xl sm:p-4 sm:w-96 sm:ml-3">
       
