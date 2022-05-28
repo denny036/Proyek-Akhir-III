@@ -22,6 +22,7 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
+
 //Route:Mahasiswa
 Route::prefix('mahasiswa')->name('mahasiswa.')->group(function(){
     Route::middleware(['guest:web', 'PreventBackButtonHistory'])->group(function(){

@@ -12,7 +12,19 @@ class CheckInController extends Controller
 {
     public function showDataCheckIn() 
     {
-      return view('mahasiswa.check-in.index');
+      $userID = Auth::guard('web')->user()->id;
+      $dataMahasiswa = DB::table('record_mahasiswa_asrama')
+                         ->join('users', 'record_mahasiswa_asrama.users_id', '=', 'users.id')
+                         ->join('asrama', 'record_mahasiswa_asrama.asrama_id', '=', 'asrama.id')
+                         ->where('record_mahasiswa_asrama.users_id', '=', $userID)
+                         ->first();
+
+      if(empty($dataMahasiswa)){
+        return redirect()->route('mahasiswa.profile')
+                             ->with('info', 'Untuk menggunakan aplikasi ini, silakan pilih asrama Anda terlebih dahulu!');
+      } else {
+        return view('mahasiswa.check-in.index');
+      }       
     }
 
     public function showFormCheckIn() 
@@ -24,9 +36,13 @@ class CheckInController extends Controller
                          ->where('record_mahasiswa_asrama.users_id', '=', $user_id)
                          ->first();
 
-      $dataAsrama = DB::table('asrama')->get();
-
-      return view('mahasiswa.check-in.create', compact('dataMahasiswa', 'dataAsrama'));
+      if(empty($dataMahasiswa)){
+        return redirect()->route('mahasiswa.profile')
+                             ->with('info', 'Untuk menggunakan aplikasi ini, silakan pilih asrama Anda terlebih dahulu!');
+      }else{
+        $dataAsrama = DB::table('asrama')->get();
+        return view('mahasiswa.check-in.create', compact('dataMahasiswa', 'dataAsrama'));
+      }
     }
 
     // public function storeCheckIn(Request $request) 
