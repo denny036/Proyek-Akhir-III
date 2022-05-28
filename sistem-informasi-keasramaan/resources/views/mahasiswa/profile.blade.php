@@ -82,16 +82,106 @@
 
 @else
   @section('statistics')
-      @foreach ($dataMahasiswa as $item)
+
+      <!-- component -->
+<div class="bg-gray-100 block py-10">
+  <div class="max-w-2xl justify-start">
+      <!--
+          ! ------------------------------------------------------------
+          ! Profile banner and avatar
+          ! ------------------------------------------------------------
+          !-->
+      <div class="w-full">
+          <div class="w-full bg-login h-10 rounded-t-lg">
+            <h1 class="font-poppins p-5 pt-2 text-white">User Info</h1>
+          </div>
+      </div>
+
+      <!--
+          ! ------------------------------------------------------------
+          ! Profile general information
+          ! ------------------------------------------------------------
+          !-->
+      <div class="bg-primary border border-primary rounded-b-lg p-5 pt-4 flex flex-col">
+        
+        @foreach ($dataMahasiswa as $item)
+    
+          <div class="mt-0 text-gray-700">
+              <div class="flex flex-row ml-auto space-x-2 items-center">
+                  <div class="mb-1 h-5 w-20">
+                    <h3 class="font-poppins font-bold flex flex-col">Nama</h3>
+                  </div> 
+                  <div class=" rounded-full h-1 w-16"></div><h3 class="font-poppins flex flex-col">{{ $item->nama }}</h3>
+              </div>
+          </div>
+
+          <div class="w-full border-t border-gray-300"></div>
+
+          <div class="mt-1 text-gray-700">
+              <div class="flex flex-row ml-auto space-x-2 items-center">
+                  <div class="mb-1 h-5 w-20">
+                    <h3 class="font-poppins font-bold">NIM</h3>
+                  </div> 
+                  <div class=" rounded-full h-1 w-16"></div><h3 class="font-poppins">{{ $item->nim }}</h3>
+              </div>
+          </div>
+
+          <div class="w-full border-t border-gray-300"></div>
+
+          <div class="mt-1 text-gray-700">
+              <div class="flex flex-row ml-auto space-x-2 items-center">
+                  <div class="mb-1 h-5 w-20">
+                    <h3 class="font-poppins font-bold">Angkatan</h3>
+                  </div> 
+                  <div class=" rounded-full h-1 w-16"></div>
+                  <h3 class="font-poppins">
+                    {{ $item->angkatan }}
+                  </h3>
+              </div>
+          </div>
+
+          <div class="w-full border-t border-gray-300"></div>
+
+          <div class="mt-1 text-gray-700">
+              <div class="flex flex-row ml-auto space-x-2 items-center">
+                  <div class="mb-1 h-5">
+                    <h3 class="font-poppins font-bold">Program Studi</h3>
+                  </div> 
+                  <div class=" rounded-full h-1 w-7"></div><h3 class="font-poppins"> {{ Str::of($item->prodi)->upper()->explode('_')->implode(' ')}}</h3>
+              </div>
+          </div>
+
+          <div class="w-full border-t border-gray-300"></div>
+
+          <div class="mt-1 text-gray-700">
+            <div class="flex flex-row ml-auto space-x-2 items-center">
+                <div class="mb-1 h-5 w-20">
+                  <h3 class="font-poppins font-bold">Asrama</h3>
+                </div> 
+                <div class=" rounded-full h-1 w-16"></div><h3 class="font-poppins">
+                  {{ $item->nama_asrama }}
+                </h3>
+            </div>
+          </div>
+          
+          <div class="w-full border-t border-gray-300"></div>
+
+          <div class="mt-1 text-gray-700">
+            <div class="flex flex-row ml-auto space-x-2 items-center">
+                <div class="mb-1 h-5">
+                  <h3 class="font-poppins font-bold">Jenis Asrama</h3>
+                </div> 
+                <div class=" rounded-full h-1 w-9"></div><h3 class="font-poppins">
+                  {{ $item->jenis_asrama }}
+                </h3>
+            </div>
+          </div>
+
+          @endforeach
+
+      </div>
+  </div>
       
-        {{ $item->nama }}
-        {{ $item->nim }}
-        {{ $item->angkatan }}
-        {{ Str::of($item->prodi)->upper()->explode('_')->implode(' ')}}
-        {{ $item->nama_asrama }}
-        {{ $item->jenis_asrama }}
-      
-      @endforeach
   @endsection
 
 @endif

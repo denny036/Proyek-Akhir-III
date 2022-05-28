@@ -103,15 +103,14 @@ class UserController extends Controller
                                 ->where('record_mahasiswa_asrama.users_id', '=', $user_id)
                                 ->first();
 
-        // $totalMahasiswaAsrama = DB::table('record_mahasiswa_asrama')
-        //                             ->join('asrama', 'record_mahasiswa_asrama.asrama_id', '=', 'asrama.id')
-        //                             ->where('record_mahasiswa_asrama.users_id', '=', $user_id)
-        //                             ->groupBy('asrama_id')
-        //                             ->count();
+                                
+        $totalMahasiswaAsrama = DB::table('record_mahasiswa_asrama')
+                                ->where('asrama_id', '=', 2)
+                                ->get();
 
         // dd($totalMahasiswaAsrama);
 
-        return view('mahasiswa.home', compact('dataAsrama', 'isNullAsrama', 'getDataMahasiswa'));
+        return view('mahasiswa.home', compact('dataAsrama', 'isNullAsrama', 'getDataMahasiswa', 'totalMahasiswaAsrama'));
     }
 
     public function getDataAsrama(Asrama $asrama)
@@ -156,6 +155,6 @@ class UserController extends Controller
     public function logout()
     {
         Auth::guard('web')->logout();
-        return redirect('/');
+        return redirect()->route('welcome');
     }
 }

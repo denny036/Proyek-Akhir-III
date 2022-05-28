@@ -16,7 +16,9 @@
 <div class="grid grid-cols-1 md:grid-cols-4 gap-4 py-6">
     <div class="bg-white shadow rounded-sm flex justify-between items-center py-3.5 px-3.5">
         <div class="space-y-2">
-            <p class="text-xs text-gray-800 uppercase font-semibold font-poppins">{{ $getDataMahasiswa->nama_asrama }}</p>
+            <p class="text-xs text-gray-800 uppercase font-semibold font-poppins">
+                {{ $getDataMahasiswa->nama_asrama ?? 'Asrama NULL' }}
+            </p>
             <div class="flex items-center space-x-2">
                 <h1 class="text-xl font-semibold">
                     {{-- {{ $totalMahasiswaAsrama }} --}}
