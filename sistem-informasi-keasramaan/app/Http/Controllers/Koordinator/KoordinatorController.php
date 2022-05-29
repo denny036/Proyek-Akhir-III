@@ -72,6 +72,6 @@ class KoordinatorController extends Controller
     public function logout() 
     {
         Auth::guard('koordinator')->logout();
-        return redirect('/');
+        return redirect()->route('welcome');
     }
 }
