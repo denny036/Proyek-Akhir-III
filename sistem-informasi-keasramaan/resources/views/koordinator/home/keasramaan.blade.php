@@ -47,8 +47,9 @@
                 </td>
                 <td class="py-3 px-6 text-center">
                     <div class="flex item-center justify-center">
-                        
-                        <span class="bg-blue-500 text-slate-50 py-1 px-3 rounded-full text-xs">Detail</span>
+                        <span class="bg-blue-500 text-slate-50 py-1 px-3 rounded-full text-xs">
+                           <a href="#">Detail</a>
+                        </span>
                     </div>
                 </td>
             </tr>

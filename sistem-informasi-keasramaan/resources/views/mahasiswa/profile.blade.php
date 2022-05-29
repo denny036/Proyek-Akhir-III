@@ -180,6 +180,21 @@
             <h3 class="font-poppins">{{ $item->jenis_asrama }}</h3>
           </div>
         </div>
+
+        {{-- <div class="mt-1 text-gray-700">
+          <div class="flex flex-row ml-auto space-x-2 items-center">
+            <div class="mb-1 h-5">
+              <h3 class="font-poppins font-bold">Pengurus Asrama</h3>
+            </div>
+            <div class="rounded-full h-1 w-9"></div>
+            <h3 class="font-poppins">
+              @foreach ($pengurusAsrama as $object)
+              {{ $object->nama }}
+              @endforeach
+              
+            </h3>
+          </div>
+        </div> --}}
   
         @endforeach
       </div>

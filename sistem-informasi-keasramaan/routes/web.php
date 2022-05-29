@@ -85,6 +85,7 @@ Route::prefix('koordinator')->name('koordinator.')->group(function() {
 
         Route::get('/home', [KoordinatorController::class, 'showDashboardKoordinator'])->name('home');
         Route::get('/detail-keasramaan/{asrama_id}', [KoordinatorController::class, 'showDetailDashboard'])->name('detail.keasramaan');
+        // Route::get('/user/')
 
         Route::get('/data-asrama', [AsramaController::class, 'showDataAsrama'])->name('show.asrama');
         Route::view('/tambah-data-asrama', 'koordinator.asrama.create')->name('create.asrama');
@@ -93,6 +94,9 @@ Route::prefix('koordinator')->name('koordinator.')->group(function() {
         Route::get('/data-petugas', [DataPetugasController::class, 'showDataPetugas'])->name('show.data-petugas');
         Route::get('/tambah-petugas', [DataPetugasController::class, 'showFormTambahPetugas'])->name('form-tambah-petugas');
         Route::post('/simpan-petugas', [DataPetugasController::class, 'storeDataPetugas'])->name('store.data-petugas');
+
+        Route::get('/data-petugas/{petugas_id}', [DataPetugasController::class, 'showFormEditPetugas'])->name('form-edit-petugas');
+        Route::put('/update-petugas/{petugas_id}', [DataPetugasController::class, 'updateDataPetugas'])->name('update.data-petugas');
 
         Route::post('/logout', [KoordinatorController::class, 'logout'])->name('logout');
     });
