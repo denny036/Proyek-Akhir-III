@@ -16,4 +16,9 @@ class Asrama extends Model
         'jenis_asrama',
         'lokasi_asrama'
     ];
+
+    public function petugas() 
+    {
+      return $this->hasMany('App\Models\Petugas', 'asrama_id');
+    }
 }

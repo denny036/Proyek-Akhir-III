@@ -17,13 +17,16 @@ class Petugas extends Authenticatable
      *
      * @var array<int, string>
      */
+
+    protected $table = 'petugas';
+    
     protected $fillable = [
         'asrama_id',
         'nama',
         'email',
         'password',
         'jabatan',
-        'lokasi_bertugas',
+        'jenis_kelamin',
     ];
 
     /**
@@ -44,4 +47,9 @@ class Petugas extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function asrama() 
+    {
+      return $this->belongsTo('App\Models\Asrama', 'asrama_id');
+    }
 }

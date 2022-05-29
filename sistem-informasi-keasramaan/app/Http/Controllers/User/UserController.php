@@ -126,8 +126,8 @@ class UserController extends Controller
                                 ->join('asrama', 'record_mahasiswa_asrama.asrama_id', '=', 'asrama.id')  
                                 ->join('users', 'record_mahasiswa_asrama.users_id', '=', 'users.id')
                                 ->where('record_mahasiswa_asrama.asrama_id', '=', $getUserAsramaID)
-                                ->paginate(15);
-                                
+                                ->orderBy('users.nama', 'asc')
+                                ->paginate(10);
                                 
             // dd($dataPenghuniAsrama);
             

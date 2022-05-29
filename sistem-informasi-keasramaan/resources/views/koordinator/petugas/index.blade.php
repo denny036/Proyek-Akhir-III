@@ -1,7 +1,7 @@
-@extends('mahasiswa.layouts.main')
+@extends('koordinator.layouts.main')
 
 @section('title')
-    <title>Portal Mahasiswa</title>
+    <title>Portal Koordinator</title>
 @endsection
 
 @section('judul-navigasi')
@@ -9,7 +9,7 @@
 @endsection
 
 @section('judul-halaman')
-    Data Check In &mdash; Institut Teknologi Del
+    Data Petugas Asrama &mdash; Institut Teknologi Del
 @endsection
 
 @section('statistics')
@@ -18,41 +18,45 @@
 @endsection
 
 @section('table')
-<a href="{{ route('mahasiswa.create.check-in') }}">
+<a href="{{ route('koordinator.form-tambah-petugas') }}">
     <button type="button" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 
     focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 
-    dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 font-poppins">Request Check-In</button></a>
+    dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 font-poppins">Tambah Petugas Asrama</button></a>
 
         <div class="bg-white shadow rounded-sm my-2.5 overflow-x-auto">
             <table class="min-w-max w-full table-auto">
                 <thead>
                     <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                        <th class="py-3 px-6 text-left">Keperluan</th>
-                        <th class="py-3 px-6 text-left">Asal Asrama</th>
-                        <th class="py-3 px-6 text-center">Asrama Tujuan</th>
-                        <th class="py-3 px-6 text-center">Status</th>
+                        <th class="py-3 px-6 text-left">Nama</th>
+                        <th class="py-3 px-6 text-left">Email</th>
+                        <th class="py-3 px-6 text-center">Jabatan</th>
+                        <th class="py-3 px-6 text-center">Jenis Kelamin</th>
+                        <th class="py-3 px-6 text-center">Lokasi Bertugas</th>
                         <th class="py-3 px-6 text-center">Aksi</th>
                     </tr>
                 </thead>
-                {{-- @foreach ($asrama as $key => $value)  --}}
+                @foreach ($dataPetugas as $key => $value) 
                 <tbody class="text-gray-600 text-sm">
                     <tr class="border-b border-gray-200 hover:bg-gray-100">
                         <td class="py-3 px-6 text-left whitespace-nowrap font-poppins">
-                                {{-- {{ $value->nama_asrama }} --}}
+                                {{ $value->nama }}
                             </div>
                         </td>
                         <td class="py-3 px-6 text-left">
                             <div class="flex items-center">
                                 <span class="font-poppins">
-                                    {{-- {{ $value->jenis_asrama }} --}}
+                                    {{ $value->email }}
                                 </span>
                             </div>
                         </td>
                         <td class="py-3 px-6 text-center font-poppins">
-                            {{-- {{ $value->lokasi_asrama }} --}}
+                            {{ $value->jabatan }}
+                        </td>
+                        <td class="py-3 px-6 text-center font-poppins">
+                            {{ Str::of($value->jenis_kelamin)->ucfirst()->explode('_')->implode(' ') }}
                         </td>
                         <td class="py-3 px-6 text-center">
-                            <span class="bg-purple-200 text-purple-600 py-1 px-3 rounded-full text-xs">Active</span>
+                            {{ $value->asrama->nama_asrama }}
                         </td>
                         <td class="py-3 px-6 text-center">
                             <div class="flex item-center justify-center">
@@ -71,7 +75,7 @@
                         </td>
                     </tr>
                 </tbody>
-                {{-- @endforeach --}}
+                @endforeach
                 
             </div>
             </table>

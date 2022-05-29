@@ -10,7 +10,7 @@ class AsramaController extends Controller
 {
     public function showDataAsrama(Asrama $asrama) 
     {   
-        $asrama = Asrama::orderBy('created_at', 'desc')->paginate(5);
+        $asrama = Asrama::orderBy('created_at', 'asc')->paginate(5);
         return view('koordinator.asrama.index',compact('asrama'));
     }
     

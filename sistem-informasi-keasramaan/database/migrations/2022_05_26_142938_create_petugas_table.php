@@ -15,7 +15,8 @@ class CreatePetugasTable extends Migration
     {
         Schema::create('petugas', function (Blueprint $table) {
             $table->id();
-            $table->string('nama', 23);
+            $table->unsignedBigInteger('asrama_id');
+            $table->string('nama');
             $table->string('email')->unique();
             $table->string('password');
             $table->string('jabatan');
@@ -23,6 +24,10 @@ class CreatePetugasTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
+            
+            $table->foreign('asrama_id')->on('asrama')->references('id')
+                    ->onDelete('CASCADE')
+                    ->onUpdate('CASCADE');
         });
     }
 

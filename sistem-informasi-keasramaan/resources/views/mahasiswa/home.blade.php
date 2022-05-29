@@ -22,7 +22,7 @@
             <div class="flex items-center space-x-2">
                 <h1 class="text-lg font-semibold font-poppins">
                     {{ $totalMahasiswaAsrama->Total ?? 'Belum Memiliki Asrama' }} 
-                    <span class="text-base font-normal font-poppins">mahasiswa</span>
+                    <span class="text-base font-normal font-poppins md:text-sm">mahasiswa</span>
                 </h1>
                 {{-- <p class="text-xs bg-green-50 text-green-500 px-1 rounded">+4.5</p> --}}
             </div>

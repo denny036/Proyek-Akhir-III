@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Koordinator\AsramaController;
+use App\Http\Controllers\Koordinator\DataPetugasController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Koordinator\KoordinatorController;
 use App\Http\Controllers\Petugas\PetugasController;
@@ -75,18 +76,23 @@ Route::prefix('petugas')->name('petugas.')->group(function(){
 
 //Route:Koordinator
 Route::prefix('koordinator')->name('koordinator.')->group(function() {
-
     Route::middleware(['guest:koordinator', 'PreventBackButtonHistory'])->group(function(){
         Route::view('/login', 'auth.koordinator.login')->name('login');
         Route::post('/check', [KoordinatorController::class, 'check'])->name('check');
     });
 
     Route::middleware(['auth:koordinator', 'PreventBackButtonHistory'])->group(function () {
-        Route::view('/home', 'koordinator.home')->name('home');
+
+        Route::get('/home', [KoordinatorController::class, 'showDashboardKoordinator'])->name('home');
+        Route::get('/detail-keasramaan/{asrama_id}', [KoordinatorController::class, 'showDetailDashboard'])->name('detail.keasramaan');
 
         Route::get('/data-asrama', [AsramaController::class, 'showDataAsrama'])->name('show.asrama');
         Route::view('/tambah-data-asrama', 'koordinator.asrama.create')->name('create.asrama');
         Route::post('/simpan-data-asrama', [AsramaController::class, 'storeDataAsrama'])->name('store.asrama');
+
+        Route::get('/data-petugas', [DataPetugasController::class, 'showDataPetugas'])->name('show.data-petugas');
+        Route::get('/tambah-petugas', [DataPetugasController::class, 'showFormTambahPetugas'])->name('form-tambah-petugas');
+        Route::post('/simpan-petugas', [DataPetugasController::class, 'storeDataPetugas'])->name('store.data-petugas');
 
         Route::post('/logout', [KoordinatorController::class, 'logout'])->name('logout');
     });

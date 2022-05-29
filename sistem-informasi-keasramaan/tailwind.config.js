@@ -16,6 +16,8 @@ module.exports = {
         iconStudents: "#112B3C",
         cardWelcome: "#EDF6FB",
         templateNav: "#222D32",
+        asramaLaki: "#48166C",
+        asramaPerempuan: "#0078C4"
       },
       fontFamily: {
         'poppins': ['Poppins', 'sans-serif'] 

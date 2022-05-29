@@ -9,6 +9,7 @@
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <script src="{{ asset('/js/alpine.js') }}" defer></script>
+    @stack('scripts')
 </head>
 
 <body class="antialiased bg-gray-100">
