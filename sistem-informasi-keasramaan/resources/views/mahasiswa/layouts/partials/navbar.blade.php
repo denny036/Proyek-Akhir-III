@@ -39,7 +39,7 @@
             <a href="#" class="block py-2 px-4 hover:bg-gray-800 hover:text-white rounded font-poppins">
                 Izin Sakit 
             </a>
-            <a href="#" class="block py-2 px-4 hover:bg-gray-800 hover:text-white rounded font-poppins">
+            <a href="{{ route('mahasiswa.izin-bermalam') }}" class="block py-2 px-4 hover:bg-gray-800 hover:text-white rounded font-poppins">
                 Izin Bermalam
             </a>
         </div>

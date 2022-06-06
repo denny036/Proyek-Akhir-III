@@ -9,7 +9,7 @@
 @endsection
 
 @section('judul-halaman')
-    Dashboard
+    Home
 @endsection
 
 @section('statistics')
@@ -49,7 +49,7 @@
 
 @section('table')
 <div class="bg-neutral-100 text-base font-poppins">
-    <h1 class="text-base font-poppins text-login font-semibold">
+    <h1 class="text-base font-poppins text-gray-600 font-semibold">
         Daftar Penghuni
     </h1>
 </div>

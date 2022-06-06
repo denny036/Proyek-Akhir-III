@@ -1,7 +1,7 @@
-@extends('koordinator.layouts.main')
+@extends('petugas.layouts.main')
 
 @section('title')
-    <title>Portal Koordinator</title>
+    <title>Portal Petugas</title>
 @endsection
 
 @section('judul-navigasi')
@@ -9,7 +9,7 @@
 @endsection
 
 @section('judul-halaman')
-    Home &mdash; Asrama Institut Teknologi Del
+    Data Penghuni Asrama
 @endsection
 
 @section('statistics')
@@ -38,7 +38,7 @@
                 <h1 class="font-poppins text-lg font-semibold">
                     {{-- {{ $totalMahasiswaAsrama->Total ?? 'Belum Memiliki Asrama' }}  --}}
                     <span class="font-poppins text-base font-normal text-slate-50 md:text-sm">
-                      <a href="{{ route('koordinator.detail.keasramaan', encrypt($allAsrama->id)) }}" class="underline">Lihat</a> 
+                      <a href="{{ route('petugas.detail.penghuni-asrama', encrypt($allAsrama->id)) }}" class="underline">Lihat</a> 
                     </span>
                 </h1>
             </div>
@@ -58,7 +58,7 @@
                     <h1 class="font-poppins text-lg font-semibold">
 
                         <span class="font-poppins text-base font-normal text-slate-50 md:text-sm">
-                            <a href="{{ route('koordinator.detail.keasramaan',  encrypt($allAsrama->id)) }}" class="underline">Lihat</a>
+                            <a href="{{ route('petugas.detail.penghuni-asrama',  encrypt($allAsrama->id)) }}" class="underline">Lihat</a>
                         </span>
                         
                     </h1>

@@ -128,7 +128,7 @@
         
         <button type="submit"
         class="w-28 px-4 py-2 mt-4 text-sm text-center text-white 
-        bg-login rounded-md hover:bg-login font-poppins">Kirim</button>
+        bg-login rounded-md hover:bg-login font-poppins">Simpan</button>
 
       </div>
     </form>

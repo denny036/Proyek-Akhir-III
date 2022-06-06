@@ -31,7 +31,6 @@ class RedirectIfAuthenticated
                     return redirect()->route('petugas.home');
                 }
 
-
                 return redirect()->route('mahasiswa.home');
                 // return redirect(RouteServiceProvider::HOME);
             }
