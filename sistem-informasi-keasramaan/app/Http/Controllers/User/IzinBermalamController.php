@@ -54,19 +54,6 @@ class IzinBermalamController extends Controller
                     'tempat_tujuan' => $request->tempat_tujuan,
         ]);
 
-        // $user_id = Auth::guard('web')->user()->id;
-
-        // $izin_asrama = new IzinBermalam();
-
-        // $izin_asrama->users_id = $request->$user_id;
-        
-        // $izin_asrama->rencana_berangkat = Carbon::createFromFormat('Y-m-d\TH:i', $request->rencana_berangkat)->format('Y-m-d\TH:i');
-        // $izin_asrama->rencana_kembali = Carbon::createFromFormat('Y-m-d\TH:i', $request->rencana_kembali)->format('Y-m-d\TH:i');
-        // $izin_asrama->keperluan_ib = $request->keperluan_ib;
-        // $izin_asrama->tempat_tujuan = $request->tempat_tujuan;
-        
-        // $save = $izin_asrama->save();
-
         if ($save) {
             return redirect()->back()->with('success', 'Anda berhasil melakukan request izin bermalam.');
         } else {

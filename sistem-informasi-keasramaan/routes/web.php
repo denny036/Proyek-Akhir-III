@@ -74,7 +74,7 @@ Route::prefix('petugas')->name('petugas.')->group(function(){
         Route::view('/home', 'petugas.home')->name('home');
 
         Route::get('/izin-bermalam-mahasiswa', [IBController::class, 'showPageIBMhs'])->name('izin-bermalam');
-        // Route::get('/izin-bermalam-mahasiswa/{izin_bermalam_id}', [IBController::class, 'showDetailIB'])->name('detail-izin-bermalam');
+        Route::get('/izin-bermalam-mahasiswa/detail/{izin_bermalam_id}', [IBController::class, 'getDetailIB'])->name('detail-izin-bermalam');
 
         Route::get('/data-petugas', [PetugasController::class, 'getAllPetugas'])->name('data-petugas');
         Route::get('/data-penghuni-asrama', [PetugasController::class, 'getPenghuniAsrama'])->name('data-penghuni-asrama');

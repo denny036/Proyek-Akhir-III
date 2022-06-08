@@ -23,7 +23,12 @@
                     <p class="text-xs bg-green-50 text-green-500 px-1 rounded">+4.5</p>
                 </div>
             </div>
-            <svg class="w-12 h-12 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <svg class="w-12 h-12 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                </path>
+            </svg>
         </div>
 
         <div class="bg-white shadow rounded-sm flex justify-between items-center py-3.5 px-3.5">
@@ -34,7 +39,12 @@
                     <p class="text-xs bg-green-50 text-green-500 px-1 rounded">+7.4</p>
                 </div>
             </div>
-            <svg class="w-12 h-12 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>                    
+            <svg class="w-12 h-12 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z">
+                </path>
+            </svg>
         </div>
 
         <div class="bg-white shadow rounded-sm flex justify-between items-center py-3.5 px-3.5">
@@ -45,7 +55,11 @@
                     <p class="text-xs bg-red-50 text-red-500 px-1 rounded">-2.9</p>
                 </div>
             </div>
-            <svg class="w-12 h-12 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+            <svg class="w-12 h-12 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6">
+                </path>
+            </svg>
         </div>
 
         <div class="bg-white shadow rounded-sm flex justify-between items-center py-3.5 px-3.5">
@@ -56,75 +70,84 @@
                     <p class="text-xs bg-green-50 text-green-500 px-1 rounded">+3.1</p>
                 </div>
             </div>
-            <svg class="w-12 h-12 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"></path></svg>
+            <svg class="w-12 h-12 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z">
+                </path>
+            </svg>
         </div>
     </div>
     <!-- END OF STATISTICS -->
 @endsection
 
 @section('table')
-            <!-- TABLE -->
-            <a href="{{ route('koordinator.create.asrama') }}">
-            <button type="button" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 
+    <!-- TABLE -->
+    <a href="{{ route('koordinator.create.asrama') }}">
+        <button type="button"
+            class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 
             focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 
-            dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 font-poppins">Tambah Data Asrama</button></a>
+            dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 font-poppins">Tambah
+            Data Asrama</button></a>
 
-                <div class="bg-white shadow rounded-sm my-2.5 overflow-x-auto">
-                    <table class="min-w-max w-full table-auto">
-                        <thead>
-                            <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                                <th class="py-3 px-6 text-left">Nama Asrama</th>
-                                <th class="py-3 px-6 text-left">Jenis Asrama</th>
-                                <th class="py-3 px-6 text-center">Lokasi Asrama</th>
-                                <th class="py-3 px-6 text-center">Status</th>
-                                <th class="py-3 px-6 text-center">Actions</th>
-                            </tr>
-                        </thead>
-                        @foreach ($asrama as $key => $value) 
-                        <tbody class="text-gray-600 text-sm">
-                            <tr class="border-b border-gray-200 hover:bg-gray-100">
-                                <td class="py-3 px-6 text-left whitespace-nowrap font-poppins">
-                                        {{ $value->nama_asrama }}
-                                    </div>
-                                </td>
-                                <td class="py-3 px-6 text-left">
-                                    <div class="flex items-center">
-                                        <span class="font-poppins">{{ $value->jenis_asrama }}</span>
-                                    </div>
-                                </td>
-                                <td class="py-3 px-6 text-center font-poppins">
-                                    {{ $value->lokasi_asrama }}
-                                </td>
-                                <td class="py-3 px-6 text-center">
-                                    <span class="bg-purple-200 text-purple-600 py-1 px-3 rounded-full text-xs">Active</span>
-                                </td>
-                                <td class="py-3 px-6 text-center">
-                                    <div class="flex item-center justify-center">
-                                        
-                                        <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110  cursor-pointer">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                                            </svg>
-                                        </div>
-                                        <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110  cursor-pointer">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                        @endforeach
-                        
-                    </div>
-                    </table>
-                    <div class="row">
-                        <div class="col-md-12">
-                            {{ $asrama->links('pagination::tailwind') }}
-                        </div>
-                    </div>
-            
-                </div>
-                <!-- END OF TABLE -->
+    <div class="bg-white shadow rounded-sm my-2.5 overflow-x-auto">
+        <table class="min-w-max w-full table-auto">
+            <thead>
+                <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                    <th class="py-3 px-6 text-left">Nama Asrama</th>
+                    <th class="py-3 px-6 text-left">Jenis Asrama</th>
+                    <th class="py-3 px-6 text-center">Lokasi Asrama</th>
+                    <th class="py-3 px-6 text-center">Status</th>
+                    <th class="py-3 px-6 text-center">Actions</th>
+                </tr>
+            </thead>
+            @foreach ($asrama as $key => $value)
+                <tbody class="text-gray-600 text-sm">
+                    <tr class="border-b border-gray-200 hover:bg-gray-100">
+                        <td class="py-3 px-6 text-left whitespace-nowrap font-poppins">
+                            {{ $value->nama_asrama }}
+    </div>
+    </td>
+    <td class="py-3 px-6 text-left">
+        <div class="flex items-center">
+            <span class="font-poppins">{{ $value->jenis_asrama }}</span>
+        </div>
+    </td>
+    <td class="py-3 px-6 text-center font-poppins">
+        {{ $value->lokasi_asrama }}
+    </td>
+    <td class="py-3 px-6 text-center">
+        <span class="bg-purple-200 text-purple-600 py-1 px-3 rounded-full text-xs">Active</span>
+    </td>
+    <td class="py-3 px-6 text-center">
+        <div class="flex item-center justify-center">
+
+            <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110  cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                </svg>
+            </div>
+            <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110  cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                </svg>
+            </div>
+        </div>
+    </td>
+    </tr>
+    </tbody>
+    @endforeach
+
+    </div>
+    </table>
+    <div class="row">
+        <div class="col-md-12">
+            {{ $asrama->links('pagination::tailwind') }}
+        </div>
+    </div>
+
+    </div>
+    <!-- END OF TABLE -->
 @endsection

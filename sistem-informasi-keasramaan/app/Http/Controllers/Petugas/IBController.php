@@ -14,30 +14,30 @@ class IBController extends Controller
     public function showPageIBMhs() 
     {   
         $petugas_id = Auth::guard('petugas')->user()->id;
-        $asramaPetugas = Auth::guard('petugas')->user()->asrama_id;
+        $asramaIDPetugas = Auth::guard('petugas')->user()->asrama_id;
 
-        $daftarReqIB = DB::table('izin_bermalam')
+        $daftarRequestIB = DB::table('izin_bermalam')
                             ->join('users', 'izin_bermalam.users_id', '=', 'users.id')
                             ->join('record_mahasiswa_asrama', 'izin_bermalam.users_id', '=', 'record_mahasiswa_asrama.users_id')
-                            ->where('record_mahasiswa_asrama.asrama_id', $asramaPetugas)
-                            ->get();
+                            ->select('users.*', 'izin_bermalam.*', 'record_mahasiswa_asrama.asrama_id')
+                            ->where('record_mahasiswa_asrama.asrama_id', $asramaIDPetugas)
+                            ->paginate(10);
 
-        return view('petugas.izin-bermalam.index', compact('daftarReqIB'));
+        // dd($daftarRequestIB);                            
+
+        return view('petugas.izin-bermalam.index', compact('daftarRequestIB'));
     }
 
-    // public function showDetailIB($id) 
-    // {
-    //     $izinBermalamID = IzinBermalam::find(decrypt($id));
+    public function getDetailIB($id) 
+    {
+        $izinBermalamID = IzinBermalam::find(decrypt($id));
 
-    //     $asramaPetugas = Auth::guard('petugas')->user()->asrama_id;
-
-    //     $detailReqIB = DB::table('izin_bermalam')
-    //                         ->join('users', 'izin_bermalam.users_id', '=', 'users.id')
-    //                         ->join('record_mahasiswa_asrama', 'izin_bermalam.users_id', '=', 'record_mahasiswa_asrama.users_id')
-    //                         ->where('izin_bermalam.id', decrypt($izinBermalamID))
-    //                         ->get();
-    //     dd($detailReqIB);
-        
-    //     return view('petugas.izin-bermalam.detail', compact('izinBermalamID', 'detailReqIB'));
-    // }
+        $detailReqIB = DB::table('izin_bermalam')
+                            ->join('users', 'izin_bermalam.users_id', '=', 'users.id')
+                            ->where('izin_bermalam.id', decrypt($id))
+                            ->get();
+                            
+        // dd($detailReqIB);
+        return view('petugas.izin-bermalam.detail', compact('izinBermalamID', 'detailReqIB'));
+    }
 }

@@ -33,7 +33,7 @@
                     <th class="py-3 px-6 text-center">Aksi</th>
                 </tr>
             </thead>
-            @foreach ($daftarReqIB as $data) 
+            @foreach ($daftarRequestIB as $key => $data) 
             <tbody class="text-gray-600 text-sm">
                 <tr class="border-b border-gray-200 hover:bg-gray-100">
                     <td class="py-3 px-6 text-left whitespace-nowrap font-poppins">
@@ -80,7 +80,7 @@
                     <td class="py-3 px-6 text-center">
                         <div class="flex item-center justify-center">
                             <span class="bg-blue-500 text-slate-50 py-1 px-3 rounded-full text-xs font-poppins">
-                                {{-- <a href="{{ route('petugas.detail-izin-bermalam', encrypt($detailReqIB->id)) }}">Detail</a> --}}
+                                <a href="{{ route('petugas.detail-izin-bermalam', encrypt($data->id)) }}">Detail</a>
                             </span>
                         </div>
                     </td>
@@ -92,7 +92,7 @@
         </table>
         <div class="row">
             <div class="col-md-12">
-                {{-- {{ $asrama->links('pagination::tailwind') }} --}}
+                {{ $daftarRequestIB->links('pagination::tailwind') }}
             </div>
         </div>
 
