@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Petugas;
 
+use App\Models\User;
 use App\Models\Asrama;
-use App\Models\Petugas;
 
+use App\Models\Petugas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\RecordMahasiswaAsrama;
 use Illuminate\Support\Facades\Auth;
 
 class PetugasController extends Controller
@@ -45,13 +47,29 @@ class PetugasController extends Controller
 
         $getAllMahasiswa = DB::table('users')->count();
 
+
         return view('petugas.penghuni-asrama.index', compact('getAllAsrama'));
     }
 
 
     public function showHomePetugas() 
     {
-      return view('petugas.home');
+        $asramaLaki = Asrama::where('jenis_asrama', 'laki-laki')->count();
+        $asramaPerempuan = Asrama::where('jenis_asrama', 'perempuan')->count();
+        $namaPetugas = Auth::guard('petugas')->user()->nama;
+        
+        $asramaPetugas = Auth::guard('petugas')->user()->asrama_id;
+        $lokasiBertugas = Petugas::where('asrama_id', $asramaPetugas)->first();
+
+        $totalMahasiswa = RecordMahasiswaAsrama::join('asrama', 'record_mahasiswa_asrama.asrama_id', '=', 'asrama.id')
+                                ->select(DB::raw('count(asrama_id) as Total'))
+                                ->where('asrama.id', '=', $asramaPetugas)
+                                ->first();
+
+        $getAllAsrama = DB::table('asrama')->orderBy('lokasi_asrama', 'asc')->get();
+
+        // dd($totalMahasiswa);
+        return view('petugas.home', compact('asramaLaki', 'asramaPerempuan', 'namaPetugas', 'lokasiBertugas', 'totalMahasiswa', 'getAllAsrama'));
     }
 
     public function showDetailAsrama($id) 
