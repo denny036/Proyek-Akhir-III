@@ -4,12 +4,12 @@ namespace App\Http\Controllers\User;
 
 use Mpdf\Mpdf;
 use Carbon\Carbon;
-use Illuminate\View\View;
 use App\Models\IzinBermalam;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
 
 
 class IzinBermalamController extends Controller
@@ -106,7 +106,7 @@ class IzinBermalamController extends Controller
             
         ]);
 
-        $html = \View::make('mahasiswa.izin-bermalam.print')->with('dataIB', $dataIB);
+        $html = View::make('mahasiswa.izin-bermalam.print')->with('dataIB', $dataIB);
         $html = $html->render();
 
         // $stylesheet = file_get_contents(url('/css/mdpf.css'));

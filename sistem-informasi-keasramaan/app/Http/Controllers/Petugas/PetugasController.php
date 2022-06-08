@@ -48,6 +48,12 @@ class PetugasController extends Controller
         return view('petugas.penghuni-asrama.index', compact('getAllAsrama'));
     }
 
+
+    public function showHomePetugas() 
+    {
+      return view('petugas.home');
+    }
+
     public function showDetailAsrama($id) 
     {
         $asramaID = Asrama::find(decrypt($id));

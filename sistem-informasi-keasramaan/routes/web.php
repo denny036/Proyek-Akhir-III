@@ -72,7 +72,9 @@ Route::prefix('petugas')->name('petugas.')->group(function(){
     });
 
     Route::middleware(['auth:petugas', 'PreventBackButtonHistory'])->group(function(){
-        Route::view('/home', 'petugas.home')->name('home');
+        
+        Route::get('/home', [PetugasController::class, 'showHomePetugas'])->name('home');
+        // Route::view('/home', 'petugas.home')->name('home');
 
         Route::get('/izin-bermalam-mahasiswa', [IBController::class, 'showPageIBMhs'])->name('izin-bermalam');
         Route::get('/izin-bermalam-mahasiswa/detail/{izin_bermalam_id}', [IBController::class, 'getDetailIB'])->name('detail-izin-bermalam');

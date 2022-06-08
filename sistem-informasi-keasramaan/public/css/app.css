@@ -787,6 +787,21 @@ select {
 .-ml-px {
   margin-left: -1px;
 }
+.mb-5 {
+  margin-bottom: 1.25rem;
+}
+.-mt-1 {
+  margin-top: -0.25rem;
+}
+.mb-3 {
+  margin-bottom: 0.75rem;
+}
+.mb-0 {
+  margin-bottom: 0px;
+}
+.ml-2\.5 {
+  margin-left: 0.625rem;
+}
 .block {
   display: block;
 }
@@ -840,6 +855,9 @@ select {
 }
 .h-3 {
   height: 0.75rem;
+}
+.h-7 {
+  height: 1.75rem;
 }
 .min-h-screen {
   min-height: 100vh;
@@ -897,6 +915,9 @@ select {
 }
 .w-3 {
   width: 0.75rem;
+}
+.w-10 {
+  width: 2.5rem;
 }
 .min-w-max {
   min-width: -webkit-max-content;
@@ -1257,6 +1278,9 @@ select {
 .p-5 {
   padding: 1.25rem;
 }
+.p-3 {
+  padding: 0.75rem;
+}
 .px-8 {
   padding-left: 2rem;
   padding-right: 2rem;
@@ -1353,6 +1377,14 @@ select {
   padding-top: 0.375rem;
   padding-bottom: 0.375rem;
 }
+.py-44 {
+  padding-top: 11rem;
+  padding-bottom: 11rem;
+}
+.py-14 {
+  padding-top: 3.5rem;
+  padding-bottom: 3.5rem;
+}
 .pt-10 {
   padding-top: 2.5rem;
 }
@@ -1388,6 +1420,9 @@ select {
 }
 .font-mono {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+.font-sans {
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 .text-5xl {
   font-size: 3rem;
@@ -1644,6 +1679,10 @@ select {
   --tw-bg-opacity: 1;
   background-color: rgb(31 41 55 / var(--tw-bg-opacity));
 }
+.hover\:bg-gray-700:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(55 65 81 / var(--tw-bg-opacity));
+}
 .hover\:text-purple-500:hover {
   --tw-text-opacity: 1;
   color: rgb(168 85 247 / var(--tw-text-opacity));
@@ -1667,6 +1706,11 @@ select {
 .hover\:shadow-2xl:hover {
   --tw-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
   --tw-shadow-colored: 0 25px 50px -12px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+.hover\:shadow:hover {
+  --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 .focus\:z-10:focus {
@@ -1735,6 +1779,10 @@ select {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(252 165 165 / var(--tw-ring-opacity));
 }
+.focus\:ring-gray-300:focus {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(209 213 219 / var(--tw-ring-opacity));
+}
 .focus\:ring-opacity-30:focus {
   --tw-ring-opacity: 0.3;
 }
@@ -1755,6 +1803,11 @@ select {
   .dark\:border-gray-600 {
     --tw-border-opacity: 1;
     border-color: rgb(75 85 99 / var(--tw-border-opacity));
+  }
+
+  .dark\:border-gray-700 {
+    --tw-border-opacity: 1;
+    border-color: rgb(55 65 81 / var(--tw-border-opacity));
   }
 
   .dark\:bg-blue-200 {
@@ -1780,6 +1833,21 @@ select {
   .dark\:bg-green-600 {
     --tw-bg-opacity: 1;
     background-color: rgb(22 163 74 / var(--tw-bg-opacity));
+  }
+
+  .dark\:bg-gray-800 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(31 41 55 / var(--tw-bg-opacity));
+  }
+
+  .dark\:bg-gray-700 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(55 65 81 / var(--tw-bg-opacity));
+  }
+
+  .dark\:bg-gray-600 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(75 85 99 / var(--tw-bg-opacity));
   }
 
   .dark\:text-blue-800 {
@@ -1817,6 +1885,11 @@ select {
     color: rgb(209 213 219 / var(--tw-text-opacity));
   }
 
+  .dark\:text-white {
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+  }
+
   .dark\:placeholder-gray-400::-moz-placeholder {
     --tw-placeholder-opacity: 1;
     color: rgb(156 163 175 / var(--tw-placeholder-opacity));
@@ -1835,6 +1908,16 @@ select {
   .dark\:hover\:bg-green-700:hover {
     --tw-bg-opacity: 1;
     background-color: rgb(21 128 61 / var(--tw-bg-opacity));
+  }
+
+  .dark\:hover\:bg-gray-600:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(75 85 99 / var(--tw-bg-opacity));
+  }
+
+  .dark\:hover\:bg-gray-500:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(107 114 128 / var(--tw-bg-opacity));
   }
 
   .dark\:hover\:text-gray-300:hover {
@@ -1857,6 +1940,11 @@ select {
     --tw-ring-color: rgb(22 101 52 / var(--tw-ring-opacity));
   }
 
+  .dark\:focus\:ring-gray-700:focus {
+    --tw-ring-opacity: 1;
+    --tw-ring-color: rgb(55 65 81 / var(--tw-ring-opacity));
+  }
+
   .dark\:focus\:ring-opacity-30:focus {
     --tw-ring-opacity: 0.3;
   }
@@ -1870,6 +1958,10 @@ select {
 
   .sm\:ml-3 {
     margin-left: 0.75rem;
+  }
+
+  .sm\:mb-4 {
+    margin-bottom: 1rem;
   }
 
   .sm\:flex {
@@ -1888,6 +1980,10 @@ select {
     width: 24rem;
   }
 
+  .sm\:w-auto {
+    width: auto;
+  }
+
   .sm\:max-w-xl {
     max-width: 36rem;
   }
@@ -1904,6 +2000,18 @@ select {
     justify-content: space-between;
   }
 
+  .sm\:space-y-0 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-y-reverse: 0;
+    margin-top: calc(0px * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(0px * var(--tw-space-y-reverse));
+  }
+
+  .sm\:space-x-4 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-x-reverse: 0;
+    margin-right: calc(1rem * var(--tw-space-x-reverse));
+    margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
+  }
+
   .sm\:p-10 {
     padding: 2.5rem;
   }
@@ -1914,6 +2022,14 @@ select {
 
   .sm\:p-4 {
     padding: 1rem;
+  }
+
+  .sm\:p-8 {
+    padding: 2rem;
+  }
+
+  .sm\:p-3 {
+    padding: 0.75rem;
   }
 
   .sm\:py-12 {
@@ -1938,6 +2054,11 @@ select {
   .sm\:text-sm {
     font-size: 0.875rem;
     line-height: 1.25rem;
+  }
+
+  .sm\:text-xs {
+    font-size: 0.75rem;
+    line-height: 1rem;
   }
 
   .sm\:leading-7 {
@@ -1985,6 +2106,11 @@ select {
     font-size: 0.875rem;
     line-height: 1.25rem;
   }
+
+  .md\:text-xs {
+    font-size: 0.75rem;
+    line-height: 1rem;
+  }
 }
 @media (min-width: 1024px) {
 
@@ -2013,6 +2139,11 @@ select {
   .lg\:text-3xl {
     font-size: 1.875rem;
     line-height: 2.25rem;
+  }
+
+  .lg\:text-xs {
+    font-size: 0.75rem;
+    line-height: 1rem;
   }
 }
 @media (min-width: 1280px) {

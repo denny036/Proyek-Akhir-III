@@ -22,7 +22,7 @@
                     <!-- LOGO -->
                     <a class="flex items-center text-white space-x-4" href="">
                         <img src="{{ asset('/images/logo-admin.png') }}" class="w-7 rounded-full" alt="Logo">
-
+                        
                         <span class="text-base font-bold font-poppins">
                             @yield('judul-navigasi')
                         </span>
