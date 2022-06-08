@@ -46,6 +46,6 @@ class User extends Authenticatable
 
     public function izin_bermalam() 
     {
-      return $this->belongsToMany(IzinBermalam::class);
+      return $this->hasMany(IzinBermalam::class);
     }
 }

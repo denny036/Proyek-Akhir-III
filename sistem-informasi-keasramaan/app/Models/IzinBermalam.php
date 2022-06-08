@@ -23,10 +23,10 @@ class IzinBermalam extends Model
 
     public $timestamps = false;
 
-    // public function petugas()
-    // {
-    //     return $this->belongsTo('App\Petugas', 'petugas_id');
-    // }
+    public function petugas()
+    {
+        return $this->belongsTo('App\Models\Petugas', 'petugas_id');
+    }
 
     public function mahasiswa()
     {

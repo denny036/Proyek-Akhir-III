@@ -58,6 +58,7 @@ Route::prefix('mahasiswa')->name('mahasiswa.')->group(function(){
         Route::get('/request-izin-bermalam', [IzinBermalamController::class, 'showReqIB'])->name('request.izin-bermalam');
         Route::post('/simpan-izin-bermalam', [IzinBermalamController::class, 'storeIB'])->name('store.izin-bermalam');
         Route::get('/izin-bermalam/detail/{izin_bermalam_id}', [IzinBermalamController::class, 'getDetailIB'])->name('detail.izin-bermalam');
+        Route::get('/izin-bermalam/print/{izin_bermalam_id}', [IzinBermalamController::class, 'printSuratIB'])->name('print.surat-ib');
         
         Route::post('/logout', [UserController::class, 'logout'])->name('logout');
     });
@@ -75,11 +76,13 @@ Route::prefix('petugas')->name('petugas.')->group(function(){
 
         Route::get('/izin-bermalam-mahasiswa', [IBController::class, 'showPageIBMhs'])->name('izin-bermalam');
         Route::get('/izin-bermalam-mahasiswa/detail/{izin_bermalam_id}', [IBController::class, 'getDetailIB'])->name('detail-izin-bermalam');
+        Route::get('/izin-bermalam-mahasiswa/detail/terima/{id}', [IBController::class, 'accIB'])->name('accept.izin-bermalam');
+        Route::get('/izin-bermalam-mahasiswa/detail/tolak/{id}', [IBController::class, 'rejectIB'])->name('reject.izin-bermalam');
 
         Route::get('/data-petugas', [PetugasController::class, 'getAllPetugas'])->name('data-petugas');
         Route::get('/data-penghuni-asrama', [PetugasController::class, 'getPenghuniAsrama'])->name('data-penghuni-asrama');
         Route::get('/data-penghuni-asrama/{asrama_id}', [PetugasController::class, 'showDetailAsrama'])->name('detail.penghuni-asrama');
-
+        
         Route::post('/logout', [PetugasController::class, 'logout'])->name('logout');
     });
 });

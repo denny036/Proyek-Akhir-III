@@ -2,30 +2,35 @@
 
 namespace App\Http\Controllers\User;
 
+use Mpdf\Mpdf;
 use Carbon\Carbon;
+use Illuminate\View\View;
 use App\Models\IzinBermalam;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
+
 class IzinBermalamController extends Controller
 {
-    public function showPageIzinBermalam() 
+    public function showPageIzinBermalam()
     {
         $mahasiswa_id = Auth::guard('web')->user()->id;
 
-        $riwayatIB = DB::table('izin_bermalam')->where('users_id', $mahasiswa_id)->paginate(5);
+        $riwayatIB = IzinBermalam::where('users_id', $mahasiswa_id)->orderByDesc('id')->paginate(5);
+
+        // dd($riwayatIB);
 
         return view('mahasiswa.izin-bermalam.index', compact('riwayatIB'));
     }
 
-    public function showReqIB() 
+    public function showReqIB()
     {
-      return view('mahasiswa.izin-bermalam.create');
+        return view('mahasiswa.izin-bermalam.create');
     }
-    
-    public function storeIB(Request $request) 
+
+    public function storeIB(Request $request)
     {
         $request->validate(
             [
@@ -47,11 +52,11 @@ class IzinBermalamController extends Controller
         );
 
         $save = DB::table('izin_bermalam')->insert([
-                    'users_id' => Auth::guard('web')->user()->id,
-                    'rencana_berangkat' => Carbon::createFromFormat('Y-m-d\TH:i', $request->rencana_berangkat)->format('Y-m-d\TH:i'),
-                    'rencana_kembali' => Carbon::createFromFormat('Y-m-d\TH:i', $request->rencana_kembali)->format('Y-m-d\TH:i'),
-                    'keperluan_ib' => $request->keperluan_ib,
-                    'tempat_tujuan' => $request->tempat_tujuan,
+            'users_id' => Auth::guard('web')->user()->id,
+            'rencana_berangkat' => Carbon::createFromFormat('Y-m-d\TH:i', $request->rencana_berangkat)->format('Y-m-d\TH:i'),
+            'rencana_kembali' => Carbon::createFromFormat('Y-m-d\TH:i', $request->rencana_kembali)->format('Y-m-d\TH:i'),
+            'keperluan_ib' => $request->keperluan_ib,
+            'tempat_tujuan' => $request->tempat_tujuan,
         ]);
 
         if ($save) {
@@ -62,18 +67,55 @@ class IzinBermalamController extends Controller
         return redirect()->route('mahasiswa.request.izin-bermalam');
     }
 
-    public function getDetailIB($id) 
+    public function getDetailIB($id)
     {
-        $izinBermalamID = IzinBermalam::find(decrypt($id));
-        // $mahasiswa_id = Auth::guard('web')->user()->id;
+        $izinBermalamID = IzinBermalam::find($id);
 
-        $detailIB = DB::table('izin_bermalam')
-                        ->join('users', 'izin_bermalam.users_id', '=', 'users.id')
-                        ->where('izin_bermalam.id', decrypt($id))
-                        ->get();
-
+        $detailIB = IzinBermalam::join('users', 'izin_bermalam.users_id', '=', 'users.id')
+            // ->join('petugas', 'izin_bermalam.petugas_id', '=', 'petugas.id')
+            ->where('izin_bermalam.id', $id)
+            ->get();
+        
         // dd($detailIB);
 
         return view('mahasiswa.izin-bermalam.detail', compact('izinBermalamID', 'detailIB'));
+    }
+
+    public function printSuratIB($id) 
+    {
+        $izinBermalamID = IzinBermalam::find($id);
+
+        $dataIB = IzinBermalam::join('users', 'izin_bermalam.users_id', '=', 'users.id')
+                                ->where('izin_bermalam.id', $id)
+                                ->get();
+
+        $fileName = 'Surat Izin Bermalam.pdf';
+
+        $mpdf = new \Mpdf\Mpdf([
+            'format' => 'A4',
+            'title'  => 'Surat IB Mahasiswa',
+            'default_font_size' => '10',
+            'default_font' => 'sans-serif',
+            'margin_left' => 15,
+            'margin_right' => 15,
+            'margin_top' => 15,
+            'margin_bottom' => 20,
+            'margin_header' => 10,
+            'margin_footer' => 10,
+            'orientation' => 'P',
+            
+        ]);
+
+        $html = \View::make('mahasiswa.izin-bermalam.print')->with('dataIB', $dataIB);
+        $html = $html->render();
+
+        // $stylesheet = file_get_contents(url('/css/mdpf.css'));
+        // $mpdf->WriteHTML($stylesheet, 1);
+        $mpdf->SetTitle('Surat IB Mahasiswa');
+        $mpdf->WriteHTML($html);
+        $mpdf->Output($fileName, 'I');
+        
+
+        return view('mahasiswa.izin-bermalam.print', compact('dataIB'));
     }
 }
