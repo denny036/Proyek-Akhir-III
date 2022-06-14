@@ -20,14 +20,39 @@ class IzinBermalamController extends Controller
 
         $riwayatIB = IzinBermalam::where('users_id', $mahasiswa_id)->orderByDesc('id')->paginate(5);
 
-        // dd($riwayatIB);
+        $dataMahasiswa = DB::table('record_mahasiswa_asrama')
+            ->join('users', 'record_mahasiswa_asrama.users_id', '=', 'users.id')
+            ->join('asrama', 'record_mahasiswa_asrama.asrama_id', '=', 'asrama.id')
+            ->where('record_mahasiswa_asrama.users_id', '=', $mahasiswa_id)
+            ->first();
 
-        return view('mahasiswa.izin-bermalam.index', compact('riwayatIB'));
+         //jika asrama mahasiswa == null
+        if (empty($dataMahasiswa)) {
+            return redirect()->route('mahasiswa.profile')
+                ->with('info', 'Untuk menggunakan aplikasi ini, silakan pilih asrama Anda terlebih dahulu!');
+        } else {
+            return view('mahasiswa.izin-bermalam.index', compact('riwayatIB'));
+        }
+
+        // dd($riwayatIB);
     }
 
     public function showReqIB()
     {
-        return view('mahasiswa.izin-bermalam.create');
+        $mahasiswa_id = Auth::guard('web')->user()->id;
+        $dataMahasiswa = DB::table('record_mahasiswa_asrama')
+            ->join('users', 'record_mahasiswa_asrama.users_id', '=', 'users.id')
+            ->join('asrama', 'record_mahasiswa_asrama.asrama_id', '=', 'asrama.id')
+            ->where('record_mahasiswa_asrama.users_id', '=', $mahasiswa_id)
+            ->first();
+
+        //jika asrama mahasiswa == null
+        if (empty($dataMahasiswa)) {
+            return redirect()->route('mahasiswa.profile')
+                ->with('info', 'Untuk menggunakan aplikasi ini, silakan pilih asrama Anda terlebih dahulu!');
+        } else {
+            return view('mahasiswa.izin-bermalam.create');
+        }
     }
 
     public function storeIB(Request $request)
@@ -75,19 +100,19 @@ class IzinBermalamController extends Controller
             // ->join('petugas', 'izin_bermalam.petugas_id', '=', 'petugas.id')
             ->where('izin_bermalam.id', $id)
             ->get();
-        
+
         // dd($detailIB);
 
         return view('mahasiswa.izin-bermalam.detail', compact('izinBermalamID', 'detailIB'));
     }
 
-    public function printSuratIB($id) 
+    public function printSuratIB($id)
     {
         $izinBermalamID = IzinBermalam::find($id);
 
         $dataIB = IzinBermalam::join('users', 'izin_bermalam.users_id', '=', 'users.id')
-                                ->where('izin_bermalam.id', $id)
-                                ->get();
+            ->where('izin_bermalam.id', $id)
+            ->get();
 
         $fileName = 'Surat Izin Bermalam.pdf';
 
@@ -103,7 +128,7 @@ class IzinBermalamController extends Controller
             'margin_header' => 10,
             'margin_footer' => 10,
             'orientation' => 'P',
-            
+
         ]);
 
         $html = View::make('mahasiswa.izin-bermalam.print')->with('dataIB', $dataIB);
@@ -114,7 +139,7 @@ class IzinBermalamController extends Controller
         $mpdf->SetTitle('Surat IB Mahasiswa');
         $mpdf->WriteHTML($html);
         $mpdf->Output($fileName, 'I');
-        
+
 
         return view('mahasiswa.izin-bermalam.print', compact('dataIB'));
     }
