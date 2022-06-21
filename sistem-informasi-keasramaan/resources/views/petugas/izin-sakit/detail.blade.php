@@ -73,7 +73,7 @@
         </td>
     </tr>
 
-    <tr class="border-b bg-slate-200 bg-slate-200border-gray-100 ">
+    <tr class="border-b border-gray-100 ">
         <td class="py-3 px-6 text-left font-poppins font-bold">
             Keterangan
         </td>
@@ -83,7 +83,7 @@
         </td>
     </tr>
 
-    <tr class="border-b border-gray-200 ">
+    <tr class="border-b bg-slate-200 border-gray-200 ">
         <td class="py-3 px-6 text-left font-poppins font-bold">
             Kondisi
         </td>
@@ -195,4 +195,11 @@ py-2.5 text-center inline-flex items-center mr-2">
             Tolak
         </button>
     </a>
+
+
+    
 @endsection
+
+
+
+
