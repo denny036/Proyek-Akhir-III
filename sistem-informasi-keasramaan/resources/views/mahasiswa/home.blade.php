@@ -38,7 +38,10 @@
             <div class="space-y-2">
                 <p class="text-lg text-gray-600 uppercase font-semibold font-poppins">Petugas</p>
                 <div class="flex items-center space-x-2">
-                    <h1 class="text-xl font-semibold">819</h1>
+                    <h1 class="text-xl font-semibold">
+                        {{ $totalPetugasByAsrama->TotalPetugas ?? 'Belum memiliki petugas'}}
+                        <span class="text-base font-normal font-poppins md:text-sm">orang petugas</span>
+                    </h1>
                 </div>
             </div>
             <svg class="w-12 h-12 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"

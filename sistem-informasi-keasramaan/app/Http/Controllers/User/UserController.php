@@ -14,7 +14,7 @@ use App\Models\RecordMahasiswaAsrama;
 use function PHPUnit\Framework\isEmpty;
 
 class UserController extends Controller
-{   
+{
 
     public function create(Request $request)
     {
@@ -79,7 +79,7 @@ class UserController extends Controller
             'nim.exists' => 'NIM Anda tidak ditemukan.',
             'password.required' => 'Password tidak boleh kosong.'
         ]);
-        
+
         $rememberMe = $request->remember ? true : false;
         $credentials = $request->only('nim', 'password');
 
@@ -90,7 +90,7 @@ class UserController extends Controller
         }
     }
 
-    public function showHomeMahasiswa(Asrama $asrama) 
+    public function showHomeMahasiswa(Asrama $asrama)
     {
         $dataAsrama = Asrama::all();
         $user_id = Auth::guard('web')->user()->id;
@@ -99,41 +99,46 @@ class UserController extends Controller
         $isNullAsrama = $checkAsrama->isEmpty();
 
         $getDataMahasiswa = DB::table('record_mahasiswa_asrama')
-                                ->join('users', 'record_mahasiswa_asrama.users_id', '=', 'users.id')
-                                ->join('asrama', 'record_mahasiswa_asrama.asrama_id', '=', 'asrama.id')
-                                ->where('record_mahasiswa_asrama.users_id', '=', $user_id)
-                                ->first();
-                              
-        $asramaUser = DB::table('record_mahasiswa_asrama')
-                        ->where('users_id', '=', $user_id)
-                        ->orderBy('asrama_id', 'desc')
-                        ->first();
+            ->join('users', 'record_mahasiswa_asrama.users_id', '=', 'users.id')
+            ->join('asrama', 'record_mahasiswa_asrama.asrama_id', '=', 'asrama.id')
+            ->where('record_mahasiswa_asrama.users_id', '=', $user_id)
+            ->first();
 
-        if(empty($asramaUser)) {
+        $asramaUser = DB::table('record_mahasiswa_asrama')
+            ->where('users_id', '=', $user_id)
+            ->orderBy('asrama_id', 'desc')
+            ->first();
+
+        if (empty($asramaUser)) {
             $totalMahasiswaAsrama = 0;
             return redirect()->route('mahasiswa.profile')
-                             ->with('info', 'Untuk menggunakan aplikasi ini, silakan pilih asrama Anda terlebih dahulu!');
-        }else{
+                ->with('info', 'Untuk menggunakan aplikasi ini, silakan pilih asrama Anda terlebih dahulu!');
+        } else {
             $getUserAsramaID = $asramaUser->asrama_id;
-                                
+
             $totalMahasiswaAsrama = DB::table('record_mahasiswa_asrama')
-                                ->join('asrama', 'record_mahasiswa_asrama.asrama_id', '=', 'asrama.id')        
-                                ->select(DB::raw('count(asrama_id) as Total'))                   
-                                ->where('asrama.id', '=', $getUserAsramaID)
-                                ->first();
+                ->join('asrama', 'record_mahasiswa_asrama.asrama_id', '=', 'asrama.id')
+                ->select(DB::raw('count(asrama_id) as Total'))
+                ->where('asrama.id', '=', $getUserAsramaID)
+                ->first();
+
+            $totalPetugasByAsrama = DB::table('petugas')
+                // ->join('petugas', 'petugas.id', '=', 'petugas.id') 
+                ->select(DB::raw('count(petugas.id) as TotalPetugas'))
+                ->where('asrama_id', '=', $getUserAsramaID)
+                ->first();
 
             $dataPenghuniAsrama = DB::table('record_mahasiswa_asrama')
-                                ->join('asrama', 'record_mahasiswa_asrama.asrama_id', '=', 'asrama.id')  
-                                ->join('users', 'record_mahasiswa_asrama.users_id', '=', 'users.id')
-                                ->where('record_mahasiswa_asrama.asrama_id', '=', $getUserAsramaID)
-                                ->orderBy('users.nama', 'asc')
-                                ->paginate(10);
-                                
-            // dd($dataPenghuniAsrama);
-            
-            return view('mahasiswa.home', compact('dataAsrama', 'isNullAsrama', 'getDataMahasiswa', 'totalMahasiswaAsrama', 'dataPenghuniAsrama'));
+                ->join('asrama', 'record_mahasiswa_asrama.asrama_id', '=', 'asrama.id')
+                ->join('users', 'record_mahasiswa_asrama.users_id', '=', 'users.id')
+                ->where('record_mahasiswa_asrama.asrama_id', '=', $getUserAsramaID)
+                ->orderBy('users.nama', 'asc')
+                ->paginate(10);
+
+            // dd($totalPetugasByAsrama);
+
+            return view('mahasiswa.home', compact('dataAsrama', 'isNullAsrama', 'getDataMahasiswa', 'totalMahasiswaAsrama', 'dataPenghuniAsrama', 'totalPetugasByAsrama'));
         }
-                          
     }
 
     public function getDataAsrama(Asrama $asrama)
@@ -145,11 +150,11 @@ class UserController extends Controller
         $nullAsrama = $checkAsrama->isEmpty();
 
         $dataMahasiswa = DB::table('record_mahasiswa_asrama')
-                         ->join('users', 'record_mahasiswa_asrama.users_id', '=', 'users.id')
-                         ->join('asrama', 'record_mahasiswa_asrama.asrama_id', '=', 'asrama.id')
-                         ->where('record_mahasiswa_asrama.users_id', '=', $user_id)
-                         ->get();
-       
+            ->join('users', 'record_mahasiswa_asrama.users_id', '=', 'users.id')
+            ->join('asrama', 'record_mahasiswa_asrama.asrama_id', '=', 'asrama.id')
+            ->where('record_mahasiswa_asrama.users_id', '=', $user_id)
+            ->get();
+
         return view('mahasiswa.profile', compact('asrama', 'nullAsrama', 'dataMahasiswa'));
     }
 

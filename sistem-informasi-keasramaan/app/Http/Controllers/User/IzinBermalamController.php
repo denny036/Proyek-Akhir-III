@@ -94,11 +94,11 @@ class IzinBermalamController extends Controller
 
     public function getDetailIB($id)
     {
-        $izinBermalamID = IzinBermalam::find($id);
+        $izinBermalamID = IzinBermalam::find(decrypt($id));
 
         $detailIB = IzinBermalam::join('users', 'izin_bermalam.users_id', '=', 'users.id')
             // ->join('petugas', 'izin_bermalam.petugas_id', '=', 'petugas.id')
-            ->where('izin_bermalam.id', $id)
+            ->where('izin_bermalam.id', decrypt($id))
             ->get();
 
         // dd($detailIB);
@@ -108,10 +108,10 @@ class IzinBermalamController extends Controller
 
     public function printSuratIB($id)
     {
-        $izinBermalamID = IzinBermalam::find($id);
+        $izinBermalamID = IzinBermalam::find(decrypt($id));
 
         $dataIB = IzinBermalam::join('users', 'izin_bermalam.users_id', '=', 'users.id')
-            ->where('izin_bermalam.id', $id)
+            ->where('izin_bermalam.id', decrypt($id))
             ->get();
 
         $fileName = 'Surat Izin Bermalam.pdf';

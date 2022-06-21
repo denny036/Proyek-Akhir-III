@@ -25,7 +25,7 @@
     @if($detailIB[0]->status == null)
     @elseif ($detailIB[0]->status == 2)
     @else
-    <a href="{{ route('mahasiswa.print.surat-ib', $izinBermalamID->id) }}">
+    <a href="{{ route('mahasiswa.print.surat-ib', encrypt($izinBermalamID->id)) }}">
         <button type="button"
             class="font-poppins text-white bg-login focus:ring-4 
 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3.5
@@ -151,7 +151,7 @@ py-1.5 text-center inline-flex items-center mr-2">
         </td>
 
         <td class="py-3 px-6 text-left font-poppins">
-            {{ !empty($data->petugas->nama) ? $data->petugas->nama:' ' }}
+            {{ !empty($data->petugas->nama) ? $data->petugas->nama : 'Pengurus Asrama' }}
         </td>
     </tr>
 

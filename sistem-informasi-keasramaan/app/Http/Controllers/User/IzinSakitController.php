@@ -15,7 +15,7 @@ class IzinSakitController extends Controller
     {
         $mahasiswa_id = Auth::guard('web')->user()->id;
 
-        $riwayatIS = IzinSakit::where('users_id', $mahasiswa_id)->orderByDesc('id')->paginate(5);
+        $riwayatIS = IzinSakit::where('users_id', $mahasiswa_id)->orderByDesc('id')->paginate(10);
 
         $dataMahasiswa = DB::table('record_mahasiswa_asrama')
             ->join('users', 'record_mahasiswa_asrama.users_id', '=', 'users.id')
@@ -107,10 +107,10 @@ class IzinSakitController extends Controller
 
     public function getDetailIzinSakit($id) 
     {
-        $izinSakitID = IzinSakit::find($id);
+        $izinSakitID = IzinSakit::find(decrypt($id));
 
         $detailIS = IzinSakit::join('users', 'izin_sakit.users_id', '=', 'users.id')
-            ->where('izin_sakit.id', $id)
+            ->where('izin_sakit.id', decrypt($id))
             ->get();
 
         // dd($detailIB);
