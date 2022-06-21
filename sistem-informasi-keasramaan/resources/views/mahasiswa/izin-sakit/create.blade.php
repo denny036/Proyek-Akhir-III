@@ -9,7 +9,7 @@
 @endsection
 
 @section('judul-halaman')
-    <a href="{{ route('mahasiswa.izin-bermalam') }}"><span class="text-gray-600">Izin Sakit / </a></span>Request Izin
+    <a href="{{ route('mahasiswa.izin-sakit') }}"><span class="text-gray-600">Izin Sakit / </a></span>Request Izin
     Sakit
 @endsection
 
@@ -44,7 +44,7 @@
                     <div>
                         <label for="asrama_mahasiswa" class="block mb-1 text-gray-600 font-semibold font-poppins">Asrama</label>
                         <input type="text" name="asrama_mahasiswa"
-                            class="bg-indigo-50 px-4 py-2 outline-none rounded-md w-full font-poppins"
+                            class="bg-indigo-50 opacity-70 px-4 py-2 outline-none rounded-md w-full font-poppins"
                             value="{{ $dataMahasiswa->nama_asrama }}" disabled>
                     </div>
 

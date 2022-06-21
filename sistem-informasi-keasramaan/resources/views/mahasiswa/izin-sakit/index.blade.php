@@ -34,76 +34,94 @@
                     <th class="py-3 px-6 text-left">Status Permohonan</th>
                     <th class="py-3 px-6 text-left">Oleh</th>
                     <th class="py-3 px-6 text-center">Jadwal Istirahat</th>
-                    <th class="py-3 px-6 text-center">Kondisi</th>
+                    <th class="py-3 px-6 text-left">Kondisi</th>
                     <th class="py-3 px-6 text-center">Keterangan</th>
                     <th class="py-3 px-6 text-center">Aksi</th>
                 </tr>
             </thead>
-            {{-- @foreach ($riwayatIS as $key => $data) --}}
+            @foreach ($riwayatIS as $key => $data)
                 <tbody class="text-gray-600 text-sm">
                     <tr class="border-b border-gray-200 hover:bg-gray-100">
 
                         <td class="py-3 px-6 text-left whitespace-nowrap font-poppins">
-                            {{-- @if ($data->status == null)
+                            @if ($data->status_izin == null)
                                 <div class="flex item-center">
                                     <span
                                         class="font-poppins bg-yellow-300 text-dark font-semibold py-1 px-3 rounded-full text-xs">
                                         Menunggu Persetujuan
                                     </span>
                                 </div>
-                            @elseif ($data->status == 1)
+                            @elseif ($data->status_izin == 1)
                                 <div class="flex item-center">
                                     <span class="font-poppins bg-green-700 text-slate-50 py-1 px-3 rounded-full text-xs">
                                         Disetujui
                                     </span>
                                 </div>
-                            @elseif ($data->status == 2)
+                            @elseif ($data->status_izin == 2)
                                 <div class="flex item-center">
                                     <span class="font-poppins bg-red-500 text-slate-50 py-1 px-3 rounded-full text-xs">
                                         Ditolak
                                     </span>
                                 </div>
-                            @endif --}}
+                            @endif
 
                         </td>
 
                         <td class="py-3 px-6 text-left">
                             <div class="flex items-center">
                                 <span class="font-poppins">
-                                {{-- {{ !empty($data->petugas->nama) ? $data->petugas->nama:' ' }} --}}
+                                {{ !empty($data->petugas->nama) ? $data->petugas->nama:' ' }}
                                 </span>
                             </div>
                         </td>
+                        
                         <td class="py-3 px-6 text-center font-poppins">
-                            {{-- {{ $data->keperluan_ib }} --}}
+                            {{ \Carbon\Carbon::parse($data->jadwal_istirahat)->isoFormat('DD MMMM YYYY H:mm') }}
                         </td>
+
                         <td class="py-3 px-6 text-center font-poppins">
-                            {{-- {{ $data->tempat_tujuan }} --}}
+                            @if ($data->kondisi_sakit == 1)
+                                <div class="flex item-center">
+                                    <span
+                                        class="font-poppins py-1 px-3 rounded-full text-sm">
+                                        Sakit
+                                    </span>
+                                </div>
+                            @else
+                            <div class="flex item-center">
+                                <span
+                                    class="font-poppins py-1 px-3 rounded-full text-sm">
+                                    Sembuh
+                                </span>
+                            </div>
+                            @endif
                         </td>
+
                         <td class="py-3 px-6 text-center font-poppins">
-                            {{-- {{ $data->tempat_tujuan }} --}}
+                            {{ $data->keterangan }}
                         </td>
+
                         <td class="py-3 px-6 text-center">
                             <div class="flex item-center justify-center">
-                                {{-- <span class="bg-blue-500 text-slate-50 py-1 px-3 rounded-full text-xs font-poppins">
-                                    <a href="{{ route('mahasiswa.detail.izin-bermalam', $data->id) }}">Detail</a>
-                                </span> --}}
+                                <span class="bg-blue-500 text-slate-50 py-1 px-3 rounded-full text-xs font-poppins">
+                                    <a href="{{ route('mahasiswa.detail.izin-sakit', $data->id) }}">Detail</a>
+                                </span>
                             </div>
                         </td>
                     </tr>
                 </tbody>
-            {{-- @endforeach --}}
+            @endforeach
 
     </div>
     </table>
     <div class="row">
         <div class="col-md-12">
-            {{-- {{ $riwayatIB->links('pagination::tailwind') }} --}}
+            {{ $riwayatIS->links('pagination::tailwind') }}
         </div>
     </div>
 
     </div>
-
+    
     {{-- <p class="font-poppins font-normal text-lg py-2">Pedoman Izin Sakit</p>
     <div class="flex border-b border-gray-300"></div>
     <ul class="list-disc px-4 font-poppins text-base text-justify">
