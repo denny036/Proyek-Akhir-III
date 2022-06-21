@@ -50,7 +50,7 @@
         <span class="font-poppins text-sm">Data Check Out</span>
     </a>
 
-    <a href="#"
+    <a href="{{ route('petugas.izin-sakit') }}"
         class="py-2.5 px-4 flex items-center space-x-2 bg-gray-800 text-white hover:bg-gray-800 hover:text-white rounded">
         <svg class="w-7 h-6" fill="none" stroke="currentColor" id="icon-sick" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

@@ -16,7 +16,7 @@
     <div class="p-4 w-full text-center bg-white rounded-lg border shadow-md sm:p-8">
         <h5 class="mb-2 text-2xl font-poppins font-bold text-slate-900 ">Hai {{ $namaPetugas }}, Anda bertugas di {{ $lokasiBertugas->asrama->nama_asrama }}.</h5>
         
-        <p class="mb-0 text-base text-slate-900 sm:text-lg font-poppins py-2.5">Total Mahasiswa: {{ $totalMahasiswa->Total ?? 'Asrama kosong' }}</p>
+        <p class="mb-0 text-base text-slate-900 sm:text-lg font-poppins py-2.5">Total Mahasiswa: {{ $totalMahasiswa->Total ?? 'Asrama kosong' }} orang mahasiswa</p>
         <div class="justify-center items-center space-y-4 sm:flex sm:space-y-0 sm:space-x-4">
         </div>
         <div class="flex flex-row py-10">

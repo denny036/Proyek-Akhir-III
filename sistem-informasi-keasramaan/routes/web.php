@@ -5,6 +5,7 @@ use App\Http\Controllers\Koordinator\DataPetugasController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Koordinator\KoordinatorController;
 use App\Http\Controllers\Petugas\IBController;
+use App\Http\Controllers\Petugas\ISController;
 use App\Http\Controllers\Petugas\PetugasController;
 use App\Http\Controllers\User\CheckInController;
 use App\Http\Controllers\User\IzinBermalamController;
@@ -83,6 +84,13 @@ Route::prefix('petugas')->name('petugas.')->group(function(){
         Route::get('/izin-bermalam-mahasiswa/detail/{izin_bermalam_id}', [IBController::class, 'getDetailIB'])->name('detail-izin-bermalam');
         Route::get('/izin-bermalam-mahasiswa/detail/terima/{id}', [IBController::class, 'accIB'])->name('accept.izin-bermalam');
         Route::get('/izin-bermalam-mahasiswa/detail/tolak/{id}', [IBController::class, 'rejectIB'])->name('reject.izin-bermalam');
+
+        Route::get('/izin-sakit-mahasiswa', [ISController::class, 'showPageISMhs'])->name('izin-sakit');
+        Route::get('/izin-sakit-mahasiswa/detail/{izin_sakit_id}', [ISController::class, 'getDetailIS'])->name('detail-izin-sakit');
+        Route::get('/izin-sakit-mahasiswa/detail/terima/{id}', [ISController::class, 'accIzinSakit'])->name('accept.izin-sakit');
+        Route::get('/izin-sakit-mahasiswa/detail/tolak/{id}', [ISController::class, 'rejectIzinSakit'])->name('reject.izin-sakit');
+
+        // Route::put('/izin-sakit-mahasiswa/detail/update-kondisi/{izin_sakit_id}', [ISController::class, 'updateKondisiMahasiswa'])->name('update.kondisi-mahasiswa');
 
         Route::get('/data-petugas', [PetugasController::class, 'getAllPetugas'])->name('data-petugas');
         Route::get('/data-penghuni-asrama', [PetugasController::class, 'getPenghuniAsrama'])->name('data-penghuni-asrama');

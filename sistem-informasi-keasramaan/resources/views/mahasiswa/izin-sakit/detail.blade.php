@@ -98,9 +98,8 @@
         </td>
 
         <td class="py-3 px-6 text-left font-poppins">
-            @if($data->surat_sakit) {
+            @if($data->surat_sakit) 
             <img src="{{ asset('uploads/surat-sakit/' . $data->surat_sakit) }}" class="w-32 rounded-full" alt="Surat Sakit">
-            }
             @else
             <p class="font-semibold">Anda tidak memiliki surat sakit</p>
             @endif
