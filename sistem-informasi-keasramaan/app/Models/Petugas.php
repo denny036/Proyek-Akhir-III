@@ -57,4 +57,9 @@ class Petugas extends Authenticatable
     {
         return $this->hasMany('App\Models\IzinBermalam', 'izin_bermalam_id');
     }
+    
+    public function i_sakit()
+    {
+        return $this->hasMany('App\Models\IzinBermalam', 'izin_bermalam_id');
+    }
 }

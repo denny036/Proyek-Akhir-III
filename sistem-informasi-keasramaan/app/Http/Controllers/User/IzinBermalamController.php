@@ -26,7 +26,7 @@ class IzinBermalamController extends Controller
             ->where('record_mahasiswa_asrama.users_id', '=', $mahasiswa_id)
             ->first();
 
-         //jika asrama mahasiswa == null
+        //jika asrama mahasiswa == null
         if (empty($dataMahasiswa)) {
             return redirect()->route('mahasiswa.profile')
                 ->with('info', 'Untuk menggunakan aplikasi ini, silakan pilih asrama Anda terlebih dahulu!');

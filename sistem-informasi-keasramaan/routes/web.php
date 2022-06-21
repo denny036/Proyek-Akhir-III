@@ -62,8 +62,8 @@ Route::prefix('mahasiswa')->name('mahasiswa.')->group(function(){
         Route::get('/izin-bermalam/print/{izin_bermalam_id}', [IzinBermalamController::class, 'printSuratIB'])->name('print.surat-ib');
         
         Route::get('izin-sakit', [IzinSakitController::class, 'showPageIzinSakit'])->name('izin-sakit');
-        // Route::get('request-izin-sakit', [IzinSakitController::class, 'showReqIS'])->name('request.izin-sakit');
-        // Route::post('simpan-izin-sakit', [IzinSakitController::class, 'storeIS'])->name('store.izin-sakit');
+        Route::get('request-izin-sakit', [IzinSakitController::class, 'showReqIS'])->name('request.izin-sakit');
+        Route::post('simpan-izin-sakit', [IzinSakitController::class, 'storeIS'])->name('store.izin-sakit');
         // Route::get('izin-sakit/detail/{izin_sakit_id}', [IzinSakitController::class, 'getDetailIzinSakit'])->name('detail.izin-sakit');
         // Route::put('izin-sakit/detail/{izin_sakit_id}', [IzinSakitController::class, 'updateIzinSakit'])->name('update.izin-sakit');
 
