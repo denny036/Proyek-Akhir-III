@@ -17,7 +17,7 @@ class IzinSakit extends Model
         'jadwal_istirahat',
         'keterangan',
         'status_izin',
-        'kondisi_sakit',
+        'kondisi',
         'surat_sakit'
     ];
 

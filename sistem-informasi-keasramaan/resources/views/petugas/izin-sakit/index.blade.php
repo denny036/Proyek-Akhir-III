@@ -56,7 +56,7 @@
     </td>
 
     <td class="py-3 px-6 text-center font-poppins">
-        @if ($data->kondisi_sakit == "sakit")
+        @if ($data->kondisi == "sakit")
             <div class="flex item-center">
                 <span class="font-poppins py-1 px-3 rounded-full text-sm">
                     Sakit

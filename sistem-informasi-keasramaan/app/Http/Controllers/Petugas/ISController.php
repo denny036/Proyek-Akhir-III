@@ -74,9 +74,9 @@ class ISController extends Controller
     public function updateKondisiMahasiswa(Request $request, $id)
     {
         $izinSakitID = IzinSakit::find($id);
-        
+
         $result = IzinSakit::find($id)->update([
-            'kondisi_sakit' => $request->kondisi_sakit,
+            'kondisi' => $request->kondisi,
         ]);
         
         dd($result);

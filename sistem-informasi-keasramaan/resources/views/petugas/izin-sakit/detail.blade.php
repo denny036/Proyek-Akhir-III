@@ -96,7 +96,7 @@
         </td>
 
         <td class="py-3 px-3 text-left font-poppins">
-            @if ($data->kondisi_sakit == "sakit")
+            @if ($data->kondisi == "sakit")
                 <div class="flex item-center">
                     <span class="font-poppins py-1 px-3 rounded-full text-sm">
                         Sakit
@@ -210,7 +210,7 @@ py-2 text-center inline-flex items-center mr-2.5 mb-3">
             Kondisi Mahasiswa
         </h5>
 
-        <select name="kondisi_sakit" id="kondisi_sakit"
+        <select name="kondisi" id="kondisi"
             class="bg-indigo-50 border  text-gray-900 text-sm  focus:ring-gray-500 
             focus:border-gray-500 block px-3 py-2 outline-none rounded-md w-9/12
                       dark:text-dark dark:focus:ring-blue-500 dark:focus:border-blue-500 font-poppins">
@@ -218,9 +218,9 @@ py-2 text-center inline-flex items-center mr-2.5 mb-3">
             <option value="Pilih Kondisi Mahasiswa" disabled selected class="font-poppins">Pilih Kondisi Mahasiswa</option>
             
             <option class="font-poppins" value="sakit"
-            {{ $izinSakitID->kondisi_sakit == 'sakit' ? 'selected' : '' }}">Sakit</option>
+            {{ $izinSakitID->kondisi == 'sakit' ? 'selected' : '' }}">Sakit</option>
             <option class="font-poppins" value="sembuh"
-            {{ $izinSakitID->kondisi_sakit == 'sembuh' ? 'selected' : '' }}">Sembuh</option>
+            {{ $izinSakitID->kondisi == 'sembuh' ? 'selected' : '' }}">Sembuh</option>
             
             
             {{-- <option class="font-poppins" value="sakit">
