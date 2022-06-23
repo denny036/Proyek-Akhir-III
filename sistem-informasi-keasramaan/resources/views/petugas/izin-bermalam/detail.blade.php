@@ -132,9 +132,8 @@
 
     <tr class="border-b border-gray-200 ">
         <td class="py-3 px-6 text-left font-poppins font-bold">
-            @if($data->status == 1) 
-                Disetujui oleh 
-            
+            @if ($data->status == 1)
+                Disetujui oleh
             @elseif($data->status == 2)
                 Ditolak oleh
             @else
@@ -143,7 +142,7 @@
         </td>
 
         <td class="py-3 px-6 text-left font-poppins">
-            {{ !empty($data->petugas->nama) ? $data->petugas->nama:' '}}
+            {{ !empty($data->petugas->nama) ? $data->petugas->nama : ' ' }}
             {{-- {{ Auth::guard('petugas')->user()->nama }} --}}
         </td>
     </tr>
@@ -156,28 +155,28 @@
 
     </div>
 
-    <a href="{{ route('petugas.accept.izin-bermalam', $data->id) }}">
-        <button type="button"
-            class="font-poppins text-white bg-login focus:ring-4 
-focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 
-py-2.5 text-center inline-flex items-center mr-2">
-            <svg class="w-5 h-5 mr-2 -ml-1" fill="currentColor" id="icon-checkmark" viewBox="0 0 32 32">
-                <path d="M27 4l-15 15-7-7-5 5 12 12 20-20z"></path>
-            </svg>
-            Terima
-        </button>
-    </a>
-
     <a href="{{ route('petugas.reject.izin-bermalam', $data->id) }}">
         <button type="button"
             class="font-poppins text-white bg-red-700 focus:ring-4 focus:outline-none 
-    focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 ">
-            <svg class="w-5 h-5 mr-2 -ml-1" fill="currentColor" id="icon-cross" viewBox="0 0 32 32">
+            focus:ring-red-300 font-normal rounded-lg text-sm px-3 py-2 text-center inline-flex items-center mr-2.5">
+            <svg class="w-4 h-4 mr-2 -ml-1" fill="currentColor" id="icon-cross" viewBox="0 0 32 32">
                 <path
                     d="M31.708 25.708c-0-0-0-0-0-0l-9.708-9.708 9.708-9.708c0-0 0-0 0-0 0.105-0.105 0.18-0.227 0.229-0.357 0.133-0.356 0.057-0.771-0.229-1.057l-4.586-4.586c-0.286-0.286-0.702-0.361-1.057-0.229-0.13 0.048-0.252 0.124-0.357 0.228 0 0-0 0-0 0l-9.708 9.708-9.708-9.708c-0-0-0-0-0-0-0.105-0.104-0.227-0.18-0.357-0.228-0.356-0.133-0.771-0.057-1.057 0.229l-4.586 4.586c-0.286 0.286-0.361 0.702-0.229 1.057 0.049 0.13 0.124 0.252 0.229 0.357 0 0 0 0 0 0l9.708 9.708-9.708 9.708c-0 0-0 0-0 0-0.104 0.105-0.18 0.227-0.229 0.357-0.133 0.355-0.057 0.771 0.229 1.057l4.586 4.586c0.286 0.286 0.702 0.361 1.057 0.229 0.13-0.049 0.252-0.124 0.357-0.229 0-0 0-0 0-0l9.708-9.708 9.708 9.708c0 0 0 0 0 0 0.105 0.105 0.227 0.18 0.357 0.229 0.356 0.133 0.771 0.057 1.057-0.229l4.586-4.586c0.286-0.286 0.362-0.702 0.229-1.057-0.049-0.13-0.124-0.252-0.229-0.357z">
                 </path>
             </svg>
             Tolak
+        </button>
+    </a>
+
+    <a href="{{ route('petugas.accept.izin-bermalam', $data->id) }}">
+        <button type="button"
+            class="font-poppins text-white bg-login focus:ring-4 
+            focus:outline-none focus:ring-blue-300 font-normal rounded-lg text-sm px-3 
+            py-2 text-center inline-flex items-center mr-2.5 mb-3">
+            <svg class="w-4 h-4 mr-2 -ml-1" fill="currentColor" id="icon-checkmark" viewBox="0 0 32 32">
+                <path d="M27 4l-15 15-7-7-5 5 12 12 20-20z"></path>
+            </svg>
+            Terima
         </button>
     </a>
 @endsection

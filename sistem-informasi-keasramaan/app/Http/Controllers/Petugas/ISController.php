@@ -37,7 +37,8 @@ class ISController extends Controller
             ->where('izin_sakit.id', decrypt($id))
             ->get();
 
-        // dd($detailReqIB);
+        // dd($getNamaMahasiswa);
+
         return view('petugas.izin-sakit.detail', compact('izinSakitID', 'detailRequestIS'));
     }
 
