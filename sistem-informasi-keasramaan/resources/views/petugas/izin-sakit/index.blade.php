@@ -56,7 +56,7 @@
     </td>
 
     <td class="py-3 px-6 text-center font-poppins">
-        @if ($data->kondisi_sakit == 1)
+        @if ($data->kondisi_sakit == "sakit")
             <div class="flex item-center">
                 <span class="font-poppins py-1 px-3 rounded-full text-sm">
                     Sakit
@@ -96,7 +96,7 @@
     <td class="py-3 px-6 text-center">
         <div class="flex item-center justify-center">
             <span class="bg-blue-500 text-slate-50 py-1 px-3 rounded-full text-xs font-poppins">
-                <a href="{{ route('petugas.detail-izin-sakit', encrypt($data->id)) }}">Detail</a>
+                <a href="{{ route('petugas.detail-izin-sakit', $data->id) }}">Detail</a>
             </span>
         </div>
     </td>

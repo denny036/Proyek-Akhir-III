@@ -66,7 +66,7 @@
         </td>
 
         <td class="py-3 px-3 text-center font-poppins">
-            @if ($data->kondisi_sakit == 1)
+            @if ($data->kondisi_sakit == "sakit")
                 <div class="flex">
                     <span class="font-poppins py-1 px-3 rounded text-sm">
                         Sakit
@@ -112,19 +112,19 @@
         </td>
 
         <td class="py-3 px-6 text-center font-poppins">
-            @if ($data->status == null)
+            @if ($data->status_izin == null)
                 <div class="flex">
                     <span class="font-poppins bg-yellow-300 text-dark font-semibold py-1 px-3 rounded text-xs">
                         Menunggu Persetujuan
                     </span>
                 </div>
-            @elseif ($data->status == 1)
+            @elseif ($data->status_izin == 1)
                 <div class="flex">
                     <span class="font-poppins bg-green-700 text-slate-50 py-1 px-3 rounded text-xs">
                         Disetujui
                     </span>
                 </div>
-            @elseif ($data->status == 2)
+            @elseif ($data->status_izin == 2)
                 <div class="flex">
                     <span class="font-poppins bg-red-500 text-slate-50 py-1 px-3 rounded text-xs">
                         Ditolak
@@ -136,9 +136,9 @@
 
     <tr class="border-b border-gray-200 ">
         <td class="py-3 px-6 text-left font-poppins font-bold">
-            @if ($data->status == 1)
+            @if ($data->status_izin == 1)
                 Disetujui oleh
-            @elseif($data->status == 2)
+            @elseif($data->status_izin == 2)
                 Ditolak oleh
             @else
                 Membutuhkan konfirmasi
@@ -146,7 +146,7 @@
         </td>
 
         <td class="py-3 px-6 text-left font-poppins">
-            {{ !empty($data->petugas->nama) ? $data->petugas->nama : 'Pengurus Asrama' }}
+            {{ !empty($data->toPetugas->nama) ? $data->toPetugas->nama : 'Pengurus Asrama' }}
         </td>
     </tr>
 

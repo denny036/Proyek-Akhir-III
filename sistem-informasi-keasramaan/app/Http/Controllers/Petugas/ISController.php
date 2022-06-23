@@ -29,15 +29,15 @@ class ISController extends Controller
 
     public function getDetailIS($id)
     {
-        $izinSakitID = IzinSakit::find(decrypt($id));
+        $izinSakitID = IzinSakit::find($id);
 
         $detailRequestIS = IzinSakit::join('users', 'izin_sakit.users_id', '=', 'users.id')
             ->join('record_mahasiswa_asrama', 'izin_sakit.users_id', '=', 'record_mahasiswa_asrama.users_id')
             ->select('users.*', 'izin_sakit.*', 'record_mahasiswa_asrama.asrama_id')
-            ->where('izin_sakit.id', decrypt($id))
+            ->where('izin_sakit.id', $id)
             ->get();
 
-        // dd($getNamaMahasiswa);
+        // dd($getKondisiSakit);
 
         return view('petugas.izin-sakit.detail', compact('izinSakitID', 'detailRequestIS'));
     }
@@ -69,5 +69,23 @@ class ISController extends Controller
 
         return redirect()->route('petugas.detail-izin-sakit', $izinSakitID->id)
             ->with('fail', 'Izin sakit mahasiswa ditolak');
+    }
+
+    public function updateKondisiMahasiswa(Request $request, $id)
+    {
+        $izinSakitID = IzinSakit::find($id);
+        
+        $result = IzinSakit::find($id)->update([
+            'kondisi_sakit' => $request->kondisi_sakit,
+        ]);
+        
+        dd($result);
+
+        // if($result) {
+        //     return redirect()->route('petugas.detail-izin-sakit', $izinSakitID->id)
+        //         ->with('success-update-kondisi', 'Kondisi mahasiswa telah diperbarui');
+        // }else{
+        //     return redirect()->back()->with('fail-update-kondisi', 'Proses gagal, silakan periksa format yang diminta.')->withInput();
+        // }
     }
 }

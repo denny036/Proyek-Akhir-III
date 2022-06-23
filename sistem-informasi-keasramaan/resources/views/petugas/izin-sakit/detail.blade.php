@@ -25,11 +25,18 @@
             role="alert">
             <span class="font-medium font-poppins">{{ Session::get('success') }}</span>
         </div>
-    @endif
-
-    @if (Session::get('fail'))
+    @elseif (Session::get('fail'))
         <div class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
             <span class="font-medium font-poppins">{{ Session::get('fail') }}</span>
+        </div>
+    @elseif (Session::get('success-update-kondisi'))
+        <div class="p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800"
+            role="alert">
+            <span class="font-medium font-poppins">{{ Session::get('success-update-kondisi') }}</span>
+        </div>
+    @elseif (Session::get('fail-update-kondisi'))
+        <div class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
+            <span class="font-medium font-poppins">{{ Session::get('fail-update-kondisi') }}</span>
         </div>
     @endif
 
@@ -89,7 +96,7 @@
         </td>
 
         <td class="py-3 px-3 text-left font-poppins">
-            @if ($data->kondisi_sakit == 1)
+            @if ($data->kondisi_sakit == "sakit")
                 <div class="flex item-center">
                     <span class="font-poppins py-1 px-3 rounded-full text-sm">
                         Sakit
@@ -160,20 +167,14 @@
         </td>
 
         <td class="py-3 px-6 text-left font-poppins">
-            {{ !empty($data->petugas->nama) ? $data->petugas->nama : ' ' }}
+            {{ !empty($data->toPetugas->nama) ? $data->toPetugas->nama : ' ' }}
         </td>
     </tr>
 
     </tbody>
-    @endforeach
-
     </div>
 
-
     </table>
-
-
-
     </div>
 
     <a href="{{ route('petugas.reject.izin-sakit', $data->id) }}">
@@ -201,6 +202,8 @@ py-2 text-center inline-flex items-center mr-2.5 mb-3">
         </button>
     </a>
 
+
+
     <h2 class="font-poppins pt-2 pb-2 text-lg">Update Kondisi Mahasiswa</h2>
     <div class="px-3.5 py-2.5 max-w-xs bg-gray-700 rounded-lg border border-gray-200 shadow-md">
         <h5 class="font-poppins mb-2 text-xl font-bold tracking-tight text-white">
@@ -213,16 +216,38 @@ py-2 text-center inline-flex items-center mr-2.5 mb-3">
                       dark:text-dark dark:focus:ring-blue-500 dark:focus:border-blue-500 font-poppins">
 
             <option value="Pilih Kondisi Mahasiswa" disabled selected class="font-poppins">Pilih Kondisi Mahasiswa</option>
-
-            <option class="font-poppins" value="Sakit">
+            
+            <option class="font-poppins" value="sakit"
+            {{ $izinSakitID->kondisi_sakit == 'sakit' ? 'selected' : '' }}">Sakit</option>
+            <option class="font-poppins" value="sembuh"
+            {{ $izinSakitID->kondisi_sakit == 'sembuh' ? 'selected' : '' }}">Sembuh</option>
+            
+            
+            {{-- <option class="font-poppins" value="sakit">
                 Sakit
             </option>
-            <option class="font-poppins" value="Sembuh">
+            <option class="font-poppins" value="sembuh">
                 Sembuh
+            </option> --}}
+            
+            {{-- <option {{ ($data->kondisi_sakit) == 'sakit' ? 'selected' : '' }}  value="sakit">Sakit</option>
+            <option {{ ($data->kondisi_sakit) == 'sembuh' ? 'selected' : '' }}  value="sembuh">Sembuh</option> --}}
+
+            {{-- <option value="Pilih Kondisi Mahasiswa" disabled selected class="font-poppins">Pilih Kondisi Mahasiswa
             </option>
+            <option class="font-poppins" value="sakit" {{ $izinSakitID->kondisi_sakit === 'sakit' ? 'selected' : '' }}">
+                Sakit</option>
+            <option class="font-poppins" value="sembuh" {{ $izinSakitID->kondisi_sakit === 'sembuh' ? 'selected' : '' }}">
+                Sembuh</option> --}}
+
         </select>
 
-        <a href="#">
+
+        {{-- <form id="update-kondisi-mahasiswa"
+                action="{{ route('petugas.update.kondisi-mahasiswa', encrypt($data->id)) }}" method="POST">
+                @method('PUT')
+                @csrf --}}
+        <a href="{{ route('petugas.update.kondisi-mahasiswa', $data->id) }}">
             <button type="button"
                 class="font-poppins text-white bg-green-700 focus:ring-4 
     focus:outline-none focus:ring-blue-300 font-normal rounded-lg text-sm px-3 
@@ -234,8 +259,9 @@ py-2 text-center inline-flex items-center mr-2.5 mb-3">
                 Update
             </button>
         </a>
+        {{-- </form> --}}
+        @endforeach
     </div>
 
-    
     </div>
 @endsection

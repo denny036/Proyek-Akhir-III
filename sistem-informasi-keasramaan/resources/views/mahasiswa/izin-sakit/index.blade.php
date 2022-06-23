@@ -70,7 +70,7 @@
                         <td class="py-3 px-6 text-left">
                             <div class="flex items-center">
                                 <span class="font-poppins">
-                                {{ !empty($data->petugas->nama) ? $data->petugas->nama:' ' }}
+                                {{ !empty($data->toPetugas->nama) ? $data->toPetugas->nama:' ' }}
                                 </span>
                             </div>
                         </td>
@@ -80,7 +80,7 @@
                         </td>
 
                         <td class="py-3 px-6 text-center font-poppins">
-                            @if ($data->kondisi_sakit == 1)
+                            @if ($data->kondisi_sakit == "sakit")
                                 <div class="flex item-center">
                                     <span
                                         class="font-poppins py-1 px-3 rounded-full text-sm">

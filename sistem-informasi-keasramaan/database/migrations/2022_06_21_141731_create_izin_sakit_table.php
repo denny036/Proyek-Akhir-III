@@ -20,7 +20,7 @@ class CreateIzinSakitTable extends Migration
             $table->dateTime('jadwal_istirahat');
             $table->string('keterangan');
             $table->integer('status_izin')->nullable();
-            $table->integer('kondisi_sakit')->default(1);
+            $table->enum('kondisi_sakit', ['sakit', 'sembuh'])->default('sakit');
             $table->string('surat_sakit')->nullable();
             
             $table->foreign('users_id')->on('users')->references('id')

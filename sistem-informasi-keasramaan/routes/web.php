@@ -89,8 +89,7 @@ Route::prefix('petugas')->name('petugas.')->group(function(){
         Route::get('/izin-sakit-mahasiswa/detail/{izin_sakit_id}', [ISController::class, 'getDetailIS'])->name('detail-izin-sakit');
         Route::get('/izin-sakit-mahasiswa/detail/terima/{id}', [ISController::class, 'accIzinSakit'])->name('accept.izin-sakit');
         Route::get('/izin-sakit-mahasiswa/detail/tolak/{id}', [ISController::class, 'rejectIzinSakit'])->name('reject.izin-sakit');
-
-        // Route::put('/izin-sakit-mahasiswa/detail/update-kondisi/{izin_sakit_id}', [ISController::class, 'updateKondisiMahasiswa'])->name('update.kondisi-mahasiswa');
+        Route::get('/izin-sakit-mahasiswa/detail/update-kondisi/{id}', [ISController::class, 'updateKondisiMahasiswa'])->name('update.kondisi-mahasiswa');
 
         Route::get('/data-petugas', [PetugasController::class, 'getAllPetugas'])->name('data-petugas');
         Route::get('/data-penghuni-asrama', [PetugasController::class, 'getPenghuniAsrama'])->name('data-penghuni-asrama');
