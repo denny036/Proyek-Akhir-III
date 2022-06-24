@@ -31,15 +31,11 @@ class ISController extends Controller
     {
         $izinSakitID = IzinSakit::find($id);
 
-        $detailRequestIS = IzinSakit::join('users', 'izin_sakit.users_id', '=', 'users.id')
-            ->join('record_mahasiswa_asrama', 'izin_sakit.users_id', '=', 'record_mahasiswa_asrama.users_id')
-            ->select('users.*', 'izin_sakit.*', 'record_mahasiswa_asrama.asrama_id')
-            ->where('izin_sakit.id', $id)
-            ->get();
+        // $detailRequestIS = IzinSakit::where('izin_sakit.id', $id)->get();
 
-        // dd($getKondisiSakit);
+        // dd($izinSakitID);
 
-        return view('petugas.izin-sakit.detail', compact('izinSakitID', 'detailRequestIS'));
+        return view('petugas.izin-sakit.detail', compact('izinSakitID'));
     }
 
     public function accIzinSakit($id)
@@ -73,19 +69,19 @@ class ISController extends Controller
 
     public function updateKondisiMahasiswa(Request $request, $id)
     {
-        $izinSakitID = IzinSakit::find($id);
+        $izinSakit = IzinSakit::find($id);
 
         $result = IzinSakit::find($id)->update([
             'kondisi' => $request->kondisi,
         ]);
         
-        dd($result);
+        // dd($result);
 
-        // if($result) {
-        //     return redirect()->route('petugas.detail-izin-sakit', $izinSakitID->id)
-        //         ->with('success-update-kondisi', 'Kondisi mahasiswa telah diperbarui');
-        // }else{
-        //     return redirect()->back()->with('fail-update-kondisi', 'Proses gagal, silakan periksa format yang diminta.')->withInput();
-        // }
+        if($result) {
+            return redirect()->route('petugas.detail-izin-sakit', $izinSakit->id)
+                ->with('success-update-kondisi', 'Kondisi kesehatan mahasiswa telah diperbarui');
+        }else{
+            return redirect()->back()->with('fail-update-kondisi', 'Proses gagal, silakan periksa format yang diminta.')->withInput();
+        }
     }
 }

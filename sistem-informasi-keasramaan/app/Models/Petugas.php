@@ -60,6 +60,6 @@ class Petugas extends Authenticatable
     
     public function i_sakit()
     {
-        return $this->hasMany('App\Models\IzinBermalam', 'izin_bermalam_id');
+        return $this->hasMany('App\Models\IzinSakit', 'izin_sakit_id');
     }
 }

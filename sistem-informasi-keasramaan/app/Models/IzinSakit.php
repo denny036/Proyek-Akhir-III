@@ -30,6 +30,6 @@ class IzinSakit extends Model
 
     public function toMahasiswa()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsTo('App\Models\User', 'users_id');
     }
 }

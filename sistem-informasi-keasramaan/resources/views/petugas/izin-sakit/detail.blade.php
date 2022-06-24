@@ -45,7 +45,7 @@
 
         <table class="min-w-max w-full table-auto">
 
-            @foreach ($detailRequestIS as $key => $data)
+            {{-- @foreach ($izinSakitID as $key => $data) --}}
                 <tbody class="text-gray-600 text-sm">
                     <tr class="border-b bg-slate-200 border-gray-200 ">
                         <td class="py-3 px-6 text-left whitespace-nowrap font-poppins font-bold">
@@ -55,7 +55,7 @@
     <td class="py-3 px-6 text-left">
         <div class="flex items-center">
             <span class="font-poppins">
-                {{ $data->nama }}
+                {{ $izinSakitID->toMahasiswa->nama }}
             </span>
         </div>
     </td>
@@ -66,7 +66,7 @@
             NIM Mahasiswa
         </td>
         <td class="py-3 px-6 text-left whitespace-nowrap font-poppins">
-            {{ $data->nim }}
+            {{ $izinSakitID->toMahasiswa->nim }}
         </td>
     </tr>
 
@@ -76,7 +76,7 @@
         </td>
 
         <td class="py-3 px-6 text-left font-poppins">
-            {{ \Carbon\Carbon::parse($data->jadwal_istirahat)->isoFormat('DD MMMM YYYY H:mm') }}
+            {{ \Carbon\Carbon::parse($izinSakitID->jadwal_istirahat)->isoFormat('DD MMMM YYYY H:mm') }}
         </td>
     </tr>
 
@@ -86,7 +86,7 @@
         </td>
 
         <td class="py-3 px-6 text-left font-poppins">
-            {{ $data->keterangan }}
+            {{ $izinSakitID->keterangan }}
         </td>
     </tr>
 
@@ -96,7 +96,7 @@
         </td>
 
         <td class="py-3 px-3 text-left font-poppins">
-            @if ($data->kondisi == "sakit")
+            @if ($izinSakitID->kondisi == 'sakit')
                 <div class="flex item-center">
                     <span class="font-poppins py-1 px-3 rounded-full text-sm">
                         Sakit
@@ -118,8 +118,8 @@
         </td>
 
         <td class="py-3 px-6 text-left font-poppins">
-            @if ($data->surat_sakit)
-                <img src="{{ asset('uploads/surat-sakit/' . $data->surat_sakit) }}" class="w-32 rounded-full"
+            @if ($izinSakitID->surat_sakit)
+                <img src="{{ asset('uploads/surat-sakit/' . $izinSakitID->surat_sakit) }}" class="w-32 rounded-full"
                     alt="Surat Sakit">
             @else
                 <p class="font-semibold">Mahasiswa ini tidak memiliki surat sakit</p>
@@ -133,19 +133,19 @@
         </td>
 
         <td class="py-3 px-6 text-center font-poppins">
-            @if ($data->status_izin == null)
+            @if ($izinSakitID->status_izin == null)
                 <div class="flex">
                     <span class="font-poppins bg-yellow-300 text-dark font-semibold py-1 px-3 rounded text-xs">
                         Menunggu Persetujuan
                     </span>
                 </div>
-            @elseif ($data->status_izin == 1)
+            @elseif ($izinSakitID->status_izin == 1)
                 <div class="flex">
                     <span class="font-poppins bg-green-700 text-slate-50 py-1 px-3 rounded text-xs">
                         Disetujui
                     </span>
                 </div>
-            @elseif ($data->status_izin == 2)
+            @elseif ($izinSakitID->status_izin == 2)
                 <div class="flex">
                     <span class="font-poppins bg-red-500 text-slate-50 py-1 px-3 rounded text-xs">
                         Ditolak
@@ -157,9 +157,9 @@
 
     <tr class="border-b border-gray-200 ">
         <td class="py-3 px-6 text-left font-poppins font-bold">
-            @if ($data->status_izin == 1)
+            @if ($izinSakitID->status_izin == 1)
                 Disetujui oleh
-            @elseif($data->status_izin == 2)
+            @elseif($izinSakitID->status_izin == 2)
                 Ditolak oleh
             @else
                 Membutuhkan konfirmasi
@@ -167,7 +167,7 @@
         </td>
 
         <td class="py-3 px-6 text-left font-poppins">
-            {{ !empty($data->toPetugas->nama) ? $data->toPetugas->nama : ' ' }}
+            {{ !empty($izinSakitID->toPetugas->nama) ? $izinSakitID->toPetugas->nama : ' ' }}
         </td>
     </tr>
 
@@ -177,7 +177,7 @@
     </table>
     </div>
 
-    <a href="{{ route('petugas.reject.izin-sakit', $data->id) }}">
+    <a href="{{ route('petugas.reject.izin-sakit', $izinSakitID->id) }}">
         <button type="button"
             class="font-poppins text-white bg-red-700 focus:ring-4 focus:outline-none 
     focus:ring-red-300 font-normal rounded-lg text-sm px-3 py-2 text-center inline-flex items-center mr-2.5">
@@ -190,7 +190,7 @@
         </button>
     </a>
 
-    <a href="{{ route('petugas.accept.izin-sakit', $data->id) }}">
+    <a href="{{ route('petugas.accept.izin-sakit', $izinSakitID->id) }}">
         <button type="button"
             class="font-poppins text-white bg-login focus:ring-4 
 focus:outline-none focus:ring-blue-300 font-normal rounded-lg text-sm px-3 
@@ -209,59 +209,62 @@ py-2 text-center inline-flex items-center mr-2.5 mb-3">
         <h5 class="font-poppins mb-2 text-xl font-bold tracking-tight text-white">
             Kondisi Mahasiswa
         </h5>
+        
+        <form id="update-kondisi-mahasiswa" action="{{ route('petugas.update.kondisi-mahasiswa', $izinSakitID->id) }}"
+            method="POST">
+            @csrf
+            @method('PATCH')
 
-        <select name="kondisi" id="kondisi"
-            class="bg-indigo-50 border  text-gray-900 text-sm  focus:ring-gray-500 
+            <select name="kondisi" id="kondisi"
+                class="bg-indigo-50 border  text-gray-900 text-sm  focus:ring-gray-500 
             focus:border-gray-500 block px-3 py-2 outline-none rounded-md w-9/12
                       dark:text-dark dark:focus:ring-blue-500 dark:focus:border-blue-500 font-poppins">
 
-            <option value="Pilih Kondisi Mahasiswa" disabled selected class="font-poppins">Pilih Kondisi Mahasiswa</option>
-            
-            <option class="font-poppins" value="sakit"
+                <option value="Pilih Kondisi Mahasiswa" disabled selected class="font-poppins">Pilih Kondisi Mahasiswa
+                </option>
+
+                <option class="font-poppins" value="sakit"
             {{ $izinSakitID->kondisi == 'sakit' ? 'selected' : '' }}">Sakit</option>
             <option class="font-poppins" value="sembuh"
             {{ $izinSakitID->kondisi == 'sembuh' ? 'selected' : '' }}">Sembuh</option>
-            
-            
-            {{-- <option class="font-poppins" value="sakit">
-                Sakit
-            </option>
-            <option class="font-poppins" value="sembuh">
-                Sembuh
-            </option> --}}
-            
-            {{-- <option {{ ($data->kondisi_sakit) == 'sakit' ? 'selected' : '' }}  value="sakit">Sakit</option>
+
+                {{-- <option class="font-poppins" value="sakit">
+                    Sakit
+                </option>
+                <option class="font-poppins" value="sembuh">
+                    Sembuh
+                </option> --}}
+
+            </select>
+
+
+
+            <a href="{{ route('petugas.update.kondisi-mahasiswa', $izinSakitID->id) }}">
+                <button type="submit"
+                    class="font-poppins text-white bg-green-700 focus:ring-4 
+    focus:outline-none focus:ring-blue-300 font-normal rounded-lg text-sm px-3 
+    py-2 text-center inline-flex items-center mr-2.5 mb-3 mt-4">
+                    <svg class="w-4 h-4 mr-2 -ml-1" fill="currentColor" id="icon-floppy-disk" viewBox="0 0 32 32">
+                        <path
+                            d="M28 0h-28v32h32v-28l-4-4zM16 4h4v8h-4v-8zM28 28h-24v-24h2v10h18v-10h2.343l1.657 1.657v22.343z">
+                        </path>
+                    </svg>
+                    Update
+                </button>
+            </a>
+        </form>
+        {{-- @endforeach --}}
+    </div>
+
+    </div>
+@endsection
+
+  {{-- <option {{ ($data->kondisi_sakit) == 'sakit' ? 'selected' : '' }}  value="sakit">Sakit</option>
             <option {{ ($data->kondisi_sakit) == 'sembuh' ? 'selected' : '' }}  value="sembuh">Sembuh</option> --}}
 
-            {{-- <option value="Pilih Kondisi Mahasiswa" disabled selected class="font-poppins">Pilih Kondisi Mahasiswa
+                {{-- <option value="Pilih Kondisi Mahasiswa" disabled selected class="font-poppins">Pilih Kondisi Mahasiswa
             </option>
             <option class="font-poppins" value="sakit" {{ $izinSakitID->kondisi_sakit === 'sakit' ? 'selected' : '' }}">
                 Sakit</option>
             <option class="font-poppins" value="sembuh" {{ $izinSakitID->kondisi_sakit === 'sembuh' ? 'selected' : '' }}">
                 Sembuh</option> --}}
-
-        </select>
-
-
-        {{-- <form id="update-kondisi-mahasiswa"
-                action="{{ route('petugas.update.kondisi-mahasiswa', encrypt($data->id)) }}" method="POST">
-                @method('PUT')
-                @csrf --}}
-        <a href="{{ route('petugas.update.kondisi-mahasiswa', $data->id) }}">
-            <button type="button"
-                class="font-poppins text-white bg-green-700 focus:ring-4 
-    focus:outline-none focus:ring-blue-300 font-normal rounded-lg text-sm px-3 
-    py-2 text-center inline-flex items-center mr-2.5 mb-3 mt-4">
-                <svg class="w-4 h-4 mr-2 -ml-1" fill="currentColor" id="icon-floppy-disk" viewBox="0 0 32 32">
-                    <path d="M28 0h-28v32h32v-28l-4-4zM16 4h4v8h-4v-8zM28 28h-24v-24h2v10h18v-10h2.343l1.657 1.657v22.343z">
-                    </path>
-                </svg>
-                Update
-            </button>
-        </a>
-        {{-- </form> --}}
-        @endforeach
-    </div>
-
-    </div>
-@endsection

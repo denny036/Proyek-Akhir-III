@@ -45,8 +45,9 @@ Route::prefix('mahasiswa')->name('mahasiswa.')->group(function(){
         Route::post('/simpan-asrama-mahasiswa', [UserController::class, 'storeAsramaMahasiswa'])->name('store.profile');
 
         Route::get('/check-in', [CheckInController::class, 'showDataCheckIn'])->name('show.check-in');
-        Route::get('/request-check-in', [CheckInController::class, 'showFormCheckIn'])->name('create.check-in');
+        Route::get('/request-check-in', [CheckInController::class, 'showFormCheckIn'])->name('request.check-in');
         Route::post('/simpan-check-in', [CheckInController::class, 'storeCheckIn'])->name('store.check-in');
+        Route::get('/check-in/detail/{id}', [CheckInController::class, 'getDetailCheckIn'])->name('detail.check-in');
 
         // Route::get('/check-out', [CheckOutController:class, 'showDataCheckOut'])->name('show.check-out');
         // Route::view('/request-check-out', 'mahasiswa.check-out.create')->name('create.check-out');
@@ -62,7 +63,6 @@ Route::prefix('mahasiswa')->name('mahasiswa.')->group(function(){
         Route::get('request-izin-sakit', [IzinSakitController::class, 'showReqIS'])->name('request.izin-sakit');
         Route::post('/simpan-izin-sakit', [IzinSakitController::class, 'storeIS'])->name('store.izin-sakit');
         Route::get('izin-sakit/detail/{izin_sakit_id}', [IzinSakitController::class, 'getDetailIzinSakit'])->name('detail.izin-sakit');
-        // Route::put('izin-sakit/detail/{izin_sakit_id}', [IzinSakitController::class, 'updateIzinSakit'])->name('update.izin-sakit');
 
         Route::post('/logout', [UserController::class, 'logout'])->name('logout');
     });
@@ -89,7 +89,7 @@ Route::prefix('petugas')->name('petugas.')->group(function(){
         Route::get('/izin-sakit-mahasiswa/detail/{izin_sakit_id}', [ISController::class, 'getDetailIS'])->name('detail-izin-sakit');
         Route::get('/izin-sakit-mahasiswa/detail/terima/{id}', [ISController::class, 'accIzinSakit'])->name('accept.izin-sakit');
         Route::get('/izin-sakit-mahasiswa/detail/tolak/{id}', [ISController::class, 'rejectIzinSakit'])->name('reject.izin-sakit');
-        Route::get('/izin-sakit-mahasiswa/detail/update-kondisi/{id}', [ISController::class, 'updateKondisiMahasiswa'])->name('update.kondisi-mahasiswa');
+        Route::patch('/izin-sakit-mahasiswa/detail/update-kondisi/{id}', [ISController::class, 'updateKondisiMahasiswa'])->name('update.kondisi-mahasiswa');
 
         Route::get('/data-petugas', [PetugasController::class, 'getAllPetugas'])->name('data-petugas');
         Route::get('/data-penghuni-asrama', [PetugasController::class, 'getPenghuniAsrama'])->name('data-penghuni-asrama');

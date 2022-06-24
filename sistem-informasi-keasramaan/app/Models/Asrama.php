@@ -21,4 +21,9 @@ class Asrama extends Model
     {
       return $this->hasMany('App\Models\Petugas', 'asrama_id');
     }
+
+    public function isAsrama() 
+    {
+      return $this->hasMany('App\Models\CheckIn', 'check_in_id');
+    }
 }
