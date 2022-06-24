@@ -14,5 +14,10 @@ class RecordMahasiswaAsrama extends Model
     protected $fillable = [
         'users_id', 'asrama_id',
     ];
+
+    public function isRecordAsrama() 
+    {
+      return $this->hasMany('App\Models\CheckIn', 'check_in_id');
+    }
     
 }

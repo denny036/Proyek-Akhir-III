@@ -78,7 +78,6 @@ Route::prefix('petugas')->name('petugas.')->group(function(){
     Route::middleware(['auth:petugas', 'PreventBackButtonHistory'])->group(function(){
         
         Route::get('/home', [PetugasController::class, 'showHomePetugas'])->name('home');
-        // Route::view('/home', 'petugas.home')->name('home');
 
         Route::get('/izin-bermalam-mahasiswa', [IBController::class, 'showPageIBMhs'])->name('izin-bermalam');
         Route::get('/izin-bermalam-mahasiswa/detail/{izin_bermalam_id}', [IBController::class, 'getDetailIB'])->name('detail-izin-bermalam');
@@ -110,7 +109,6 @@ Route::prefix('koordinator')->name('koordinator.')->group(function() {
 
         Route::get('/home', [KoordinatorController::class, 'showDashboardKoordinator'])->name('home');
         Route::get('/detail-keasramaan/{asrama_id}', [KoordinatorController::class, 'showDetailDashboard'])->name('detail.keasramaan');
-        // Route::get('/user/')
 
         Route::get('/data-asrama', [AsramaController::class, 'showDataAsrama'])->name('show.asrama');
         Route::view('/tambah-data-asrama', 'koordinator.asrama.create')->name('create.asrama');

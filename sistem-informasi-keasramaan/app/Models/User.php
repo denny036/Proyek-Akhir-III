@@ -53,4 +53,9 @@ class User extends Authenticatable
     {
       return $this->hasMany(IzinSakit::class);
     }
+
+    public function isCheckIn() 
+    {
+      return $this->hasMany(IzinBermalam::class);
+    }
 }

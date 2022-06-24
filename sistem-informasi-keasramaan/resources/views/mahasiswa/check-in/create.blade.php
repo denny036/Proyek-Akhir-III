@@ -85,7 +85,7 @@
                         <label for="tanggal_check_in" class="block mb-1 text-gray-600 font-semibold font-poppins">Tanggal
                             Check In</label>
                         <input type="datetime-local" name="tanggal_check_in"
-                            class="bg-indigo-50 px-4 py-2 outline-none rounded-md w-full" />
+                            class="bg-indigo-50 px-4 py-2 outline-none rounded-md w-full font-poppins" />
                     </div>
 
                     <div>

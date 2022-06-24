@@ -28,13 +28,13 @@ class CheckIn extends Model
         return $this->belongsTo('App\Models\Petugas', 'petugas_id');
     }
 
-    // public function toMahasiswa()
-    // {
-    //     return $this->belongsToMany(User::class);
-    // }
-
-    public function isAsrama() 
+    public function isMahasiswa()
     {
-      return $this->belongsTo('App\Models\Asrama', 'asrama_id');
+        return $this->belongsToMany(User::class);
+    }
+
+    public function isRecordAsrama() 
+    {
+      return $this->belongsTo('App\Models\RecordMahasiswaAsrama', 'record_mahasiswa_asrama_id');
     }
 }

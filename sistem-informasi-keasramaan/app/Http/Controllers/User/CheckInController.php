@@ -14,18 +14,20 @@ class CheckInController extends Controller
   public function showDataCheckIn()
   {
     $userID = Auth::guard('web')->user()->id;
+
+    //get data mahasiswa
     $dataMahasiswa = DB::table('record_mahasiswa_asrama')
       ->join('users', 'record_mahasiswa_asrama.users_id', '=', 'users.id')
       ->join('asrama', 'record_mahasiswa_asrama.asrama_id', '=', 'asrama.id')
       ->where('record_mahasiswa_asrama.users_id', '=', $userID)
       ->first();
 
-    $riwayatCheckIn = CheckIn::join('asrama', 'check_in.asrama_tujuan', '=', 'asrama.id')
-    ->where('users_id', $userID)
-    ->get();
-
+    //get data check in mahasiswa
+    $riwayatCheckIn = CheckIn::where('users_id', $userID)->get();
+    
     // dd($riwayatCheckIn);
 
+    // check if mahasiswa has asrama
     if (empty($dataMahasiswa)) {
       return redirect()->route('mahasiswa.profile')
         ->with('info', 'Untuk menggunakan aplikasi ini, silakan pilih asrama Anda terlebih dahulu!');
@@ -91,6 +93,12 @@ class CheckInController extends Controller
   {
     $userID = Auth::guard('web')->user()->id;
 
+    $dataMahasiswa = DB::table('record_mahasiswa_asrama')
+      ->join('users', 'record_mahasiswa_asrama.users_id', '=', 'users.id')
+      ->join('asrama', 'record_mahasiswa_asrama.asrama_id', '=', 'asrama.id')
+      ->where('record_mahasiswa_asrama.users_id', '=', $userID)
+      ->first();
+
     $detailCheckIn = CheckIn::join('users', 'check_in.users_id', '=', 'users.id')
       ->join('asrama', 'check_in.asrama_tujuan', '=', 'asrama.id')
       ->where('check_in.id', $id)
@@ -99,6 +107,6 @@ class CheckInController extends Controller
 
     // dd($detailCheckIn);
 
-    return view('mahasiswa.check-in.detail', compact('detailCheckIn'));
+    return view('mahasiswa.check-in.detail', compact('detailCheckIn', 'dataMahasiswa'));
   }
 }

@@ -50,6 +50,43 @@
     </tr>
 
     <tr class="border-b bg-slate-200 border-gray-200 ">
+        <td class="py-3 px-6 text-left whitespace-nowrap font-poppins font-bold">
+            Angkatan
+        </td>
+        <td class="py-3 px-6 text-left whitespace-nowrap font-poppins">
+            {{ $data->angkatan }}
+        </td>
+    </tr>
+
+    <tr class="border-b border-gray-200 ">
+        <td class="py-3 px-6 text-left whitespace-nowrap font-poppins font-bold">
+            Program Studi
+        </td>
+        <td class="py-3 px-6 text-left whitespace-nowrap font-poppins">
+            {{ Str::of($data->prodi)->upper()->explode('_')->implode(' ') }}
+        </td>
+    </tr>
+
+    <tr class="border-b bg-slate-200 border-gray-200 ">
+        <td class="py-3 px-6 text-left whitespace-nowrap font-poppins font-bold">
+            Asrama Asal
+        </td>
+        <td class="py-3 px-6 text-left whitespace-nowrap font-poppins">
+           {{ $dataMahasiswa->nama_asrama }}
+        </td>
+    </tr>
+    
+    <tr class="border-b bg-slate-200border-gray-100 ">
+        <td class="py-3 px-6 text-left font-poppins font-bold">
+            Asrama Tujuan
+        </td>
+
+        <td class="py-3 px-6 text-left font-poppins">
+            {{ $data->nama_asrama  }}
+        </td>
+    </tr>
+
+    <tr class="border-b bg-slate-200 border-gray-200 ">
         <td class="py-3 px-6 text-left font-poppins font-bold">
             Tanggal Check In
         </td>
@@ -59,7 +96,7 @@
         </td>
     </tr>
 
-    <tr class="border-b bg-slate-200 bg-slate-200border-gray-100 ">
+    <tr class="border-b bg-slate-200border-gray-100 ">
         <td class="py-3 px-6 text-left font-poppins font-bold">
             Keperluan Check In
         </td>
@@ -69,15 +106,6 @@
         </td>
     </tr>
 
-    <tr class="border-b bg-slate-200 bg-slate-200border-gray-100 ">
-        <td class="py-3 px-6 text-left font-poppins font-bold">
-            Asrama Tujuan
-        </td>
-
-        <td class="py-3 px-6 text-left font-poppins">
-            {{ $data->nama_asrama  }}
-        </td>
-    </tr>
 
     <tr class="border-b bg-slate-200 border-gray-200 ">
         <td class="py-3 px-6 text-left font-poppins font-bold">
