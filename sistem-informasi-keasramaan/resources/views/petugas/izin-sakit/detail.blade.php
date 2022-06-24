@@ -202,8 +202,7 @@ py-2 text-center inline-flex items-center mr-2.5 mb-3">
         </button>
     </a>
 
-
-
+    @if ($izinSakitID->status_izin == 1)
     <h2 class="font-poppins pt-2 pb-2 text-lg">Update Kondisi Mahasiswa</h2>
     <div class="px-3.5 py-2.5 max-w-xs bg-gray-700 rounded-lg border border-gray-200 shadow-md">
         <h5 class="font-poppins mb-2 text-xl font-bold tracking-tight text-white">
@@ -237,8 +236,6 @@ py-2 text-center inline-flex items-center mr-2.5 mb-3">
 
             </select>
 
-
-
             <a href="{{ route('petugas.update.kondisi-mahasiswa', $izinSakitID->id) }}">
                 <button type="submit"
                     class="font-poppins text-white bg-green-700 focus:ring-4 
@@ -255,6 +252,9 @@ py-2 text-center inline-flex items-center mr-2.5 mb-3">
         </form>
         {{-- @endforeach --}}
     </div>
+    @endif
+
+    
 
     </div>
 @endsection
