@@ -80,7 +80,7 @@
                         </td>
 
                         <td class="py-3 px-6 text-center font-poppins">
-                            {{ $data->nama_asrama}}
+                            {{ $data->toAsrama->nama_asrama}}
                         </td>
 
                         <td class="py-3 px-6 text-center font-poppins">
@@ -102,7 +102,7 @@
     </table>
     <div class="row">
         <div class="col-md-12">
-            {{-- {{ $riwayatCheckIn->links('pagination::tailwind') }} --}}
+            {{ $riwayatCheckIn->links('pagination::tailwind') }}
         </div>
     </div>
 

@@ -56,6 +56,6 @@ class User extends Authenticatable
 
     public function isCheckIn() 
     {
-      return $this->hasMany(IzinBermalam::class);
+      return $this->hasMany('App\Models\CheckIn', 'check_in_id');
     }
 }

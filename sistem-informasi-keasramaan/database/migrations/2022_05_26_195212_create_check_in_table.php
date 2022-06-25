@@ -17,23 +17,22 @@ class CreateCheckInTable extends Migration
             $table->id();
             $table->unsignedBigInteger('users_id');
             $table->unsignedBigInteger('petugas_id')->nullable();
-            $table->unsignedBigInteger('record_mahasiswa_asrama_id')->nullable();
+            $table->unsignedBigInteger('asrama_id');
             $table->dateTime('tanggal_check_in');
-            $table->string('asrama_tujuan');
             $table->text('keperluan');
             $table->string('status_request')->nullable();
 
             $table->foreign('users_id')->on('users')->references('id')
-                    ->onDelete('CASCADE')
-                    ->onUpdate('CASCADE');
+                ->onDelete('CASCADE')
+                ->onUpdate('CASCADE');
 
             $table->foreign('petugas_id')->nullable()->references('id')->on('petugas')
-                    ->onDelete('CASCADE')
-                    ->onUpdate('CASCADE');
+                ->onDelete('CASCADE')
+                ->onUpdate('CASCADE');
 
-            $table->foreign('record_mahasiswa_asrama_id')->nullable()->references('id')->on('record_mahasiswa_asrama')
-                    ->onDelete('CASCADE')
-                    ->onUpdate('CASCADE');
+            $table->foreign('asrama_id')->nullable()->references('id')->on('asrama')
+                ->onDelete('CASCADE')
+                ->onUpdate('CASCADE');
         });
     }
 

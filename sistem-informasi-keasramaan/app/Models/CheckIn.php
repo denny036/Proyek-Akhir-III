@@ -10,12 +10,12 @@ class CheckIn extends Model
     use HasFactory;
 
     protected $table = 'check_in';
+    protected $primaryKey = 'check_in_id';
 
     protected $fillable = [
         'users_id',
         'petugas_id',
-        'record_mahasiswa_asrama_id',
-        'asrama_tujuan',
+        'asrama_id',
         'tanggal_check_in',
         'keperluan',
         'status_request',
@@ -30,11 +30,12 @@ class CheckIn extends Model
 
     public function isMahasiswa()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsTo('App\Models\User', 'users_id');
     }
 
-    public function isRecordAsrama() 
+    public function toAsrama() 
     {
-      return $this->belongsTo('App\Models\RecordMahasiswaAsrama', 'record_mahasiswa_asrama_id');
+        return $this->belongsTo('App\Models\Asrama', 'asrama_id');
+        // return $this->hasMany('App\Models\Asrama', 'check_in_id');
     }
 }

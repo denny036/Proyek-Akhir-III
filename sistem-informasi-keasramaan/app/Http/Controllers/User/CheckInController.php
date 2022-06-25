@@ -14,20 +14,16 @@ class CheckInController extends Controller
   public function showDataCheckIn()
   {
     $userID = Auth::guard('web')->user()->id;
-
-    //get data mahasiswa
     $dataMahasiswa = DB::table('record_mahasiswa_asrama')
       ->join('users', 'record_mahasiswa_asrama.users_id', '=', 'users.id')
       ->join('asrama', 'record_mahasiswa_asrama.asrama_id', '=', 'asrama.id')
       ->where('record_mahasiswa_asrama.users_id', '=', $userID)
       ->first();
 
-    //get data check in mahasiswa
-    $riwayatCheckIn = CheckIn::where('users_id', $userID)->get();
+    $riwayatCheckIn = CheckIn::where('users_id', $userID)->paginate(10);
     
     // dd($riwayatCheckIn);
 
-    // check if mahasiswa has asrama
     if (empty($dataMahasiswa)) {
       return redirect()->route('mahasiswa.profile')
         ->with('info', 'Untuk menggunakan aplikasi ini, silakan pilih asrama Anda terlebih dahulu!');
@@ -75,7 +71,7 @@ class CheckInController extends Controller
 
     $result = DB::table('check_in')->insert([
       'users_id' => $mahasiswaID,
-      'asrama_tujuan' => $request->asrama_tujuan,
+      'asrama_id' => $request->asrama_tujuan,
       'tanggal_check_in' => Carbon::createFromFormat('Y-m-d\TH:i', $request->tanggal_check_in)->format('Y-m-d\TH:i'),
       'keperluan' => $request->keperluan,
     ]);
@@ -99,11 +95,13 @@ class CheckInController extends Controller
       ->where('record_mahasiswa_asrama.users_id', '=', $userID)
       ->first();
 
-    $detailCheckIn = CheckIn::join('users', 'check_in.users_id', '=', 'users.id')
-      ->join('asrama', 'check_in.asrama_tujuan', '=', 'asrama.id')
-      ->where('check_in.id', $id)
-      ->where('users_id', $userID)
-      ->get();
+    // $detailCheckIn = CheckIn::join('users', 'check_in.users_id', '=', 'users.id')
+    //   ->join('asrama', 'check_in.asrama_id', '=', 'asrama.id')
+    //   ->where('check_in.id', $id)
+    //   ->where('users_id', $userID)
+    //   ->get();
+
+    $detailCheckIn = CheckIn::where('check_in.id', $id)->where('users_id', $userID)->get(); 
 
     // dd($detailCheckIn);
 
