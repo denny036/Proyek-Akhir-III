@@ -19,7 +19,7 @@
 @endsection
 
 @section('table')
-    <p class="font-poppins font-normal text-lg py-2">Data Izin Bermalam</p>
+    <p class="font-poppins font-normal text-lg py-2">Detail Izin Bermalam</p>
     
     {{-- @foreach ($detailIB as $data) --}}
     @if($detailIB[0]->status == null)

@@ -19,7 +19,7 @@
 @endsection
 
 @section('table')
-    <p class="font-poppins font-normal text-lg py-2">Data Izin Sakit</p>
+    <p class="font-poppins font-normal text-lg py-2">Detail Izin Sakit</p>
 
     <div class="bg-white shadow rounded-sm my-2.5 overflow-x-auto">
 

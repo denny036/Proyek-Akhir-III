@@ -18,7 +18,7 @@
 @endsection
 
 @section('table')
-    <p class="font-poppins font-normal text-lg py-2">Data Check In</p>
+    <p class="font-poppins font-normal text-lg py-2">Detail Check In</p>
 
     <div class="bg-white shadow rounded-sm my-2.5 overflow-x-auto">
 
