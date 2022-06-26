@@ -9,7 +9,7 @@
 @endsection
 
 @section('judul-halaman')
-    Data Asrama &mdash; Institut Teknologi Del
+   <a href="{{ route('koordinator.home') }}"><span class="text-gray-600">Home / </a></span>Data Asrama
 @endsection
 
 @section('statistics')
@@ -24,12 +24,14 @@
     focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 
     dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 font-poppins">Tambah
             Data Asrama</button></a>
+
     @if (Session::get('success'))
         <div class="p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800"
             role="alert">
             <span class="font-medium font-poppins">{{ Session::get('success') }}</span>
         </div>
     @endif
+
     <div class="bg-white shadow rounded-sm my-2.5 overflow-x-auto">
         <table class="min-w-max w-full table-auto">
             <thead>
@@ -55,6 +57,7 @@
     <td class="py-3 px-6 text-center font-poppins">
         {{ $value->lokasi_asrama }}
     </td>
+
     <td class="py-3 px-6 text-center">
         <div class="flex item-center justify-center">
 
@@ -66,6 +69,7 @@
                     </svg>
                 </a>
             </div>
+
             <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110  cursor-pointer">
                 <a href="{{ route('koordinator.delete-asrama', $value->id) }}" class="delete-confirm">
                     <form action="{{ route('koordinator.delete-asrama', $value->id) }}" id="deleteForm" method="POST">
@@ -78,6 +82,7 @@
                     </form>
                 </a>
             </div>
+            
         </div>
     </td>
     </tr>
@@ -95,41 +100,47 @@
 
     </div>
 
-    <script>
-        $('.delete-confirm').on('click', function(e) {
-            e.preventDefault();
-            var href = $(this).attr('href');
-            Swal.fire({
-                title: 'Anda yakin hapus data ini?',
-                text: "Data yang sudah dihapus tidak dapat dikembalikan!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Ya, hapus!',
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    document.getElementById('deleteForm').action = href;
-                    document.getElementById('deleteForm').submit();
-                    Swal.fire({
-                        title: 'Terhapus!',
-                        text: 'Data berhasil dihapus!',
-                        icon: 'success',
-                        confirmButtonColor: '#13C39C',
-                        timer: 4000
-                    })
-                } else {
-                    Swal.fire({
-                        title: 'Dibatalkan',
-                        text: 'Data asrama tidak jadi dihapus',
-                        icon: 'error',
-                    })
-                }
-            })
-        })
-    </script>
+    
 @endsection
+
+@push('ext-script')
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.slim.js"></script>
+
+<script>
+    $('.delete-confirm').on('click', function(e) {
+        e.preventDefault();
+        var href = $(this).attr('href');
+        Swal.fire({
+            title: 'Anda yakin hapus data ini?',
+            text: "Data yang sudah dihapus tidak dapat dikembalikan!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, hapus!',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('deleteForm').action = href;
+                document.getElementById('deleteForm').submit();
+                Swal.fire({
+                    title: 'Terhapus!',
+                    text: 'Data berhasil dihapus!',
+                    icon: 'success',
+                    confirmButtonColor: '#13C39C',
+                    timer: 4000
+                })
+            } else {
+                Swal.fire({
+                    title: 'Dibatalkan',
+                    text: 'Data asrama tidak jadi dihapus',
+                    icon: 'error',
+                })
+            }
+        })
+    })
+</script>
+@endpush
+

@@ -74,7 +74,6 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                     </svg>
-                    </form>
                 </a>
             </div>
             <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110  cursor-pointer">
@@ -105,39 +104,7 @@
 
     </div>
 
-    <script>
-        $('.swal-confirm').on('click', function(e) {
-            e.preventDefault();
-            var href = $(this).attr('href');
-            Swal.fire({
-                title: 'Anda yakin hapus data ini?',
-                text: "Data yang sudah dihapus tidak dapat dikembalikan!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Ya, hapus!',
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    document.getElementById('deleteForm').action = href;
-                    document.getElementById('deleteForm').submit();
-                    Swal.fire({
-                        title: 'Terhapus!',
-                        text: 'Data berhasil dihapus!',
-                        icon: 'success',
-                        confirmButtonColor: '#13C39C',
-                        timer: 4000
-                    })
-                } else {
-                    Swal.fire({
-                        title: 'Dibatalkan',
-                        text: 'Data petugas tidak jadi dihapus',
-                        icon: 'error',
-                    })
-                }
-            })
-        })
-    </script>
+    
     {{-- <script>
         $(".swal-confirm").click(function(e) {
         id = e.target.dataset.id;
@@ -161,8 +128,44 @@
         });
     </script> --}}
 @endsection
-{{-- <script src="https://demo.getstisla.com/assets/modules/sweetalert/sweetalert.min.js"></script> --}}
+
+@push('ext-script')
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.slim.js"></script>
+
+<<script>
+    $('.swal-confirm').on('click', function(e) {
+        e.preventDefault();
+        var href = $(this).attr('href');
+        Swal.fire({
+            title: 'Anda yakin hapus data ini?',
+            text: "Data yang sudah dihapus tidak dapat dikembalikan!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, hapus!',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('deleteForm').action = href;
+                document.getElementById('deleteForm').submit();
+                Swal.fire({
+                    title: 'Terhapus!',
+                    text: 'Data berhasil dihapus!',
+                    icon: 'success',
+                    confirmButtonColor: '#13C39C',
+                    timer: 4000
+                })
+            } else {
+                Swal.fire({
+                    title: 'Dibatalkan',
+                    text: 'Data petugas tidak jadi dihapus',
+                    icon: 'error',
+                })
+            }
+        })
+    })
+</script>
+@endpush

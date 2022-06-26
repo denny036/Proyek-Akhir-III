@@ -93,5 +93,5 @@
     </div>
 
 </body>
-
+@stack('ext-script')
 </html>
