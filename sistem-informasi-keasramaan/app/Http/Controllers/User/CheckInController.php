@@ -23,14 +23,20 @@ class CheckInController extends Controller
 
     $riwayatCheckIn = RecordCheckIn::join('check_in', 'check_in.id', 'record_checkin.check_in_id')
                       ->where('users_id', $userID)->paginate(10);
-    
-    // dd($riwayatCheckIn);
+
+
+    // dd($isStatusMenunggu);
 
     if (empty($dataMahasiswa)) {
       return redirect()->route('mahasiswa.profile')
         ->with('info', 'Untuk menggunakan aplikasi ini, silakan pilih asrama Anda terlebih dahulu!');
     } else {
-      return view('mahasiswa.check-in.index', compact('riwayatCheckIn'));
+
+      $checkStatus = RecordCheckIn::join('check_in', 'check_in.id', 'record_checkin.check_in_id')->where('users_id', $userID)->whereNull('check_in.status_request')->first();                      
+    
+      $isStatusMenunggu = $checkStatus->status_request ?? $checkStatus == "";
+      
+      return view('mahasiswa.check-in.index', compact('riwayatCheckIn', 'isStatusMenunggu'));
     }
   }
 
@@ -115,9 +121,10 @@ class CheckInController extends Controller
   {
     $userID = Auth::guard('web')->user()->id;
 
-    $dataMahasiswa = DB::table('record_mahasiswa_asrama')
+    $dataAsramaMahasiswa = DB::table('record_mahasiswa_asrama')
       ->join('users', 'record_mahasiswa_asrama.users_id', '=', 'users.id')
-      ->join('asrama', 'record_mahasiswa_asrama.asrama_id', '=', 'asrama.id')
+      ->join('asrama', 'record_mahasiswa_asrama.asrama_sebelumnya', '=', 'asrama.id')
+      // ->select('asrama.nama_asrama', 'record_mahasiswa_asrama.asrama_sebelumnya')
       ->where('record_mahasiswa_asrama.users_id', '=', $userID)
       ->first();
 
@@ -125,8 +132,8 @@ class CheckInController extends Controller
     $detailCheckIn = RecordCheckIn::join('check_in', 'check_in.id', '=', 'record_checkin.check_in_id')
     ->where('check_in.id', $id)->where('users_id', $userID)->get(); 
 
-    // dd($detailCheckIn);
+    // dd($dataAsramaMahasiswa);
 
-    return view('mahasiswa.check-in.detail', compact('detailCheckIn', 'dataMahasiswa'));
+    return view('mahasiswa.check-in.detail', compact('detailCheckIn', 'dataAsramaMahasiswa'));
   }
 }

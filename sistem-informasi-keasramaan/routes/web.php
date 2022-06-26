@@ -81,7 +81,7 @@ Route::prefix('petugas')->name('petugas.')->group(function(){
         Route::get('/home', [PetugasController::class, 'showHomePetugas'])->name('home');
 
         Route::get('/check-in-mahasiswa', [CheckInPetugasController::class, 'showPageCheckIn'])->name('check-in');
-        Route::get('/check-in-mahasiswa/detail/{check_in_id}', [CheckInPetugasController::class, 'getDetailCheckIn'])->name('detail-check-in');
+        Route::get('/check-in-mahasiswa/detail/{id}', [CheckInPetugasController::class, 'getDetailCheckIn'])->name('detail-check-in');
         Route::get('/check-in-mahasiswa/detail/terima/{id}', [CheckInPetugasController::class, 'acceptCheckIn'])->name('accept.check-in');
         Route::get('/check-in-mahasiswa/detail/tolak/{id}', [CheckInPetugasController::class, 'rejectCheckIn'])->name('reject.check-in');
 

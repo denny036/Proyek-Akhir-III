@@ -72,7 +72,7 @@
             Asrama Asal
         </td>
         <td class="py-3 px-6 text-left whitespace-nowrap font-poppins">
-           {{ $dataMahasiswa->nama_asrama }}
+           {{ $dataAsramaMahasiswa->nama_asrama }}
         </td>
     </tr>
     

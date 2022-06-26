@@ -18,12 +18,24 @@
 @endsection
 
 @section('table')
+
+    @if ($isStatusMenunggu == null) 
+    <a href="{{ route('mahasiswa.request.check-in') }}">
+        <button type="button"
+            class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 
+    focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 
+    dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 font-poppins" disabled >Request Check In</button>
+    </a>
+    <p class="text-red-600 font-base font-poppins">*Anda tidak dapat melakukan check in ketika terdapat request <span class="font-semibold">Menunggu.</span></p>
+    @else
     <a href="{{ route('mahasiswa.request.check-in') }}">
         <button type="button"
             class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 
     focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 
     dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 font-poppins">Request
-            Check In</button></a>
+            Check In</button>
+    </a>
+    @endif
 
     <p class="font-poppins font-normal text-lg py-2">Request sebelumnya</p>
     <div class="bg-white shadow rounded-sm my-2.5 overflow-x-auto">
@@ -70,17 +82,17 @@
                         <td class="py-3 px-6 text-left">
                             <div class="flex items-center">
                                 <span class="font-poppins">
-                                {{ !empty($data->isPetugas->nama) ? $data->isPetugas->nama:' ' }}
+                                    {{ !empty($data->isPetugas->nama) ? $data->isPetugas->nama : ' ' }}
                                 </span>
                             </div>
                         </td>
-                        
+
                         <td class="py-3 px-6 text-center font-poppins">
                             {{ \Carbon\Carbon::parse($data->tanggal_check_in)->isoFormat('DD MMMM YYYY H:mm') }}
                         </td>
 
                         <td class="py-3 px-6 text-center font-poppins">
-                            {{ $data->toAsrama->nama_asrama}}
+                            {{ $data->toAsrama->nama_asrama }}
                         </td>
 
                         <td class="py-3 px-6 text-center font-poppins">
