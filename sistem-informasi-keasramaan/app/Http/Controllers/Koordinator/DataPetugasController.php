@@ -123,6 +123,6 @@ class DataPetugasController extends Controller
     {
         $dataPetugas = Petugas::find($id);
         $dataPetugas->delete();
-        return redirect()->route('koordinator.show.data-petugas')->with('success', 'Data petugas berhasil dihapus');
+        return redirect()->back()->with('success', 'Data petugas berhasil dihapus');
     }
 }

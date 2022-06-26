@@ -119,6 +119,9 @@ Route::prefix('koordinator')->name('koordinator.')->group(function() {
         Route::get('/data-asrama', [AsramaController::class, 'showDataAsrama'])->name('show.asrama');
         Route::view('/tambah-data-asrama', 'koordinator.asrama.create')->name('create.asrama');
         Route::post('/simpan-data-asrama', [AsramaController::class, 'storeDataAsrama'])->name('store.asrama');
+        Route::get('/data-asrama/edit/{asrama_id}', [AsramaController::class, 'showFormEditAsrama'])->name('form-edit-asrama');
+        Route::put('/update-asrama/{asrama_id}', [AsramaController::class, 'updateDataAsrama'])->name('update.data-asrama');
+        Route::delete('/data-asrama/delete/{id}', [AsramaController::class, 'deleteDataAsrama'])->name('delete-asrama');
 
         Route::get('/data-petugas', [DataPetugasController::class, 'showDataPetugas'])->name('show.data-petugas');
         Route::get('/tambah-petugas', [DataPetugasController::class, 'showFormTambahPetugas'])->name('form-tambah-petugas');

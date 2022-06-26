@@ -13,83 +13,23 @@
 @endsection
 
 @section('statistics')
-    <!-- STATISTICS -->
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 py-6">
-        <div class="bg-white shadow rounded-sm flex justify-between items-center py-3.5 px-3.5">
-            <div class="space-y-2">
-                <p class="text-xs text-gray-400 uppercase">Value</p>
-                <div class="flex items-center space-x-2">
-                    <h1 class="text-xl font-semibold">$13,500</h1>
-                    <p class="text-xs bg-green-50 text-green-500 px-1 rounded">+4.5</p>
-                </div>
-            </div>
-            <svg class="w-12 h-12 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
-                </path>
-            </svg>
-        </div>
-
-        <div class="bg-white shadow rounded-sm flex justify-between items-center py-3.5 px-3.5">
-            <div class="space-y-2">
-                <p class="text-xs text-gray-400 uppercase">Users</p>
-                <div class="flex items-center space-x-2">
-                    <h1 class="text-xl font-semibold">819</h1>
-                    <p class="text-xs bg-green-50 text-green-500 px-1 rounded">+7.4</p>
-                </div>
-            </div>
-            <svg class="w-12 h-12 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z">
-                </path>
-            </svg>
-        </div>
-
-        <div class="bg-white shadow rounded-sm flex justify-between items-center py-3.5 px-3.5">
-            <div class="space-y-2">
-                <p class="text-xs text-gray-400 uppercase">Orders</p>
-                <div class="flex items-center space-x-2">
-                    <h1 class="text-xl font-semibold">121</h1>
-                    <p class="text-xs bg-red-50 text-red-500 px-1 rounded">-2.9</p>
-                </div>
-            </div>
-            <svg class="w-12 h-12 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6">
-                </path>
-            </svg>
-        </div>
-
-        <div class="bg-white shadow rounded-sm flex justify-between items-center py-3.5 px-3.5">
-            <div class="space-y-2">
-                <p class="text-xs text-gray-400 uppercase">Tickets</p>
-                <div class="flex items-center space-x-2">
-                    <h1 class="text-xl font-semibold">243</h1>
-                    <p class="text-xs bg-green-50 text-green-500 px-1 rounded">+3.1</p>
-                </div>
-            </div>
-            <svg class="w-12 h-12 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z">
-                </path>
-            </svg>
-        </div>
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 py-2">
     </div>
-    <!-- END OF STATISTICS -->
 @endsection
 
 @section('table')
-    <!-- TABLE -->
     <a href="{{ route('koordinator.create.asrama') }}">
         <button type="button"
             class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 
-            focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 
-            dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 font-poppins">Tambah
+    focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 
+    dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 font-poppins">Tambah
             Data Asrama</button></a>
-
+    @if (Session::get('success'))
+        <div class="p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800"
+            role="alert">
+            <span class="font-medium font-poppins">{{ Session::get('success') }}</span>
+        </div>
+    @endif
     <div class="bg-white shadow rounded-sm my-2.5 overflow-x-auto">
         <table class="min-w-max w-full table-auto">
             <thead>
@@ -97,7 +37,6 @@
                     <th class="py-3 px-6 text-left">Nama Asrama</th>
                     <th class="py-3 px-6 text-left">Jenis Asrama</th>
                     <th class="py-3 px-6 text-center">Lokasi Asrama</th>
-                    <th class="py-3 px-6 text-center">Status</th>
                     <th class="py-3 px-6 text-center">Actions</th>
                 </tr>
             </thead>
@@ -117,28 +56,34 @@
         {{ $value->lokasi_asrama }}
     </td>
     <td class="py-3 px-6 text-center">
-        <span class="bg-purple-200 text-purple-600 py-1 px-3 rounded-full text-xs">Active</span>
-    </td>
-    <td class="py-3 px-6 text-center">
         <div class="flex item-center justify-center">
 
             <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110  cursor-pointer">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                </svg>
+                <a href="{{ route('koordinator.form-edit-asrama', $value->id) }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                    </svg>
+                </a>
             </div>
             <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110  cursor-pointer">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                </svg>
+                <a href="{{ route('koordinator.delete-asrama', $value->id) }}" class="delete-confirm">
+                    <form action="{{ route('koordinator.delete-asrama', $value->id) }}" id="deleteForm" method="POST">
+                        @csrf
+                        @method('delete')
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg>
+                    </form>
+                </a>
             </div>
         </div>
     </td>
     </tr>
     </tbody>
     @endforeach
+
 
     </div>
     </table>
@@ -149,5 +94,42 @@
     </div>
 
     </div>
-    <!-- END OF TABLE -->
+
+    <script>
+        $('.delete-confirm').on('click', function(e) {
+            e.preventDefault();
+            var href = $(this).attr('href');
+            Swal.fire({
+                title: 'Anda yakin hapus data ini?',
+                text: "Data yang sudah dihapus tidak dapat dikembalikan!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, hapus!',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('deleteForm').action = href;
+                    document.getElementById('deleteForm').submit();
+                    Swal.fire({
+                        title: 'Terhapus!',
+                        text: 'Data berhasil dihapus!',
+                        icon: 'success',
+                        confirmButtonColor: '#13C39C',
+                        timer: 4000
+                    })
+                } else {
+                    Swal.fire({
+                        title: 'Dibatalkan',
+                        text: 'Data asrama tidak jadi dihapus',
+                        icon: 'error',
+                    })
+                }
+            })
+        })
+    </script>
 @endsection
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.slim.js"></script>

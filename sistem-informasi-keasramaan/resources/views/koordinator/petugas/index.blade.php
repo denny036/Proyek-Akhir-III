@@ -24,7 +24,12 @@
     focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 
     dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 font-poppins">Tambah
             Petugas Asrama</button></a>
-
+    @if (Session::get('success'))
+        <div class="p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800"
+            role="alert">
+            <span class="font-medium font-poppins">{{ Session::get('success') }}</span>
+        </div>
+    @endif
     <div class="bg-white shadow rounded-sm my-2.5 overflow-x-auto">
         <table class="min-w-max w-full table-auto">
             <thead>
@@ -112,22 +117,23 @@
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Ya, hapus!',
-                reverseButtons: true
             }).then((result) => {
                 if (result.isConfirmed) {
                     document.getElementById('deleteForm').action = href;
                     document.getElementById('deleteForm').submit();
-                    Swal.fire(
-                        'Terhapus!',
-                        'Data berhasil dihapus!',
-                        'success'
-                    )
+                    Swal.fire({
+                        title: 'Terhapus!',
+                        text: 'Data berhasil dihapus!',
+                        icon: 'success',
+                        confirmButtonColor: '#13C39C',
+                        timer: 4000
+                    })
                 } else {
-                    Swal.fire(
-                        'Dibatalkan',
-                        'Data petugas tidak jadi dihapus',
-                        'error'
-                    )
+                    Swal.fire({
+                        title: 'Dibatalkan',
+                        text: 'Data petugas tidak jadi dihapus',
+                        icon: 'error',
+                    })
                 }
             })
         })

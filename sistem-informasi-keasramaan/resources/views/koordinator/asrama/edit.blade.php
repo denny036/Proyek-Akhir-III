@@ -9,8 +9,8 @@
 @endsection
 
 @section('judul-halaman')
-    <a href="{{ route('koordinator.show.asrama') }}"><span class="text-gray-600">Data Asrama / </a></span>Tambah Data
-    Asrama
+    <a href="{{ route('koordinator.show.asrama') }}"><span class="text-gray-600">Data Asrama / </a></span>Edit
+    Data Asrama
 @endsection
 
 @section('statistics')
@@ -20,7 +20,8 @@
 
 @section('table')
     <div class="h-screen flex justify-start w-full">
-        <form action="{{ route('koordinator.store.asrama') }}" method="POST">
+        <form action="{{ route('koordinator.update.data-asrama', $asrama->id) }}" method="POST">
+            @method('PUT')
             @csrf
 
             @if (Session::get('success'))
@@ -39,12 +40,13 @@
 
             <div class="bg-white px-10 py-7 rounded-xl w-screen shadow-md max-w-lg">
                 <div class="space-y-4">
-                    <h1 class="text-center text-2xl font-semibold text-gray-600 font-poppins">Tambah Asrama Baru</h1>
+                    <h1 class="text-center text-2xl font-semibold text-gray-600 font-poppins">Edit Data Asrama</h1>
                     <div>
-                        <label for="nama_asrama" class="block mb-1 text-gray-600 font-semibold font-poppins">Nama Asrama</label>
+                        <label for="nama_asrama" class="block mb-1 text-gray-600 font-semibold font-poppins">Nama
+                            Asrama</label>
                         <input type="text" name="nama_asrama"
                             class="bg-indigo-50 px-4 py-2 outline-none rounded-md w-full font-poppins"
-                            value="{{ old('nama_asrama') }}">
+                            value="{{ $asrama->nama_asrama }}">
                         <span class="text-red-800 text-sm font-poppins">
                             @error('nama_asrama')
                                 {{ $message }}
@@ -62,30 +64,33 @@
 
                             <option value="Pilih Jenis Asrama" disabled selected class="font-poppins">Pilih Jenis Asrama
                             </option>
-                            <option class="font-poppins"
-                                value="laki-laki {{ old('jenis_asrama') == 'laki-laki' ? 'selected' : '' }}">Laki-Laki
-                            </option>
-                            <option class="font-poppins"
-                                value="perempuan {{ old('jenis_asrama') == 'perempuan' ? 'selected' : '' }}">Perempuan
-                            </option>
+                            <option class="font-poppins" value="laki-laki"
+                                {{ $asrama->jenis_asrama == 'laki-laki' ? 'selected' : '' }}">Laki-Laki</option>
+                            <option class="font-poppins" value="perempuan"
+                                {{ $asrama->jenis_asrama == 'perempuan' ? 'selected' : '' }}">Perempuan</option>
+
                         </select>
+
                     </div>
 
-        
-
                     <div>
-                        <label for="lokasi_asrama" class="block mb-1 text-gray-600 font-semibold font-poppins">Lokasi Asrama</label>
+                        <label for="lokasi_asrama" class="block mb-1 text-gray-600 font-semibold font-poppins">Lokasi
+                            Asrama</label>
                         <select name="lokasi_asrama" id="lokasi_asrama"
-                            class="bg-indigo-50 border 
-                    text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 
-                        dark:text-dark dark:focus:ring-blue-500 dark:focus:border-blue-500 font-poppins">
+                            class="bg-indigo-50 border  text-gray-900 text-sm  focus:ring-blue-500 
+            focus:border-blue-500 block  px-4 py-2 outline-none rounded-md w-full
+                      dark:text-dark dark:focus:ring-blue-500 dark:focus:border-blue-500 font-poppins">
 
-                            <option class="font-poppins" value="Pilih Lokasi Asrama" disabled selected>Pilih Lokasi Asrama</option>
-                            <option class="font-poppins" value="Asrama Dalam Kampus">Asrama Dalam Kampus</option>
-                            <option class="font-poppins" value="Asrama Luar Kampus">Asrama Luar Kampus</option>
-
+                            <option value="Pilih Lokasi Asrama" disabled selected class="font-poppins">Pilih Lokasi Asrama
+                            </option>
+                            
+                            <option class="font-poppins" value="Asrama Dalam Kampus"
+                                {{ $asrama->lokasi_asrama == 'Asrama Dalam Kampus' ? 'selected' : '' }}">Asrama Dalam
+                                Kampus</option>
+                            <option class="font-poppins" value="Asrama Luar Kampus"
+                                {{ $asrama->lokasi_asrama == 'Asrama Luar Kampus' ? 'selected' : '' }}">Asrama Luar Kampus
+                            </option>
                         </select>
-
                     </div>
                 </div>
 
