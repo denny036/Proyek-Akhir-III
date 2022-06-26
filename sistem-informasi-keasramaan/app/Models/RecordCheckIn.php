@@ -35,6 +35,7 @@ class RecordCheckIn extends Model
         return $this->belongsTo('App\Models\Asrama', 'asrama_id');
     }
 
+
     public function isMahasiswa()
     {
         return $this->belongsTo('App\Models\User', 'users_id');

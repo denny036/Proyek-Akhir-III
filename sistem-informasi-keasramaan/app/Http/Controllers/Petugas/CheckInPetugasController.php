@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Petugas;
 
 use App\Models\CheckIn;
 use Illuminate\Http\Request;
+use App\Models\RecordCheckIn;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Models\RecordMahasiswaAsrama;
 use Illuminate\Support\Facades\Auth;
+use App\Models\RecordMahasiswaAsrama;
+use Facade\FlareClient\Glows\Recorder;
 
 class CheckInPetugasController extends Controller
 {
@@ -15,60 +17,29 @@ class CheckInPetugasController extends Controller
     {
         $asramaIDPetugas = Auth::guard('petugas')->user()->asrama_id;
 
-        $daftarRequestCheckIn = CheckIn::paginate(15);
-        
-        // $daftarRequestCheckIn = CheckIn::join('asrama', 'check_in.asrama_id', 'asrama.id')
-        // ->join('record_mahasiswa_asrama', 'check_in.users_id', '=', 'record_mahasiswa_asrama.users_id')
-        // ->where('check_in.asrama_id', $asramaIDPetugas)
-        // ->paginate(15);
+        $daftarRequestCheckIn = RecordCheckIn::join('check_in', 'check_in.id', '=', 'record_checkin.check_in_id')
+        ->join('record_mahasiswa_asrama', 'record_mahasiswa_asrama.users_id', '=', 'record_checkin.users_id')
+        ->join('asrama', 'asrama.id', '=', 'record_mahasiswa_asrama.asrama_id')
+        ->select('record_checkin.*', 'check_in.tanggal_check_in', 'check_in.keperluan', 'asrama.nama_asrama')
+        ->where('record_mahasiswa_asrama.asrama_id', $asramaIDPetugas)
+        ->paginate(15);
 
-        // $daftarRequestCheckIn = CheckIn::join('record_mahasiswa_asrama', 'check_in.users_id', '=', 'record_mahasiswa_asrama.users_id')
-        // ->join('asrama', 'check_in.asrama_id', '=', 'asrama.id')
-        // ->where('check_in.asrama_id', $asramaIDPetugas)
-        // // ->orderByDesc('check_in.id')
-        // ->paginate(15);
-
-        // $daftarRequestCheckIn = CheckIn::join('record_mahasiswa_asrama', 'check_in.users_id', '=', 'record_mahasiswa_asrama.id')
-        // ->join('asrama', 'check_in.asrama_id', '=', 'asrama.id')
-        // ->paginate(15);
-
-        // $daftarRequestCheckIn = CheckIn::join('record_mahasiswa_asrama', 'check_in.users_id', '=', 'record_mahasiswa_asrama.users_id')
-        // ->select('check_in.*')
-        // ->paginate(10);
-
-        $dataAsramaMahasiswa = RecordMahasiswaAsrama::join('users', 'record_mahasiswa_asrama.users_id', '=', 'users.id')
-            ->join('asrama', 'record_mahasiswa_asrama.asrama_id', '=', 'asrama.id')
-            ->where('record_mahasiswa_asrama.asrama_id', '=', $asramaIDPetugas)
-            ->first();
-
-        // $dataAsramaMahasiswa = CheckIn::join('record_mahasiswa_asrama', 'check_in.users_id', '=', 'record_mahasiswa_asrama.users_id')
-        // ->select('check_in.*', 'record_mahasiswa_asrama.asrama_id')
-        // ->get();
-
-        //    dd($daftarRequestCheckIn); 
-        return view('petugas.check-in.index', compact('daftarRequestCheckIn', 'dataAsramaMahasiswa'));
+        //    dd($daftarRequestCheckIn);   
+        return view('petugas.check-in.index', compact('daftarRequestCheckIn'));
     }
 
     public function getDetailCheckIn($id) 
     {
         $asramaIDPetugas = Auth::guard('petugas')->user()->asrama_id;
 
-        $checkInID = CheckIn::find($id);
+        $checkInID = RecordCheckIn::join('check_in', 'check_in.id', '=', 'record_checkin.check_in_id')
+        ->join('record_mahasiswa_asrama', 'record_mahasiswa_asrama.users_id', '=', 'record_checkin.users_id')
+        ->join('asrama', 'asrama.id', '=', 'record_checkin.asrama_id')
+        ->where('record_mahasiswa_asrama.asrama_id', $asramaIDPetugas)
+        ->where('record_checkin.id', $id)
+        ->first();
 
-        // $detailCheckIn = CheckIn::join('record_mahasiswa_asrama', 'check_in.asrama_id', '=', 'record_mahasiswa_asrama.asrama_id')
-        // ->join('users', 'check_in.users_id', '=', 'users.id')
-        // ->where('check_in.id', $id)
-        // ->get();
-
-        $dataAsramaMahasiswa = DB::table('record_mahasiswa_asrama')
-            ->join('users', 'record_mahasiswa_asrama.users_id', '=', 'users.id')
-            ->join('asrama', 'record_mahasiswa_asrama.asrama_id', '=', 'asrama.id')
-            ->where('record_mahasiswa_asrama.asrama_id', '=', $asramaIDPetugas)
-            ->first();
-        
-        // dd($detailCheckIn);
-
-        return view('petugas.check-in.detail', compact('checkInID', 'dataAsramaMahasiswa'));
+        return view('petugas.check-in.detail', compact('checkInID'));
     }
 
     public function acceptCheckIn($id) 

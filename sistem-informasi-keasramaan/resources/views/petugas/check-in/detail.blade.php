@@ -87,7 +87,7 @@
         </td>
 
         <td class="py-3 px-6 text-left font-poppins">
-            {{ $dataAsramaMahasiswa->nama_asrama }}
+            {{ $checkInID->toAsrama->nama_asrama }}
         </td>
     </tr>
 
@@ -97,7 +97,7 @@
         </td>
 
         <td class="py-3 px-6 text-left font-poppins">
-            {{ $checkInID->toAsrama->nama_asrama }}
+            {{ $checkInID->nama_asrama }}
         </td>
     </tr>
 

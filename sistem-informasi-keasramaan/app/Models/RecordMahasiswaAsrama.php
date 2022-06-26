@@ -12,7 +12,7 @@ class RecordMahasiswaAsrama extends Model
     protected $table = 'record_mahasiswa_asrama';
 
     protected $fillable = [
-        'users_id', 'asrama_id',
+        'users_id', 'asrama_id', 'asrama_sebelumnya'
     ];
 
     public function isRecordAsrama() 
