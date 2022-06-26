@@ -23,12 +23,12 @@ class RecordCheckOut extends Model
         return $this->belongsTo('App\Models\CheckOut', 'check_out_id');
     }
 
-    public function isPetugas()
+    public function isAnyPetugas()
     {
         return $this->belongsTo('App\Models\Petugas', 'petugas_id');
     }
 
-    public function isMahasiswa()
+    public function isAnyMahasiswa()
     {
         return $this->belongsTo('App\Models\User', 'users_id');
     }

@@ -25,8 +25,6 @@ class CheckInController extends Controller
                       ->where('users_id', $userID)->paginate(10);
 
 
-    // dd($isStatusMenunggu);
-
     if (empty($dataMahasiswa)) {
       return redirect()->route('mahasiswa.profile')
         ->with('info', 'Untuk menggunakan aplikasi ini, silakan pilih asrama Anda terlebih dahulu!');
@@ -104,7 +102,6 @@ class CheckInController extends Controller
     $dataAsramaMahasiswa = DB::table('record_mahasiswa_asrama')
       ->join('users', 'record_mahasiswa_asrama.users_id', '=', 'users.id')
       ->join('asrama', 'record_mahasiswa_asrama.asrama_sebelumnya', '=', 'asrama.id')
-      // ->select('asrama.nama_asrama', 'record_mahasiswa_asrama.asrama_sebelumnya')
       ->where('record_mahasiswa_asrama.users_id', '=', $userID)
       ->first();
 

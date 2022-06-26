@@ -6,6 +6,7 @@ use App\Http\Controllers\Koordinator\DataPetugasController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Koordinator\KoordinatorController;
 use App\Http\Controllers\Petugas\CheckInPetugasController;
+use App\Http\Controllers\Petugas\HandleCheckOutController;
 use App\Http\Controllers\Petugas\IBController;
 use App\Http\Controllers\Petugas\ISController;
 use App\Http\Controllers\Petugas\PetugasController;
@@ -87,6 +88,11 @@ Route::prefix('petugas')->name('petugas.')->group(function(){
         Route::get('/check-in-mahasiswa/detail/{id}', [CheckInPetugasController::class, 'getDetailCheckIn'])->name('detail-check-in');
         Route::get('/check-in-mahasiswa/detail/terima/{id}', [CheckInPetugasController::class, 'acceptCheckIn'])->name('accept.check-in');
         Route::get('/check-in-mahasiswa/detail/tolak/{id}', [CheckInPetugasController::class, 'rejectCheckIn'])->name('reject.check-in');
+
+        Route::get('/check-out-mahasiswa', [HandleCheckOutController::class, 'showPageCheckOut'])->name('check-out');
+        Route::get('/check-out-mahasiswa/detail/{id}', [HandleCheckOutController::class, 'getDetailCheckOut'])->name('detail-check-out');
+        Route::get('/check-out-mahasiswa/detail/terima/{id}', [HandleCheckOutController::class, 'acceptCheckOut'])->name('accept.check-out');
+        Route::get('/check-out-mahasiswa/detail/tolak/{id}', [HandleCheckOutController::class, 'rejectCheckOut'])->name('reject.check-out');
 
         Route::get('/izin-bermalam-mahasiswa', [IBController::class, 'showPageIBMhs'])->name('izin-bermalam');
         Route::get('/izin-bermalam-mahasiswa/detail/{izin_bermalam_id}', [IBController::class, 'getDetailIB'])->name('detail-izin-bermalam');

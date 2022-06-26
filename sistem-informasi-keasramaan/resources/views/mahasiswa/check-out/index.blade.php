@@ -81,7 +81,7 @@
                         <td class="py-3 px-6 text-left">
                             <div class="flex items-center">
                                 <span class="font-poppins">
-                                    {{ !empty($data->isPetugas->nama) ? $data->isPetugas->nama : ' ' }}
+                                    {{ !empty($data->isAnyPetugas->nama) ? $data->isAnyPetugas->nama : ' ' }}
                                 </span>
                             </div>
                         </td>

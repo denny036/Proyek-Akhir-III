@@ -34,7 +34,7 @@
     <td class="py-3 px-6 text-left">
         <div class="flex items-center">
             <span class="font-poppins">
-                {{ $data->isMahasiswa->nama }}
+                {{ $data->isAnyMahasiswa->nama }}
             </span>
         </div>
     </td>
@@ -45,7 +45,7 @@
             NIM Mahasiswa
         </td>
         <td class="py-3 px-6 text-left whitespace-nowrap font-poppins">
-            {{ $data->isMahasiswa->nim }}
+            {{ $data->isAnyMahasiswa->nim }}
         </td>
     </tr>
 
@@ -54,7 +54,7 @@
             Angkatan
         </td>
         <td class="py-3 px-6 text-left whitespace-nowrap font-poppins">
-            {{ $data->isMahasiswa->angkatan }}
+            {{ $data->isAnyMahasiswa->angkatan }}
         </td>
     </tr>
 
@@ -63,7 +63,7 @@
             Program Studi
         </td>
         <td class="py-3 px-6 text-left whitespace-nowrap font-poppins">
-            {{ Str::of($data->isMahasiswa->prodi)->upper()->explode('_')->implode(' ') }}
+            {{ Str::of($data->isAnyMahasiswa->prodi)->upper()->explode('_')->implode(' ') }}
         </td>
     </tr>
 
@@ -137,7 +137,7 @@
         </td>
 
         <td class="py-3 px-6 text-left font-poppins">
-            {{ !empty($data->isPetugas->nama) ? $data->isPetugas->nama : 'Pengurus Asrama' }}
+            {{ !empty($data->isAnyPetugas->nama) ? $data->isAnyPetugas->nama : 'Pengurus Asrama' }}
         </td>
     </tr>
 
