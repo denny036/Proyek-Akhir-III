@@ -123,9 +123,9 @@ Route::prefix('koordinator')->name('koordinator.')->group(function() {
         Route::get('/data-petugas', [DataPetugasController::class, 'showDataPetugas'])->name('show.data-petugas');
         Route::get('/tambah-petugas', [DataPetugasController::class, 'showFormTambahPetugas'])->name('form-tambah-petugas');
         Route::post('/simpan-petugas', [DataPetugasController::class, 'storeDataPetugas'])->name('store.data-petugas');
-
-        Route::get('/data-petugas/{petugas_id}', [DataPetugasController::class, 'showFormEditPetugas'])->name('form-edit-petugas');
+        Route::get('/data-petugas/edit/{petugas_id}', [DataPetugasController::class, 'showFormEditPetugas'])->name('form-edit-petugas');
         Route::put('/update-petugas/{petugas_id}', [DataPetugasController::class, 'updateDataPetugas'])->name('update.data-petugas');
+        Route::delete('/data-petugas/delete/{id}', [DataPetugasController::class, 'deleteDataPetugas'])->name('delete-petugas');
 
         Route::post('/logout', [KoordinatorController::class, 'logout'])->name('logout');
     });

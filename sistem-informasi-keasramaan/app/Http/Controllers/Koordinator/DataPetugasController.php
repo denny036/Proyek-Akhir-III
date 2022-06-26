@@ -12,7 +12,7 @@ class DataPetugasController extends Controller
 {
     public function showDataPetugas() 
     {
-        $dataPetugas = Petugas::all();
+        $dataPetugas = Petugas::paginate(15);
         
         return view('koordinator.petugas.index', compact('dataPetugas'));
     }
@@ -117,5 +117,12 @@ class DataPetugasController extends Controller
         } else {
             return redirect()->back()->with('fail', 'Proses edit gagal, silakan periksa format yang diminta.')->withInput();
         }
+    }
+
+    public function deleteDataPetugas($id) 
+    {
+        $dataPetugas = Petugas::find($id);
+        $dataPetugas->delete();
+        return redirect()->route('koordinator.show.data-petugas')->with('success', 'Data petugas berhasil dihapus');
     }
 }

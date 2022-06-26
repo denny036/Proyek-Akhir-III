@@ -69,13 +69,20 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                     </svg>
+                    </form>
                 </a>
             </div>
             <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110  cursor-pointer">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                </svg>
+                <a href="{{ route('koordinator.delete-petugas', $value->id) }}" class="swal-confirm">
+                    <form action="{{ route('koordinator.delete-petugas', $value->id) }}" id="deleteForm" method="POST">
+                        @csrf
+                        @method('delete')
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg>
+                    </form>
+                </a>
             </div>
         </div>
     </td>
@@ -87,9 +94,69 @@
     </table>
     <div class="row">
         <div class="col-md-12">
-            {{-- {{ $asrama->links('pagination::tailwind') }} --}}
+            {{ $dataPetugas->links('pagination::tailwind') }}
         </div>
     </div>
 
     </div>
+
+    <script>
+        $('.swal-confirm').on('click', function(e) {
+            e.preventDefault();
+            var href = $(this).attr('href');
+            Swal.fire({
+                title: 'Anda yakin hapus data ini?',
+                text: "Data yang sudah dihapus tidak dapat dikembalikan!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, hapus!',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('deleteForm').action = href;
+                    document.getElementById('deleteForm').submit();
+                    Swal.fire(
+                        'Terhapus!',
+                        'Data berhasil dihapus!',
+                        'success'
+                    )
+                } else {
+                    Swal.fire(
+                        'Dibatalkan',
+                        'Data petugas tidak jadi dihapus',
+                        'error'
+                    )
+                }
+            })
+        })
+    </script>
+    {{-- <script>
+        $(".swal-confirm").click(function(e) {
+        id = e.target.dataset.id;
+        swal({
+            title: 'Anda yakin hapus data ini?',
+            text: 'Anda tidak dapat mengembalikan data ini jika sudah dihapus.',
+            icon: 'warning',
+            buttons: true,
+            dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    swal('Data petugas berhasil dihapus!', {
+                        icon: 'success',
+                    });
+                    $(`#delete${id}`).submit();
+                } else {
+                    swal('Data petugas tidak jadi dihapus!');
+                }
+            });
+        });
+    </script> --}}
 @endsection
+{{-- <script src="https://demo.getstisla.com/assets/modules/sweetalert/sweetalert.min.js"></script> --}}
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.slim.js"></script>
