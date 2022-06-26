@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CheckOutController;
 use App\Http\Controllers\Koordinator\AsramaController;
 use App\Http\Controllers\Koordinator\DataPetugasController;
 use App\Http\Controllers\User\UserController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\Petugas\IBController;
 use App\Http\Controllers\Petugas\ISController;
 use App\Http\Controllers\Petugas\PetugasController;
 use App\Http\Controllers\User\CheckInController;
+use App\Http\Controllers\User\ChkOutController;
 use App\Http\Controllers\User\IzinBermalamController;
 use App\Http\Controllers\User\IzinSakitController;
 use Illuminate\Support\Facades\Route;
@@ -50,9 +52,10 @@ Route::prefix('mahasiswa')->name('mahasiswa.')->group(function(){
         Route::post('/simpan-check-in', [CheckInController::class, 'storeCheckIn'])->name('store.check-in');
         Route::get('/check-in/detail/{id}', [CheckInController::class, 'getDetailCheckIn'])->name('detail.check-in');
 
-        // Route::get('/check-out', [CheckOutController:class, 'showDataCheckOut'])->name('show.check-out');
-        // Route::view('/request-check-out', 'mahasiswa.check-out.create')->name('create.check-out');
-        // Route::post('/simpan-check-out', [CheckOutController::class, 'storeCheckOut'])->name('store.check-out');
+        Route::get('/check-out', [ChkOutController::class, 'showDataCheckOut'])->name('show.check-out');
+        Route::get('/request-check-out', [ChkOutController::class, 'showFormCheckOut'])->name('request.check-out');
+        Route::post('/simpan-check-out', [ChkOutController::class, 'storeCheckOut'])->name('store.check-out');
+        Route::get('/check-out/detail/{id}', [ChkOutController::class, 'getDetailCheckOut'])->name('detail.check-out');
 
         Route::get('/izin-bermalam', [IzinBermalamController::class, 'showPageIzinBermalam'])->name('izin-bermalam');
         Route::get('/request-izin-bermalam', [IzinBermalamController::class, 'showReqIB'])->name('request.izin-bermalam');

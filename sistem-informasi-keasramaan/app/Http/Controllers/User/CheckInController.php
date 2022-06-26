@@ -95,26 +95,6 @@ class CheckInController extends Controller
         }
         return redirect()->route('mahasiswa.request.check-in')->with('fail', 'Proses gagal, silakan periksa format yang diminta.')->withInput();
       }
-
-    //   DB::table('check_in')->insert([
-    //   'tanggal_check_in' => Carbon::createFromFormat('Y-m-d\TH:i', $request->tanggal_check_in)->format('Y-m-d\TH:i'),
-    //   'keperluan' => $request->keperluan,
-    //   ]);
-
-    //   $lastID =
-
-    //   RecordCheckIn::create([
-    //     'check_in_id' => 
-    //     'users_id' => $mahasiswaID,
-    //     'asrama_id' => $request->asrama_tujuan,
-    // ]);
-
-    
-    // if (true) {
-      
-    // } else {
-      
-    // }
   }
 
   public function getDetailCheckIn($id)

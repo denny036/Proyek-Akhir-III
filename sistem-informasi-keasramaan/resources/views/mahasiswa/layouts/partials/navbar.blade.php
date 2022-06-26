@@ -17,7 +17,7 @@
         <span class="font-poppins">Check In</span>
     </a>
 
-    <a href="#" class="py-2.5 px-4 flex items-center space-x-2 bg-gray-800 text-white hover:bg-gray-800 hover:text-white rounded">
+    <a href="{{ route('mahasiswa.show.check-out') }}" class="py-2.5 px-4 flex items-center space-x-2 bg-gray-800 text-white hover:bg-gray-800 hover:text-white rounded">
         <svg class="w-5 h-6" id="icon-exit" fill="none" stroke="currentColor" viewBox="0 0 32 32">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" 
             d="M24 20v-4h-10v-4h10v-4l6 6zM22 18v8h-10v6l-12-6v-26h22v10h-2v-8h-16l8 4v18h8v-6z"></path>
