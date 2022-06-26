@@ -82,7 +82,7 @@
         </td>
 
         <td class="py-3 px-6 text-left font-poppins">
-            {{ $data->toAsrama->nama_asrama  }}
+            {{ $data->toAsrama->nama_asrama}}
         </td>
     </tr>
 

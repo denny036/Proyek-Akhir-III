@@ -7,6 +7,7 @@ use App\Models\CheckIn;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\RecordCheckIn;
 use Illuminate\Support\Facades\Auth;
 
 class CheckInController extends Controller
@@ -20,7 +21,8 @@ class CheckInController extends Controller
       ->where('record_mahasiswa_asrama.users_id', '=', $userID)
       ->first();
 
-    $riwayatCheckIn = CheckIn::where('users_id', $userID)->paginate(10);
+    $riwayatCheckIn = RecordCheckIn::join('check_in', 'check_in.id', 'record_checkin.check_in_id')
+                      ->where('users_id', $userID)->paginate(10);
     
     // dd($riwayatCheckIn);
 
@@ -35,6 +37,7 @@ class CheckInController extends Controller
   public function showFormCheckIn()
   {
     $user_id = Auth::guard('web')->user()->id;
+
     $dataMahasiswa = DB::table('record_mahasiswa_asrama')
       ->join('users', 'record_mahasiswa_asrama.users_id', '=', 'users.id')
       ->join('asrama', 'record_mahasiswa_asrama.asrama_id', '=', 'asrama.id')
@@ -69,18 +72,43 @@ class CheckInController extends Controller
 
     $mahasiswaID = Auth::guard('web')->user()->id;
 
-    $result = DB::table('check_in')->insert([
-      'users_id' => $mahasiswaID,
-      'asrama_id' => $request->asrama_tujuan,
-      'tanggal_check_in' => Carbon::createFromFormat('Y-m-d\TH:i', $request->tanggal_check_in)->format('Y-m-d\TH:i'),
-      'keperluan' => $request->keperluan,
-    ]);
+      $checkin = new CheckIn;
+      $checkin->tanggal_check_in = Carbon::createFromFormat('Y-m-d\TH:i', $request->tanggal_check_in)->format('Y-m-d\TH:i');
+      $checkin->keperluan = $request->keperluan;
 
-    if ($result) {
-      return redirect()->route('mahasiswa.request.check-in')->with('success', 'Anda berhasil melakukan request check in.');
-    } else {
-      return redirect()->route('mahasiswa.request.check-in')->with('fail', 'Proses gagal, silakan periksa format yang diminta.')->withInput();
-    }
+      if($checkin->save())
+      {
+        $recordCheckIn = new RecordCheckIn;
+        $recordCheckIn->check_in_id = $checkin->id;
+        $recordCheckIn->users_id = $mahasiswaID;
+        $recordCheckIn->asrama_id = $request->asrama_tujuan;
+
+        if($recordCheckIn->save())
+        {
+          return redirect()->route('mahasiswa.request.check-in')->with('success', 'Anda berhasil melakukan request check in.');
+        }
+        return redirect()->route('mahasiswa.request.check-in')->with('fail', 'Proses gagal, silakan periksa format yang diminta.')->withInput();
+      }
+
+    //   DB::table('check_in')->insert([
+    //   'tanggal_check_in' => Carbon::createFromFormat('Y-m-d\TH:i', $request->tanggal_check_in)->format('Y-m-d\TH:i'),
+    //   'keperluan' => $request->keperluan,
+    //   ]);
+
+    //   $lastID =
+
+    //   RecordCheckIn::create([
+    //     'check_in_id' => 
+    //     'users_id' => $mahasiswaID,
+    //     'asrama_id' => $request->asrama_tujuan,
+    // ]);
+
+    
+    // if (true) {
+      
+    // } else {
+      
+    // }
   }
 
   public function getDetailCheckIn($id)
@@ -93,7 +121,9 @@ class CheckInController extends Controller
       ->where('record_mahasiswa_asrama.users_id', '=', $userID)
       ->first();
 
-    $detailCheckIn = CheckIn::where('check_in.id', $id)->where('users_id', $userID)->get(); 
+
+    $detailCheckIn = RecordCheckIn::join('check_in', 'check_in.id', '=', 'record_checkin.check_in_id')
+    ->where('check_in.id', $id)->where('users_id', $userID)->get(); 
 
     // dd($detailCheckIn);
 
