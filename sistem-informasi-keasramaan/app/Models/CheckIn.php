@@ -10,7 +10,6 @@ class CheckIn extends Model
     use HasFactory;
 
     protected $table = 'check_in';
-    protected $primaryKey = 'check_in_id';
 
     protected $fillable = [
         'users_id',

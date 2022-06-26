@@ -40,7 +40,7 @@
         </div>
     @endif
 
-    <p class="font-poppins font-normal text-lg py-2">Data Izin Sakit Mahasiswa</p>
+    <p class="font-poppins font-normal text-lg py-2">Detail Izin Sakit Mahasiswa</p>
     <div class="bg-white shadow rounded-sm my-2.5 overflow-x-auto">
 
         <table class="min-w-max w-full table-auto">

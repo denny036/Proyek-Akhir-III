@@ -81,8 +81,6 @@ class CheckInController extends Controller
     } else {
       return redirect()->route('mahasiswa.request.check-in')->with('fail', 'Proses gagal, silakan periksa format yang diminta.')->withInput();
     }
-
-    // $tujuanCheckIn = $request->asrama_tujuan;
   }
 
   public function getDetailCheckIn($id)
@@ -94,12 +92,6 @@ class CheckInController extends Controller
       ->join('asrama', 'record_mahasiswa_asrama.asrama_id', '=', 'asrama.id')
       ->where('record_mahasiswa_asrama.users_id', '=', $userID)
       ->first();
-
-    // $detailCheckIn = CheckIn::join('users', 'check_in.users_id', '=', 'users.id')
-    //   ->join('asrama', 'check_in.asrama_id', '=', 'asrama.id')
-    //   ->where('check_in.id', $id)
-    //   ->where('users_id', $userID)
-    //   ->get();
 
     $detailCheckIn = CheckIn::where('check_in.id', $id)->where('users_id', $userID)->get(); 
 

@@ -9,8 +9,7 @@
 @endsection
 
 @section('judul-halaman')
-    <a href="{{ route('petugas.izin-bermalam') }}"><span class="text-gray-600">Daftar Request IB Mahasiswa / </a>Detail IB
-    Mahasiswa</span>
+    <a href="{{ route('petugas.check-in') }}"><span class="text-gray-600">Daftar Request Check In Mahasiswa / </a>Detail Check In Mahasiswa</span>
 @endsection
 
 @section('statistics')
@@ -32,12 +31,12 @@
         </div>
     @endif
 
-    <p class="font-poppins font-normal text-lg py-2">Detail Izin Bermalam</p>
+    <p class="font-poppins font-normal text-lg py-2">Detail Check In</p>
     <div class="bg-white shadow rounded-sm my-2.5 overflow-x-auto">
 
         <table class="min-w-max w-full table-auto">
 
-            @foreach ($detailReqIB as $key => $data)
+            {{-- @foreach ($detailReqCheckIn as $key => $data) --}}
                 <tbody class="text-gray-600 text-sm">
                     <tr class="border-b bg-slate-200 border-gray-200 ">
                         <td class="py-3 px-6 text-left whitespace-nowrap font-poppins font-bold">
@@ -47,7 +46,7 @@
     <td class="py-3 px-6 text-left">
         <div class="flex items-center">
             <span class="font-poppins">
-                {{ $data->nama }}
+                {{ $checkInID->isMahasiswa->nama }}
             </span>
         </div>
     </td>
@@ -58,47 +57,67 @@
             NIM Mahasiswa
         </td>
         <td class="py-3 px-6 text-left whitespace-nowrap font-poppins">
-            {{ $data->nim }}
+            {{ $checkInID->isMahasiswa->nim }}
         </td>
     </tr>
 
     <tr class="border-b bg-slate-200 border-gray-200 ">
         <td class="py-3 px-6 text-left font-poppins font-bold">
-            Rencana Berangkat
+            Angkatan
         </td>
 
         <td class="py-3 px-6 text-left font-poppins">
-            {{ \Carbon\Carbon::parse($data->rencana_berangkat)->isoFormat('DD MMMM YYYY H:mm') }}
+            {{ $checkInID->isMahasiswa->angkatan }}
         </td>
     </tr>
 
     <tr class="border-b border-gray-200">
         <td class="py-3 px-6 text-left font-poppins font-bold">
-            Rencana Kembali
+            Program Studi
         </td>
 
         <td class="py-3 px-6 text-left font-poppins">
-            {{ \Carbon\Carbon::parse($data->rencana_kembali)->isoFormat('DD MMMM YYYY H:mm ') }}
+            {{ Str::of($checkInID->isMahasiswa->prodi)->upper()->explode('_')->implode(' ') }}
         </td>
     </tr>
 
     <tr class="border-b bg-slate-200 bg-slate-200border-gray-100 ">
         <td class="py-3 px-6 text-left font-poppins font-bold">
-            Keperluan IB
+            Asrama Asal
         </td>
 
         <td class="py-3 px-6 text-left font-poppins">
-            {{ $data->keperluan_ib }}
+            {{ $dataAsramaMahasiswa->nama_asrama }}
         </td>
     </tr>
 
     <tr class="border-b border-gray-200 ">
         <td class="py-3 px-6 text-left font-poppins font-bold">
-            Tempat Tujuan IB
+            Asrama Tujuan
         </td>
 
         <td class="py-3 px-6 text-left font-poppins">
-            {{ $data->tempat_tujuan }}
+            {{ $checkInID->toAsrama->nama_asrama }}
+        </td>
+    </tr>
+
+    <tr class="border-b border-gray-200 ">
+        <td class="py-3 px-6 text-left font-poppins font-bold">
+            Tanggal Check In
+        </td>
+
+        <td class="py-3 px-6 text-left font-poppins">
+            {{ \Carbon\Carbon::parse($checkInID->tanggal_check_in)->isoFormat('DD MMMM YYYY H:mm') }}
+        </td>
+    </tr>
+
+    <tr class="border-b border-gray-200 ">
+        <td class="py-3 px-6 text-left font-poppins font-bold">
+            Keperluan Check In
+        </td>
+
+        <td class="py-3 px-6 text-left font-poppins">
+            {{ $checkInID->keperluan }}
         </td>
     </tr>
 
@@ -108,19 +127,19 @@
         </td>
 
         <td class="py-3 px-6 text-center font-poppins">
-            @if ($data->status == null)
+            @if ($checkInID->status_request == null)
                 <div class="flex">
                     <span class="font-poppins bg-yellow-300 text-dark font-semibold py-1 px-3 rounded text-xs">
                         Menunggu Persetujuan
                     </span>
                 </div>
-            @elseif ($data->status == 1)
+            @elseif ($checkInID->status_request == 1)
                 <div class="flex">
                     <span class="font-poppins bg-green-700 text-slate-50 py-1 px-3 rounded text-xs">
                         Disetujui
                     </span>
                 </div>
-            @elseif ($data->status == 2)
+            @elseif ($checkInID->status_request == 2)
                 <div class="flex">
                     <span class="font-poppins bg-red-500 text-slate-50 py-1 px-3 rounded text-xs">
                         Ditolak
@@ -132,9 +151,9 @@
 
     <tr class="border-b border-gray-200 ">
         <td class="py-3 px-6 text-left font-poppins font-bold">
-            @if ($data->status == 1)
+            @if ($checkInID->status_request == 1)
                 Disetujui oleh
-            @elseif($data->status == 2)
+            @elseif($checkInID->status_request == 2)
                 Ditolak oleh
             @else
                 Membutuhkan konfirmasi
@@ -142,20 +161,20 @@
         </td>
 
         <td class="py-3 px-6 text-left font-poppins">
-            {{ !empty($data->petugas->nama) ? $data->petugas->nama : ' ' }}
+            {{ !empty($checkInID->isPetugas->nama) ? $checkInID->isPetugas->nama : ' ' }}
             {{-- {{ Auth::guard('petugas')->user()->nama }} --}}
         </td>
     </tr>
 
     </tbody>
-    @endforeach
+    {{-- @endforeach --}}
 
     </div>
     </table>
 
     </div>
 
-    <a href="{{ route('petugas.reject.izin-bermalam', $data->id) }}">
+    <a href="{{ route('petugas.reject.check-in', $checkInID->id) }}">
         <button type="button"
             class="font-poppins text-white bg-red-700 focus:ring-4 focus:outline-none 
             focus:ring-red-300 font-normal rounded-lg text-sm px-3 py-2 text-center inline-flex items-center mr-2.5">
@@ -168,7 +187,7 @@
         </button>
     </a>
 
-    <a href="{{ route('petugas.accept.izin-bermalam', $data->id) }}">
+    <a href="{{ route('petugas.accept.check-in', $checkInID->id) }}">
         <button type="button"
             class="font-poppins text-white bg-login focus:ring-4 
             focus:outline-none focus:ring-blue-300 font-normal rounded-lg text-sm px-3 

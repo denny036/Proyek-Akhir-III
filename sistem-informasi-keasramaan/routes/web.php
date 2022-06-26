@@ -4,6 +4,7 @@ use App\Http\Controllers\Koordinator\AsramaController;
 use App\Http\Controllers\Koordinator\DataPetugasController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Koordinator\KoordinatorController;
+use App\Http\Controllers\Petugas\CheckInPetugasController;
 use App\Http\Controllers\Petugas\IBController;
 use App\Http\Controllers\Petugas\ISController;
 use App\Http\Controllers\Petugas\PetugasController;
@@ -78,6 +79,11 @@ Route::prefix('petugas')->name('petugas.')->group(function(){
     Route::middleware(['auth:petugas', 'PreventBackButtonHistory'])->group(function(){
         
         Route::get('/home', [PetugasController::class, 'showHomePetugas'])->name('home');
+
+        Route::get('/check-in-mahasiswa', [CheckInPetugasController::class, 'showPageCheckIn'])->name('check-in');
+        Route::get('/check-in-mahasiswa/detail/{check_in_id}', [CheckInPetugasController::class, 'getDetailCheckIn'])->name('detail-check-in');
+        Route::get('/check-in-mahasiswa/detail/terima/{id}', [CheckInPetugasController::class, 'acceptCheckIn'])->name('accept.check-in');
+        Route::get('/check-in-mahasiswa/detail/tolak/{id}', [CheckInPetugasController::class, 'rejectCheckIn'])->name('reject.check-in');
 
         Route::get('/izin-bermalam-mahasiswa', [IBController::class, 'showPageIBMhs'])->name('izin-bermalam');
         Route::get('/izin-bermalam-mahasiswa/detail/{izin_bermalam_id}', [IBController::class, 'getDetailIB'])->name('detail-izin-bermalam');

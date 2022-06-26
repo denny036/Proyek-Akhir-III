@@ -30,7 +30,7 @@
         <span class="font-poppins text-sm">Data Penghuni Asrama</span>
     </a>
 
-    <a href="#"
+    <a href="{{ route('petugas.check-in') }}"
         class="py-2.5 px-4 flex items-center space-x-2 bg-gray-800 text-white hover:bg-gray-800 hover:text-white rounded">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" id="icon-arrow-right2" viewBox="0 0 32 32">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
