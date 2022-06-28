@@ -33,7 +33,7 @@
         <h5 class="mb-2 text-xl text-left font-poppins font-bold text-slate-900 ">Asrama di IT DEL</h5>
         <div class="grid grid-cols-1 gap-4 py-6 md:grid-cols-4">
             @foreach ($getAllAsrama as $asrama)
-            @if ($asrama->jenis_asrama == 'Laki-laki')
+            @if ($asrama->jenis_asrama == 'laki-laki')
                 <div class="bg-asramaLaki flex items-center justify-between rounded-sm py-3.5 px-3.5">
                     <div class="space-y-2">
                         <p class="font-poppins text-lg font-semibold uppercase text-slate-50">
@@ -56,7 +56,7 @@
                         </path>
                     </svg>
                 </div>
-            @elseif($asrama->jenis_asrama == 'Perempuan')
+            @elseif($asrama->jenis_asrama == 'perempuan')
                 <div class="bg-asramaPerempuan flex items-center justify-between rounded-sm py-3.5 px-3.5 shadow">
                     <div class="space-y-2">
                         <p class="font-poppins text-lg font-semibold uppercase text-slate-50">

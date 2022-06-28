@@ -49,7 +49,7 @@
                 <tbody class="text-gray-600 text-sm">
                     <tr class="border-b border-gray-200 hover:bg-gray-100">
                         <td class="py-3 px-6 text-left whitespace-nowrap font-poppins">
-                            {{ $data->isMahasiswa->nama }}
+                            {{ ucwords($data->isMahasiswa->nama) }}
     </div>
     </td>
 

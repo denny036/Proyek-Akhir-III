@@ -122,7 +122,7 @@
                                     <h3 class="font-poppins font-bold flex flex-col">Nama</h3>
                                 </div>
                                 <div class="rounded-full h-1 w-16"></div>
-                                <h3 class="font-poppins flex flex-col">{{ $item->nama }}</h3>
+                                <h3 class="font-poppins flex flex-col">{{ ucwords($item->nama) }}</h3>
                             </div>
                         </div>
 
@@ -172,7 +172,7 @@
                                     <h3 class="font-poppins font-bold">Asrama</h3>
                                 </div>
                                 <div class="rounded-full h-1 w-16"></div>
-                                <h3 class="font-poppins">{{ $item->nama_asrama }}</h3>
+                                <h3 class="font-poppins">{{ ucwords($item->nama_asrama) }}</h3>
                             </div>
                         </div>
 
@@ -184,7 +184,7 @@
                                     <h3 class="font-poppins font-bold">Jenis Asrama</h3>
                                 </div>
                                 <div class="rounded-full h-1 w-9"></div>
-                                <h3 class="font-poppins">{{ $item->jenis_asrama }}</h3>
+                                <h3 class="font-poppins">Asrama {{ ucfirst($item->jenis_asrama) }}</h3>
                             </div>
                         </div>
 

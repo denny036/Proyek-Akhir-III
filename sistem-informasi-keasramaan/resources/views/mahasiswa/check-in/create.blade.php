@@ -48,7 +48,7 @@
                     <div>
                         <label for="nama" class="block mb-1 text-gray-600 font-semibold font-poppins">Nama</label>
                         <input type="text" class="bg-indigo-50 px-4 py-2 outline-none rounded-md w-full font-poppins"
-                            value="{{ $dataMahasiswa->nama }}" disabled />
+                            value="{{ ucwords($dataMahasiswa->nama) }}" disabled />
                     </div>
                     <div>
                         <label for="angkatan" class="block mb-1 text-gray-600 font-semibold font-poppins">Angkatan</label>

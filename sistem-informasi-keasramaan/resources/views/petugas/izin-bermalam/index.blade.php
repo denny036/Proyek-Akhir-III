@@ -37,7 +37,7 @@
             <tbody class="text-gray-600 text-sm">
                 <tr class="border-b border-gray-200 hover:bg-gray-100">
                     <td class="py-3 px-6 text-left whitespace-nowrap font-poppins">
-                            {{ $data->nama }}
+                            {{ ucwords($data->nama) }}
                         </div>
                     </td>
                     <td class="py-3 px-6 text-left">
@@ -52,7 +52,7 @@
                     </td>
 
                     <td class="py-3 px-6 text-center font-poppins">
-                        {{ $data->tempat_tujuan }}
+                        {{ ucwords($data->tempat_tujuan) }}
                     </td>
 
                     <td class="py-3 px-6 text-center font-poppins">

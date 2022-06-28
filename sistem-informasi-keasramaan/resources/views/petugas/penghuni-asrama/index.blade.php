@@ -25,7 +25,7 @@
     <div class="grid grid-cols-1 gap-4 py-6 md:grid-cols-4">
 
         @foreach ($getAllAsrama as $allAsrama)
-            @if ($allAsrama->jenis_asrama == 'Laki-laki')
+            @if ($allAsrama->jenis_asrama == 'laki-laki')
                 <div class="bg-asramaLaki flex items-center justify-between rounded-sm py-3.5 px-3.5">
                     <div class="space-y-2">
                         <p class="font-poppins text-lg font-semibold uppercase text-slate-50">
@@ -49,7 +49,7 @@
                         </path>
                     </svg>
                 </div>
-            @elseif($allAsrama->jenis_asrama == 'Perempuan')
+            @elseif($allAsrama->jenis_asrama == 'perempuan')
                 <div class="bg-asramaPerempuan flex items-center justify-between rounded-sm py-3.5 px-3.5 shadow">
                     <div class="space-y-2">
                         <p class="font-poppins text-lg font-semibold uppercase text-slate-50">

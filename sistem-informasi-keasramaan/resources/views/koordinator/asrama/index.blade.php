@@ -51,7 +51,7 @@
     </td>
     <td class="py-3 px-6 text-left">
         <div class="flex items-center">
-            <span class="font-poppins">{{ $value->jenis_asrama }}</span>
+            <span class="font-poppins">{{ ucfirst($value->jenis_asrama) }}</span>
         </div>
     </td>
     <td class="py-3 px-6 text-center font-poppins">

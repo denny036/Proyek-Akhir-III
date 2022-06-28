@@ -46,7 +46,7 @@
                 <tbody class="text-gray-600 text-sm">
                     <tr class="border-b border-gray-200 hover:bg-gray-100">
                         <td class="py-3 px-6 text-left whitespace-nowrap font-poppins">
-                            {{ $value->nama }}
+                            {{ ucwords($value->nama) }}
     </div>
     </td>
     <td class="py-3 px-6 text-left">
@@ -63,7 +63,7 @@
         {{ Str::of($value->jenis_kelamin)->ucfirst()->explode('_')->implode(' ') }}
     </td>
     <td class="py-3 px-6 text-center">
-        {{ $value->asrama->nama_asrama }}
+        {{ ucwords($value->asrama->nama_asrama) }}
     </td>
     <td class="py-3 px-6 text-center">
         <div class="flex item-center justify-center">

@@ -27,7 +27,7 @@ class DataPetugasController extends Controller
     {
         $request->validate(
             [
-                'nama' => 'required|min:3|max:25',
+                'nama' => 'required|min:3',
                 'email' => 'required|email|unique:petugas,email',
                 'password' => 'required|string|min:6|max:16|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
                 'confirm_password' => 'required|string|min:6|max:16|same:password|',
@@ -37,7 +37,6 @@ class DataPetugasController extends Controller
             [
                 'nama.required' => 'Nama tidak boleh kosong.',
                 'nama.min' => 'Nama minimal 3 karakter.',
-                'nama.max' =>  'Nama maksimal 25 karakter.',
                 'email.required' =>  'Email tidak boleh kosong.',
                 'email.unique' => 'Email sudah terdaftar.',
                 'password.required' => 'Password tidak boleh kosong.',
@@ -79,8 +78,8 @@ class DataPetugasController extends Controller
     {
         $request->validate(
             [
-                'nama' => 'required|min:3|max:25',
-                'email' => 'required|email|unique:petugas,email',
+                'nama' => 'required|min:3',
+                'email' => 'email',
                 'password' => 'required|string|min:6|max:16|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
                 'confirm_password' => 'required|string|min:6|max:16|same:password|',
                 'jabatan' => 'required',
@@ -89,9 +88,6 @@ class DataPetugasController extends Controller
             [
                 'nama.required' => 'Nama tidak boleh kosong.',
                 'nama.min' => 'Nama minimal 3 karakter.',
-                'nama.max' =>  'Nama maksimal 25 karakter.',
-                'email.required' =>  'Email tidak boleh kosong.',
-                'email.unique' => 'Email sudah terdaftar.',
                 'password.required' => 'Password tidak boleh kosong.',
                 'password.min' => 'Password minimal 6 karakter.',
                 'password.max' => 'Password maksimal 16 karakter.',

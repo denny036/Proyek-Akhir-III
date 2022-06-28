@@ -32,7 +32,7 @@
 
 
     <p>DIBERIKAN IZIN BERMALAM KEPADA:</p>
-    <p class="text-nama">Nama: {{ $item->nama }}</p><br>
+    <p class="text-nama">Nama: {{ ucwords($item->nama) }}</p><br>
     
     <p><b>Rencana IB</b></p>
     <p class="text-info">Tanggal Berangkat: {{ \Carbon\Carbon::parse($item->rencana_berangkat)->isoFormat('DD MMMM YYYY') }}
@@ -52,11 +52,11 @@
     <div class="all-rows">
         <div class="all-columns">
             <p>Pemohon</p>
-            <p class="text-name">({{ $item->nama }})</p>
+            <p class="text-name">({{ ucwords($item->nama) }})</p>
         </div>
         <div class="all-columns">
             <p>Menyetujui, petugas</p>
-            <p class="text-name">({{ $item->petugas->nama }})</p>
+            <p class="text-name">({{ ucwords($item->petugas->nama) }})</p>
         </div>
         <div class="all-columns">
             <p>Diketahui, orangtua/wali</p>

@@ -56,7 +56,7 @@ py-1.5 text-center inline-flex items-center mr-2">
     <td class="py-3 px-6 text-left">
         <div class="flex items-center">
             <span class="font-poppins">
-                {{ $data->nama }}
+                {{ ucwords($data->nama) }}
             </span>
         </div>
     </td>

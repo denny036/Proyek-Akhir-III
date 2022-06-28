@@ -9,7 +9,7 @@
 @endsection
 
 @section('judul-halaman')
-    <a href="{{ route('mahasiswa.home') }}"><span class="text-gray-600">Home / </a></span>Check In
+    <a href="{{ route('mahasiswa.home') }}"><span class="text-gray-600">Home / </a></span>Check Out
 @endsection
 
 @section('statistics')

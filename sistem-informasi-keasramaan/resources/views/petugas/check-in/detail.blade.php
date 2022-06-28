@@ -46,7 +46,7 @@
     <td class="py-3 px-6 text-left">
         <div class="flex items-center">
             <span class="font-poppins">
-                {{ $checkInID->isMahasiswa->nama }}
+                {{ ucwords($checkInID->isMahasiswa->nama) }}
             </span>
         </div>
     </td>

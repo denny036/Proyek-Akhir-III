@@ -34,7 +34,7 @@
     <td class="py-3 px-6 text-left">
         <div class="flex items-center">
             <span class="font-poppins">
-                {{ $data->isMahasiswa->nama }}
+                {{ ucwords($data->isMahasiswa->nama) }}
             </span>
         </div>
     </td>
@@ -72,7 +72,7 @@
             Asrama Asal
         </td>
         <td class="py-3 px-6 text-left whitespace-nowrap font-poppins">
-           {{ $dataAsramaMahasiswa->nama_asrama }}
+           {{ ucwords($dataAsramaMahasiswa->nama_asrama) }}
         </td>
     </tr>
     
@@ -82,7 +82,7 @@
         </td>
 
         <td class="py-3 px-6 text-left font-poppins">
-            {{ $data->toAsrama->nama_asrama}}
+            {{ ucwords($data->toAsrama->nama_asrama) }}
         </td>
     </tr>
 
