@@ -73,15 +73,18 @@ class IzinSakitController extends Controller
         if ($request->hasFile('surat_sakit')) {
             $file = $request->file('surat_sakit');
             $fileExtension = $file->getClientOriginalExtension();
-            $destinationPath = 'uploads/surat-sakit/';
+
+            // $destinationPath = 'uploads/surat-sakit/';
+            
             $fileName =  md5(time()) . '.' . $fileExtension;
-            $file->move($destinationPath, $fileName);
+            $image = $file->storeAs('surat-sakit', $fileName);
+            // $file->move($destinationPath, $fileName);
 
             $saveHasFile = DB::table('izin_sakit')->insert([
                 'users_id' => Auth::guard('web')->user()->id,
                 'jadwal_istirahat' => Carbon::createFromFormat('Y-m-d\TH:i', $request->jadwal_istirahat)->format('Y-m-d\TH:i'),
                 'keterangan' => $request->keterangan,
-                'surat_sakit' => $fileName,
+                'surat_sakit' => $image,
             ]);
             if($saveHasFile){
                 return redirect()->back()->with('success', 'Anda berhasil melakukan request izin sakit.');
