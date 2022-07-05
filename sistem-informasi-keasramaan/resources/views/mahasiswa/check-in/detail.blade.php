@@ -72,7 +72,7 @@
             Asrama Asal
         </td>
         <td class="py-3 px-6 text-left whitespace-nowrap font-poppins">
-           {{ ucwords($dataAsramaMahasiswa->nama_asrama) }}
+           {{ ucwords($dataAsramaMahasiswa->nama_asrama ?? $data->toAsrama->nama_asrama ) }} 
         </td>
     </tr>
     

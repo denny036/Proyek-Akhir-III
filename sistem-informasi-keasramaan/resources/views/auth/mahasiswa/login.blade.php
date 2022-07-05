@@ -61,8 +61,8 @@
                                 </label>
                             </div>
                             <div>
-                                <a class="block text-sm text-slate-900 hover:underline focus:outline-none focus:underline"
-                                    href="#">Lupa kata sandi?</a>
+                                <!--<a class="block text-sm text-slate-900 hover:underline focus:outline-none focus:underline"-->
+                                <!--    href="#">Lupa kata sandi?</a>-->
                             </div>
                             
                         </div>

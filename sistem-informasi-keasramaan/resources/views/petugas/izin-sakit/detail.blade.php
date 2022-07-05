@@ -119,7 +119,7 @@
 
         <td class="py-3 px-6 text-left font-poppins">
             @if ($izinSakitID->surat_sakit)
-                <img src="{{ asset('uploads/surat-sakit/' . $izinSakitID->surat_sakit) }}" class="w-32 rounded-full"
+                <img src="{{ asset('storage/' . $izinSakitID->surat_sakit) }}" class="w-32 rounded-full"
                     alt="Surat Sakit">
             @else
                 <p class="font-semibold">Mahasiswa ini tidak memiliki surat sakit</p>

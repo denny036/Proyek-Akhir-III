@@ -23,7 +23,6 @@
                     <th class="py-3 px-6 text-left">NIM</th>
                     <th class="py-3 px-6 text-center">Angkatan</th>
                     <th class="py-3 px-6 text-center">Prodi</th>
-                    <th class="py-3 px-6 text-center">Aksi</th>
                 </tr>
             </thead>
             @foreach ($dataPenghuniAsrama as $key => $value)
@@ -46,13 +45,7 @@
     <td class="py-3 px-6 text-center">
         {{ Str::of($value->prodi)->upper()->explode('_')->implode(' ') }}
     </td>
-    <td class="py-3 px-6 text-center">
-        <div class="flex item-center justify-center">
-            <span class="bg-blue-500 text-slate-50 py-1 px-3 rounded-full text-xs">
-                <a href="#">Detail</a>
-            </span>
-        </div>
-    </td>
+   
     </tr>
     </tbody>
     @endforeach
@@ -81,7 +74,7 @@
                         <th class="py-3 px-6 text-left">Nama Petugas</th>
                         <th class="py-3 px-6 text-left">Email</th>
                         <th class="py-3 px-6 text-center">Jabatan</th>
-                        <th class="py-3 px-6 text-center">Aksi</th>
+                        
                     </tr>
                 </thead>
 
@@ -103,12 +96,7 @@
             {{ $object->jabatan }}
         </td>
 
-        <td class="py-3 px-6 text-center">
-            <div class="flex item-center justify-center">
-
-                <span class="bg-blue-500 text-slate-50 py-1 px-3 rounded-full text-xs">Detail</span>
-            </div>
-        </td>
+        
         </tr>
         </tbody>
         @endforeach
