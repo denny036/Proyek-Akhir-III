@@ -45,7 +45,7 @@
                         </div>
                         <div class="flex flex-col items-center justify-center w-full h-full py-4 rounded-b-lg bg-login">
                             <p class="text-sm font-poppins text-white text-center py-2">
-                                Klik untuk masuk sebagai Koordinator Keasramaan!
+                                Klik untuk masuk sebagai Koordinator Keasramaan
                             </p>
                         </div>
                     </label>
@@ -66,7 +66,7 @@
                         </div>
                         <div class="flex flex-col items-center justify-center w-full h-full py-7 rounded-b-lg bg-login">
                             <p class="text-sm font-poppins text-white text-center py-2">
-                                Klik untuk masuk sebagai Mahasiswa!
+                                Klik untuk masuk sebagai Mahasiswa
                             </p>
                              
                         </div>
@@ -112,7 +112,7 @@
                         </div>
                         <div class="flex flex-col items-center justify-center w-full h-full py-4 rounded-b-lg bg-login">
                             <p class="text-sm font-poppins text-white text-center py-2">
-                                Klik untuk masuk sebagai Petugas Keasramaan!
+                                Klik untuk masuk sebagai Petugas Keasramaan
                             </p>
                         </div>
                     </label>
