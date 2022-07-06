@@ -151,6 +151,17 @@
         </td>
     </tr>
 
+    @if ($data->status_izin == 2)
+    <tr class="border-b bg-slate-200 border-gray-200 ">
+        <td class="py-3 px-6 text-left font-poppins font-bold">
+                Alasan Penolakan
+        </td>
+        <td class="py-3 px-6 text-left font-poppins">
+            {{ ucfirst($data->alasan_tolak) }}
+        </td>
+    </tr>
+
+    @endif
     </tbody>
     @endforeach
 
