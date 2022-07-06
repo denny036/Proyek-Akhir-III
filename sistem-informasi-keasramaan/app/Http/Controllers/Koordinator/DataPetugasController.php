@@ -10,11 +10,20 @@ use Illuminate\Support\Facades\Hash;
 
 class DataPetugasController extends Controller
 {
-    public function showDataPetugas() 
+    public function showDataPetugas(Request $request) 
     {
-        $dataPetugas = Petugas::paginate(15);
-        
-        return view('koordinator.petugas.index', compact('dataPetugas'));
+        // $dataPetugas = Petugas::paginate(15);
+
+        $keyword = $request->cari;
+        $queryPetugas = Petugas::where('nama', 'LIKE', '%'.$keyword.'%')
+                        ->orWhere('email', 'LIKE', '%'.$keyword.'%') 
+                        ->orWhere('jabatan', 'LIKE', '%'.$keyword.'%')
+                        ->orWhere('jenis_kelamin', 'LIKE', '%'.$keyword.'%')
+                        ->paginate(10);
+
+        $queryPetugas->appends($request->all());
+
+        return view('koordinator.petugas.index', compact('keyword', 'queryPetugas'));
     }
 
     public function showFormTambahPetugas() 
