@@ -12,12 +12,20 @@ use App\Models\RecordMahasiswaAsrama;
 
 class AsramaController extends Controller
 {
-    public function showDataAsrama(Asrama $asrama)
+    public function showDataAsrama(Request $request, Asrama $asrama)
     {
-        $asrama = Asrama::orderBy('nama_asrama', 'asc')->paginate(10);
+        // $asrama = Asrama::orderBy('nama_asrama', 'asc')->paginate(10);
         // $onlyNamaAsrama = Asrama::where('nama_asrama')->get();
 
-        return view('koordinator.asrama.index', compact('asrama'));
+        $keyword = $request->cari;
+        $dataAsrama = Asrama::where('nama_asrama', 'LIKE', '%'.$keyword.'%')
+                        ->orWhere('jenis_asrama', 'LIKE', '%'.$keyword.'%') 
+                        ->orWhere('lokasi_asrama', 'LIKE', '%'.$keyword.'%')
+                        ->paginate(10);
+
+        $dataAsrama->appends($request->all());
+
+        return view('koordinator.asrama.index', compact('keyword', 'dataAsrama'));
     }
 
     public function storeDataAsrama(Request $request)

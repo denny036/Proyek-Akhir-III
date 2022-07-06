@@ -9,7 +9,7 @@
 @endsection
 
 @section('judul-halaman')
-   <a href="{{ route('koordinator.home') }}"><span class="text-gray-600">Home / </a></span>Data Asrama
+    <a href="{{ route('koordinator.home') }}"><span class="text-gray-600">Home / </a></span>Data Asrama
 @endsection
 
 @section('statistics')
@@ -18,12 +18,30 @@
 @endsection
 
 @section('table')
-    <a href="{{ route('koordinator.create.asrama') }}">
-        <button type="button"
-            class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 
+    <div class="grid grid-cols-1 md:grid-cols-1 gap-4 py-2">
+        <a href="{{ route('koordinator.create.asrama') }}">
+            <button type="button"
+                class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 
     focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 
     dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 font-poppins">Tambah
-            Data Asrama</button></a>
+                Data Asrama</button>
+        </a>
+
+        <form class="order-first mb-10 md:mb-0 md:order-last md:pr-8" action="{{ url()->current() }}" method="GET">
+            @csrf
+            <input class="w-52 py-1 pl-3 pr-10  rounded-md focus:outline-0" type="text" name="cari"
+                placeholder="Cari.." value="{{ request('cari') }}">
+            <button class="-ml-8 border-6 bg-trasparent" type="submit">
+                <svg class="text-gray-600 h-3.5 w-3.5 fill-current" xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px"
+                    viewBox="0 0 56.966 56.966" style="enable-background:new 0 0 56.966 56.966;" xml:space="preserve"
+                    width="512px" height="512px">
+                    <path
+                        d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z" />
+                </svg>
+            </button>
+        </form>
+    </div>
 
     @if (Session::get('success'))
         <div class="p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800"
@@ -42,7 +60,7 @@
                     <th class="py-3 px-6 text-center">Actions</th>
                 </tr>
             </thead>
-            @foreach ($asrama as $key => $value)
+            @foreach ($dataAsrama as $key => $value)
                 <tbody class="text-gray-600 text-sm">
                     <tr class="border-b border-gray-200 hover:bg-gray-100">
                         <td class="py-3 px-6 text-left whitespace-nowrap font-poppins">
@@ -82,7 +100,7 @@
                     </form>
                 </a>
             </div>
-            
+
         </div>
     </td>
     </tr>
@@ -94,53 +112,50 @@
     </table>
     <div class="row">
         <div class="col-md-12">
-            {{ $asrama->links('pagination::tailwind') }}
+            {{ $dataAsrama->links('pagination::tailwind') }}
         </div>
     </div>
 
     </div>
-
-    
 @endsection
 
 @push('ext-script')
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.slim.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.slim.js"></script>
 
-<script>
-    $('.delete-confirm').on('click', function(e) {
-        e.preventDefault();
-        var href = $(this).attr('href');
-        Swal.fire({
-            title: 'Anda yakin hapus data ini?',
-            text: "Data yang sudah dihapus tidak dapat dikembalikan!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Ya, hapus!',
-        }).then((result) => {
-            if (result.isConfirmed) {
-                document.getElementById('deleteForm').action = href;
-                document.getElementById('deleteForm').submit();
-                Swal.fire({
-                    title: 'Terhapus!',
-                    text: 'Data berhasil dihapus!',
-                    icon: 'success',
-                    confirmButtonColor: '#13C39C',
-                    timer: 4000
-                })
-            } else {
-                Swal.fire({
-                    title: 'Dibatalkan',
-                    text: 'Data asrama tidak jadi dihapus',
-                    icon: 'error',
-                })
-            }
+    <script>
+        $('.delete-confirm').on('click', function(e) {
+            e.preventDefault();
+            var href = $(this).attr('href');
+            Swal.fire({
+                title: 'Anda yakin hapus data ini?',
+                text: "Data yang sudah dihapus tidak dapat dikembalikan!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, hapus!',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('deleteForm').action = href;
+                    document.getElementById('deleteForm').submit();
+                    Swal.fire({
+                        title: 'Terhapus!',
+                        text: 'Data berhasil dihapus!',
+                        icon: 'success',
+                        confirmButtonColor: '#13C39C',
+                        timer: 4000
+                    })
+                } else {
+                    Swal.fire({
+                        title: 'Dibatalkan',
+                        text: 'Data asrama tidak jadi dihapus',
+                        icon: 'error',
+                    })
+                }
+            })
         })
-    })
-</script>
+    </script>
 @endpush
-
