@@ -58,7 +58,7 @@
 @section('table')
     <div class="bg-neutral-100 text-base font-poppins">
         <h1 class="text-base font-poppins text-gray-600 font-semibold">
-            Daftar Penghuni
+            Rekap Izin Mahasiswa
         </h1>
     </div>
     <div class="bg-white shadow rounded-sm my-2.5 overflow-x-auto">
@@ -67,42 +67,62 @@
             <thead>
                 <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                     <th class="py-3 px-6 text-left">Nama</th>
-                    <th class="py-3 px-6 text-left">NIM</th>
-                    <th class="py-3 px-6 text-center">Prodi</th>
-                    <th class="py-3 px-6 text-center">Angkatan</th>
+                    <th class="py-3 px-6 text-center">Total Check In</th>
+                    <th class="py-3 px-6 text-center">Total Check Out</th>
+                    <th class="py-3 px-6 text-center">Total Izin Bermalam</th>
+                    <th class="py-3 px-6 text-center">Total Izin Sakit</th>
                 </tr>
             </thead>
-            @foreach ($dataPenghuniAsrama as $key => $value)
+            {{-- @foreach ($dataPenghuniAsrama as $key => $value) --}}
                 <tbody class="text-gray-600 text-sm">
                     <tr class="border-b border-gray-200 hover:bg-gray-100">
                         <td class="py-3 px-6 text-left whitespace-nowrap font-poppins">
-                            {{ ucwords($value->nama) }}
+                            {{ ucwords($getNamaMahasiswa) }}
     </div>
     </td>
-    <td class="py-3 px-6 text-left">
-        <div class="flex items-center">
-            <span class="font-poppins">
-                {{ $value->nim }}
-            </span>
-        </div>
+    <td class="py-3 px-6 text-center font-poppins">
+        {{-- {{ Str::of($value->prodi)->upper()->explode('_')->implode(' ') }} --}}
+        @if (empty($totalCheckIn))
+            {{ "Tidak ada record check in." }}
+        @else 
+            {{ $totalCheckIn . " kali."}}
+        @endif
     </td>
     <td class="py-3 px-6 text-center font-poppins">
-        {{ Str::of($value->prodi)->upper()->explode('_')->implode(' ') }}
+        {{-- {{ Str::of($value->prodi)->upper()->explode('_')->implode(' ') }} --}}
+        @if (empty($totalCheckOut))
+            {{  "Tidak ada record check out." }}
+        @else 
+            {{ $totalCheckOut . " kali."}}
+        @endif
     </td>
     <td class="py-3 px-6 text-center">
         <span class="font-poppins">
-            {{ $value->angkatan }}
+            @if (empty($totalIB))
+                {{ "Tidak ada record izin bermalam." }}
+            @else 
+                {{ $totalIB . " kali."}}
+            @endif
         </span>
     </td>
+
+    <td class="py-3 px-6 text-center font-poppins">
+        @if (empty($totalIS))
+            {{ "Tidak ada record izin sakit." }}
+        @else
+            {{ $totalIS . " kali." }}
+        @endif
+    </td>
+
     </tr>
     </tbody>
-    @endforeach
+    {{-- @endforeach --}}
 
     </div>
     </table>
     <div class="row">
         <div class="col-md-12">
-            {{ $dataPenghuniAsrama->links('pagination::tailwind') }}
+            {{-- {{ $dataPenghuniAsrama->links('pagination::tailwind') }} --}}
         </div>
     </div>
 

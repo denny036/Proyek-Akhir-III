@@ -7,6 +7,10 @@ use App\Models\Asrama;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\IzinBermalam;
+use App\Models\IzinSakit;
+use App\Models\RecordCheckIn;
+use App\Models\RecordCheckOut;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\RecordMahasiswaAsrama;
@@ -128,16 +132,33 @@ class UserController extends Controller
                 ->where('asrama_id', '=', $getUserAsramaID)
                 ->first();
 
-            $dataPenghuniAsrama = DB::table('record_mahasiswa_asrama')
-                ->join('asrama', 'record_mahasiswa_asrama.asrama_id', '=', 'asrama.id')
-                ->join('users', 'record_mahasiswa_asrama.users_id', '=', 'users.id')
-                ->where('record_mahasiswa_asrama.asrama_id', '=', $getUserAsramaID)
-                ->orderBy('users.nama', 'asc')
-                ->paginate(10);
+            // $dataPenghuniAsrama = DB::table('record_mahasiswa_asrama')
+            //     ->join('asrama', 'record_mahasiswa_asrama.asrama_id', '=', 'asrama.id')
+            //     ->join('users', 'record_mahasiswa_asrama.users_id', '=', 'users.id')
+            //     ->where('record_mahasiswa_asrama.asrama_id', '=', $getUserAsramaID)
+            //     ->orderBy('users.nama', 'asc')
+            //     ->paginate(10);
 
-            // dd($totalPetugasByAsrama);
+            $getNamaMahasiswa = Auth::guard('web')->user()->nama;
 
-            return view('mahasiswa.home', compact('dataAsrama', 'isNullAsrama', 'getDataMahasiswa', 'totalMahasiswaAsrama', 'dataPenghuniAsrama', 'totalPetugasByAsrama'));
+            $totalCheckIn = RecordCheckIn::where('users_id', $user_id)->count();  
+
+            $totalCheckOut = RecordCheckOut::where('users_id', $user_id)->count();
+            // DB::table('record_checkout')
+            //                     ->join('check_out', 'check_out.id', '=', 'record_checkout.check_out_id')
+            //                     ->select(DB::raw('count(check_out_id) as TotalCheckOut'))
+            //                     ->where('users_id', '=', $user_id)
+            //                     ->first();
+                               
+            // dd($totalCheckOut);
+
+
+            $totalIB = IzinBermalam::where('users_id', $user_id)->where('status', '=', 1)->count();
+            $totalIS = IzinSakit::where('users_id', $user_id)->where('status_izin', '=', 1)->count();
+
+            // dd($totalIS);
+
+            return view('mahasiswa.home', compact('dataAsrama', 'isNullAsrama', 'getDataMahasiswa', 'totalMahasiswaAsrama', 'totalPetugasByAsrama', 'getNamaMahasiswa', 'totalCheckIn', 'totalCheckOut', 'totalIB', 'totalIS'));
         }
     }
 
