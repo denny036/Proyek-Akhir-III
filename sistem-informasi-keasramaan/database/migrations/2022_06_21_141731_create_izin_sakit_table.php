@@ -22,6 +22,7 @@ class CreateIzinSakitTable extends Migration
             $table->integer('status_izin')->nullable();
             $table->enum('kondisi', ['sakit', 'sembuh'])->default('sakit');
             $table->string('surat_sakit')->nullable();
+            $table->string('alasan_tolak', 45)->nullable();
             
             $table->foreign('users_id')->on('users')->references('id')
                     ->onDelete('CASCADE')

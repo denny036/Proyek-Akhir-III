@@ -53,18 +53,26 @@ class ISController extends Controller
             ->with('success', 'Izin sakit mahasiswa diterima');
     }
 
-    public function rejectIzinSakit($id)
+    public function rejectIzinSakit(Request $request, $id)
     {
         $izinSakitID = IzinSakit::find($id);
         $petugas_id = Auth::guard('petugas')->user()->id;
 
-        IzinSakit::where('id', $id)->update([
-            'petugas_id' => $petugas_id,
-            'status_izin' => 2
-        ]);
-
-        return redirect()->route('petugas.detail-izin-sakit', $izinSakitID->id)
-            ->with('fail', 'Izin sakit mahasiswa ditolak');
+        if (empty($request->alasan_tolak)){
+            return redirect()->back()->with('fail-format', 'Gagal menolak permintaan mahasiswa, silakan isi alasan penolakan dengan format yang benar!');
+        }else{
+            $save = IzinSakit::where('id', $id)->update([
+                'petugas_id' => $petugas_id,
+                'status_izin' => 2,
+                'alasan_tolak' => $request->alasan_tolak
+            ]);
+            if ($save) {
+                return redirect()->route('petugas.detail-izin-sakit', $izinSakitID->id)
+                ->with('fail', 'Izin sakit mahasiswa ditolak');
+            } else {
+                return redirect()->back()->with('fail-format', 'Gagal menolak permintaan mahasiswa, silakan isi alasan penolakan dengan format yang benar!');
+            }
+        }
     }
 
     public function updateKondisiMahasiswa(Request $request, $id)

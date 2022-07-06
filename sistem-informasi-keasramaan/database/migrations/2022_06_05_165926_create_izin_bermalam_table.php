@@ -22,6 +22,7 @@ class CreateIzinBermalamTable extends Migration
             $table->string('keperluan_ib');
             $table->string('tempat_tujuan');
             $table->integer('status')->nullable();
+            $table->string('alasan_tolak', 45)->nullable();
 
             $table->foreign('users_id')->on('users')->references('id')
                     ->onDelete('CASCADE')

@@ -97,7 +97,7 @@ Route::prefix('petugas')->name('petugas.')->group(function(){
         Route::get('/izin-bermalam-mahasiswa', [IBController::class, 'showPageIBMhs'])->name('izin-bermalam');
         Route::get('/izin-bermalam-mahasiswa/detail/{izin_bermalam_id}', [IBController::class, 'getDetailIB'])->name('detail-izin-bermalam');
         Route::get('/izin-bermalam-mahasiswa/detail/terima/{id}', [IBController::class, 'accIB'])->name('accept.izin-bermalam');
-        Route::get('/izin-bermalam-mahasiswa/detail/tolak/{id}', [IBController::class, 'rejectIB'])->name('reject.izin-bermalam');
+        Route::patch('/izin-bermalam-mahasiswa/detail/tolak/{id}', [IBController::class, 'rejectIB'])->name('reject.izin-bermalam');
 
         Route::get('/izin-sakit-mahasiswa', [ISController::class, 'showPageISMhs'])->name('izin-sakit');
         Route::get('/izin-sakit-mahasiswa/detail/{izin_sakit_id}', [ISController::class, 'getDetailIS'])->name('detail-izin-sakit');

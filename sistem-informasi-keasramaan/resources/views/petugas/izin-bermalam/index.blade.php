@@ -9,7 +9,7 @@
 @endsection
 
 @section('judul-halaman')
-    <a href="{{ route('petugas.home') }}"><span class="text-gray-600">Home / </a></span>Daftar IB Mahasiswa
+    <a href="{{ route('petugas.home') }}"><span class="text-gray-600">Home / </a></span>Daftar Izin Bermalam Mahasiswa
 @endsection
 
 @section('statistics')

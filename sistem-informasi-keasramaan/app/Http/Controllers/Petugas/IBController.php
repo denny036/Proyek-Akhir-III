@@ -58,17 +58,42 @@ class IBController extends Controller
 
     }
 
-    public function rejectIB($id)
+    public function rejectIB(Request $request, $id)
     {
         $izinBermalamID = IzinBermalam::find($id);
         $petugas_id = Auth::guard('petugas')->user()->id;
-        
-        IzinBermalam::where('id', $id)->update([
-            'petugas_id' => $petugas_id,
-            'status' => 2
-        ]);
 
-        return redirect()->route('petugas.detail-izin-bermalam', $izinBermalamID->id)
-            ->with('fail', 'Izin bermalam mahasiswa ditolak');
+        // $request->validate(
+        //     [
+        //         'alasan_penolakan' => 'required|min:4|max:45',
+        //     ],
+        //     [
+        //         'alasan_penolakan.required' => 'Alasan penolakan tidak boleh kosong.',
+        //         'alasan_penolakan.min' => 'Alasan penolakan minimal 4 karakter.',
+        //         'alasan_penolakan.max' =>  'Alasan penolakan maksimal 45 karakter.',
+        //     ]
+        // );
+        
+        if (empty($request->alasan_tolak)){
+            return redirect()->back()->with('fail-format', 'Gagal menolak permintaan mahasiswa, silakan isi alasan penolakan dengan format yang benar!');
+        }else{
+            $save = IzinBermalam::where('id', $id)->update([
+                'petugas_id' => $petugas_id,
+                'status' => 2,
+                'alasan_tolak' => $request->alasan_tolak
+            ]);
+            if ($save) {
+                return redirect()->route('petugas.detail-izin-bermalam', $izinBermalamID->id)
+                ->with('fail', 'Izin bermalam mahasiswa ditolak');
+            } else {
+                return redirect()->back()->with('fail-format', 'Gagal menolak permintaan mahasiswa, silakan isi alasan penolakan dengan format yang benar!');
+            }
+        }
+
+
+        // dd($alasanTolak);
+
+        
+        
     }
 }
