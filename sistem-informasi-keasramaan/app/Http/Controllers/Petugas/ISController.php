@@ -72,6 +72,8 @@ class ISController extends Controller
             } else {
                 return redirect()->back()->with('fail-format', 'Gagal menolak permintaan mahasiswa, silakan isi alasan penolakan dengan format yang benar!');
             }
+
+            dd($save);
         }
     }
 

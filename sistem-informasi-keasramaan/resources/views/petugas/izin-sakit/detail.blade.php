@@ -195,7 +195,7 @@
                 Alasan Penolakan <span class="text-xs text-red-500 font-normal">*jika Anda ingin menolak izin</span>
             </td>
 
-            <form action="{{ route('petugas.reject.izin-bermalam', $izinSakitID->id) }}" method="POST">
+            <form action="{{ route('petugas.reject.izin-sakit', $izinSakitID->id) }}" method="POST">
                 @csrf
                 @method('PATCH')
                 <td class="py-3 px-6 text-left font-poppins">
